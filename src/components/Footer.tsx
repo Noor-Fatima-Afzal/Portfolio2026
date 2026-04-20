@@ -1,5 +1,5 @@
 import { Mail } from "lucide-react";
-import { GithubIcon, LinkedinIcon } from "./icons";
+import { GithubIcon, LinkedinIcon, OrcidIcon } from "./icons";
 
 export default function Footer() {
   return (
@@ -31,6 +31,15 @@ export default function Footer() {
             aria-label="GitHub"
           >
             <GithubIcon className="h-4 w-4" />
+          </a>
+          <a
+            href="https://orcid.org/0009-0007-6079-1974"
+            target="_blank"
+            rel="noreferrer"
+            className="h-9 w-9 grid place-items-center rounded-md border border-border hover:bg-secondary hover:text-foreground transition-colors"
+            aria-label="ORCID"
+          >
+            <OrcidIcon className="h-4 w-4" />
           </a>
         </div>
       </div>

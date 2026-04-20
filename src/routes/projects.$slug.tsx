@@ -11,12 +11,12 @@ export const Route = createFileRoute("/projects/$slug")({
   },
   head: ({ loaderData }) => {
     const p = loaderData?.project;
-    if (!p) return { meta: [{ title: "Project — Noor Fatima" }] };
+    if (!p) return { meta: [{ title: "Project | Noor Fatima" }] };
     return {
       meta: [
-        { title: `${p.title} — Noor Fatima` },
+        { title: `${p.title} | Noor Fatima` },
         { name: "description", content: p.description },
-        { property: "og:title", content: `${p.title} — Noor Fatima` },
+        { property: "og:title", content: `${p.title} | Noor Fatima` },
         { property: "og:description", content: p.description },
         { property: "og:image", content: p.image },
         { name: "twitter:image", content: p.image },

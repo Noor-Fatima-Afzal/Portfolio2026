@@ -1,21 +1,21 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Mail, MapPin, Phone, Send } from "lucide-react";
 import { useState, type FormEvent } from "react";
-import { GithubIcon, LinkedinIcon, ScholarIcon } from "@/components/icons";
+import { GithubIcon, LinkedinIcon, ScholarIcon, OrcidIcon } from "@/components/icons";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — Noor Fatima" },
+      { title: "Contact | Noor Fatima" },
       {
         name: "description",
         content:
-          "Get in touch with Noor Fatima for AI / Machine Learning Engineer roles and collaborations.",
+          "Get in touch with Noor Fatima for AI and Machine Learning Engineer roles and collaborations.",
       },
-      { property: "og:title", content: "Contact — Noor Fatima" },
+      { property: "og:title", content: "Contact | Noor Fatima" },
       {
         property: "og:description",
-        content: "Open to AI / Machine Learning Engineer roles and project collaborations.",
+        content: "Open to AI and Machine Learning Engineer roles and project collaborations.",
       },
     ],
   }),
@@ -45,7 +45,7 @@ function ContactPage() {
         Let's <span className="text-gradient">collaborate</span>.
       </h1>
       <p className="mt-4 max-w-2xl text-muted-foreground">
-        Open to AI / Machine Learning Engineer roles, freelance ML projects and applied research
+        Open to AI and Machine Learning Engineer roles, freelance ML projects, and applied research
         collaborations.
       </p>
 
@@ -82,6 +82,21 @@ function ContactPage() {
             </div>
           </div>
 
+          <a
+            href="https://orcid.org/0009-0007-6079-1974"
+            target="_blank"
+            rel="noreferrer"
+            className="group flex items-center gap-3 rounded-xl border border-border bg-card p-4 hover:border-primary/40 transition-colors"
+          >
+            <span className="h-10 w-10 grid place-items-center rounded-lg bg-primary/10 text-primary">
+              <OrcidIcon className="h-4 w-4" />
+            </span>
+            <div>
+              <div className="text-xs text-muted-foreground">ORCID</div>
+              <div className="text-sm font-medium">0009-0007-6079-1974</div>
+            </div>
+          </a>
+
           <div className="flex gap-2 pt-2">
             <a
               href="https://www.linkedin.com/"
@@ -109,6 +124,15 @@ function ContactPage() {
               className="h-10 w-10 grid place-items-center rounded-lg border border-border bg-card hover:bg-secondary"
             >
               <ScholarIcon className="h-4 w-4" />
+            </a>
+            <a
+              href="https://orcid.org/0009-0007-6079-1974"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="ORCID"
+              className="h-10 w-10 grid place-items-center rounded-lg border border-border bg-card hover:bg-secondary"
+            >
+              <OrcidIcon className="h-4 w-4" />
             </a>
           </div>
         </aside>

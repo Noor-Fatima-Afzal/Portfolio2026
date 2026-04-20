@@ -36,7 +36,7 @@ export const projects: Project[] = [
   {
     slug: "neuroai-platform",
     title: "NeuroAI Platform",
-    date: "Jun 2025 — Present",
+    date: "Jun 2025 · Present",
     description:
       "Scalable ML platform with automated parameter prediction for EEG model benchmarking and intelligent ingestion workflows.",
     results: [
@@ -53,7 +53,7 @@ export const projects: Project[] = [
   {
     slug: "seizure-detection",
     title: "Real-time Seizure Detection & Classification",
-    date: "May 2025 — Jul 2025",
+    date: "May 2025 · Jul 2025",
     description:
       "GNN-based optimization system for seizure detection on the TUH EEG dataset with hyperparameter optimization.",
     results: [
@@ -85,7 +85,7 @@ export const projects: Project[] = [
   {
     slug: "sleep-snn",
     title: "Energy-Efficient Sleep Stage Classification",
-    date: "Feb 2025 — Mar 2025",
+    date: "Feb 2025 · Mar 2025",
     description:
       "Spiking Neural Networks on the ISRUC-Sleep dataset, optimized for low-power edge computing.",
     results: ["82% accuracy", "35% energy reduction"],
@@ -97,7 +97,7 @@ export const projects: Project[] = [
   {
     slug: "multiview-decoding",
     title: "Multiview Neural Decoding with Attention",
-    date: "Nov 2024 — Jan 2025",
+    date: "Nov 2024 · Jan 2025",
     description:
       "Attention-based decoder combining temporal, spectral and spatial features across 500+ subjects.",
     results: ["93.3% accuracy", "+2.3% over prior work"],
@@ -110,7 +110,7 @@ export const projects: Project[] = [
     title: "AI-Powered Dental DICOM Annotation",
     date: "Jun 2025",
     description:
-      "U-Net model for segmenting dental CT scans — nerves, roots and enamel structures.",
+      "U-Net model for segmenting dental CT scans, including nerves, roots, and enamel structures.",
     results: ["3D volumetric preprocessing", "3D Slicer / Dragonfly visualization"],
     stack: ["Python", "PyTorch", "U-Net", "pydicom"],
     categories: ["Healthcare AI", "AI / ML"],

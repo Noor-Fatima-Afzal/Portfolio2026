@@ -8,11 +8,11 @@ import { projects } from "@/lib/projects";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Noor Fatima — AI Engineer & Machine Learning Engineer" },
+      { title: "Noor Fatima | AI Engineer & Machine Learning Engineer" },
       {
         name: "description",
         content:
-          "AI Engineer and Machine Learning Engineer building deployed ML systems across healthcare, neuroscience and LLM applications. Two peer-reviewed publications.",
+          "AI Engineer and Machine Learning Engineer building deployed ML systems across healthcare, neuroscience, and LLM applications. Two peer-reviewed publications.",
       },
     ],
   }),
@@ -20,7 +20,7 @@ export const Route = createFileRoute("/")({
 });
 
 const stats = [
-  { v: "17+", l: "shipped ML projects across healthcare & LLM apps" },
+  { v: "17+", l: "shipped ML projects across healthcare and LLM apps" },
   { v: "2", l: "peer-reviewed publications in applied AI" },
   { v: "10k+", l: "medical images segmented in production" },
   { v: "Top 1%", l: "CGPA, Computer Engineering UET" },
@@ -57,9 +57,9 @@ function Index() {
               AI Engineer · Machine Learning Engineer
             </p>
             <p className="mt-6 max-w-xl text-base text-muted-foreground leading-relaxed">
-              I build <span className="text-foreground">deployed ML systems</span> — production
+              I build <span className="text-foreground">deployed ML systems</span>: production
               pipelines for <span className="text-foreground">healthcare AI</span>,{" "}
-              <span className="text-foreground">LLM applications</span> and large-scale signal
+              <span className="text-foreground">LLM applications</span>, and large-scale signal
               decoding, with measurable real-world impact.
             </p>
 
@@ -111,7 +111,7 @@ function Index() {
         <div className="grid md:grid-cols-12 gap-10">
           <div className="md:col-span-4">
             <div className="text-xs font-mono uppercase tracking-widest text-primary">
-              01 — About
+              01 · About
             </div>
             <h2 className="mt-3 font-display text-3xl md:text-4xl font-semibold tracking-tight">
               Engineering ML for the real world.
@@ -119,22 +119,22 @@ function Index() {
           </div>
           <div className="md:col-span-8 space-y-5 text-muted-foreground leading-relaxed">
             <p>
-              I'm an AI / Machine Learning Engineer focused on shipping{" "}
-              <span className="text-foreground">production ML systems</span> — end-to-end pipelines
+              I'm an AI and Machine Learning Engineer focused on shipping{" "}
+              <span className="text-foreground">production ML systems</span>. End-to-end pipelines
               that move from raw data to deployed inference, with measurable impact on accuracy,
-              latency and cost.
+              latency, and cost.
             </p>
             <p>
-              I've built and deployed pipelines used by clinicians and researchers — from{" "}
+              I've built and deployed pipelines used by clinicians and researchers, from{" "}
               <span className="text-foreground">EEG-based emotion and seizure models</span> across
               500+ subjects to <span className="text-foreground">U-Net segmentation</span> on 10k+
               medical images, plus a suite of <span className="text-foreground">LLM applications</span>{" "}
-              spanning RAG, vision-language OCR and fine-tuned clinical assistants.
+              spanning RAG, vision-language OCR, and fine-tuned clinical assistants.
             </p>
             <p>
               My work is grounded in research credibility: two peer-reviewed papers accepted at{" "}
               <em>eNeuro</em> and <em>Brain-Apparatus Communication</em> on applied deep learning
-              for brain-signal analysis — bringing rigor to the engineering, not the other way
+              for brain-signal analysis, bringing rigor to the engineering rather than the other way
               around.
             </p>
 
@@ -162,7 +162,7 @@ function Index() {
         <div className="flex items-end justify-between mb-8">
           <div>
             <div className="text-xs font-mono uppercase tracking-widest text-primary">
-              02 — Selected Work
+              02 · Selected Work
             </div>
             <h2 className="mt-2 font-display text-3xl md:text-4xl font-semibold tracking-tight">
               Flagship projects

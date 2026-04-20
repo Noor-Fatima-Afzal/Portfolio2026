@@ -6,17 +6,17 @@ import { categories, projects, type Category } from "@/lib/projects";
 export const Route = createFileRoute("/projects")({
   head: () => ({
     meta: [
-      { title: "Projects — Noor Fatima" },
+      { title: "Projects | Noor Fatima" },
       {
         name: "description",
         content:
-          "Selected research and engineering projects across AI/ML, Quantum Computing, Healthcare AI and LLM applications.",
+          "Selected engineering projects across AI/ML, Healthcare AI, and LLM applications, with measurable real-world impact.",
       },
-      { property: "og:title", content: "Projects — Noor Fatima" },
+      { property: "og:title", content: "Projects | Noor Fatima" },
       {
         property: "og:description",
         content:
-          "Flagship and selected projects: NeuroAI Platform, End-to-End Quantum ML, Real-time Seizure Detection, Multimodal RAG for X-ray and more.",
+          "Flagship projects including NeuroAI Platform, Real-time Seizure Detection, and Multimodal RAG for chest X-ray.",
       },
     ],
   }),
@@ -36,11 +36,11 @@ function ProjectsPage() {
         Projects
       </div>
       <h1 className="mt-3 font-display text-4xl md:text-5xl font-semibold tracking-tight">
-        Building at the <span className="text-gradient">edge of research</span>.
+        Building at the <span className="text-gradient">edge of applied AI</span>.
       </h1>
       <p className="mt-4 max-w-2xl text-muted-foreground">
-        {projects.length} projects spanning quantum machine learning, neural decoding, medical
-        imaging, and LLM applications.
+        {projects.length} projects spanning neural decoding, medical imaging, and LLM applications,
+        each shipped with measurable impact.
       </p>
 
       <div className="mt-10 flex flex-wrap gap-2">
