@@ -294,9 +294,3 @@ export default function ExperiencePage() {
   );
 }
 
-// re-export for the route component
-ExperiencePage.displayName = "ExperiencePage";
-export { ExperiencePage as ExperienceComponent };
-
-// Tell tanstack which component to render
-Route.update({ component: ExperiencePage });

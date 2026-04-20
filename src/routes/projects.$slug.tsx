@@ -35,7 +35,7 @@ export const Route = createFileRoute("/projects/$slug")({
 });
 
 function ProjectDetail() {
-  const { project: p } = Route.useLoaderData();
+  const { project: p } = Route.useLoaderData() as { project: typeof projects[number] };
 
   return (
     <article className="mx-auto max-w-4xl px-6 py-16">
