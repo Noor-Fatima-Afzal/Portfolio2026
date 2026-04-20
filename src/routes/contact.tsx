@@ -6,16 +6,16 @@ import { GithubIcon, LinkedinIcon, ScholarIcon, OrcidIcon } from "@/components/i
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — Noor Fatima" },
+      { title: "Contact | Noor Fatima" },
       {
         name: "description",
         content:
-          "Get in touch with Noor Fatima for AI / Machine Learning Engineer roles and collaborations.",
+          "Get in touch with Noor Fatima for AI and Machine Learning Engineer roles and collaborations.",
       },
-      { property: "og:title", content: "Contact — Noor Fatima" },
+      { property: "og:title", content: "Contact | Noor Fatima" },
       {
         property: "og:description",
-        content: "Open to AI / Machine Learning Engineer roles and project collaborations.",
+        content: "Open to AI and Machine Learning Engineer roles and project collaborations.",
       },
     ],
   }),

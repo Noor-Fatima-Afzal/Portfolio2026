@@ -4,13 +4,13 @@ import { BookOpen, Brain, FileText } from "lucide-react";
 export const Route = createFileRoute("/publications")({
   head: () => ({
     meta: [
-      { title: "Publications — Noor Fatima" },
+      { title: "Publications | Noor Fatima" },
       {
         name: "description",
         content:
           "Peer-reviewed publications in applied AI and deep learning, focused on EEG-based brain signal analysis and real-world healthcare problems.",
       },
-      { property: "og:title", content: "Publications — Noor Fatima" },
+      { property: "og:title", content: "Publications | Noor Fatima" },
       {
         property: "og:description",
         content:
