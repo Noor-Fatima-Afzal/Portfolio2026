@@ -10,12 +10,12 @@ export const Route = createFileRoute("/contact")({
       {
         name: "description",
         content:
-          "Get in touch with Noor Fatima for research collaborations, internships and PhD opportunities.",
+          "Get in touch with Noor Fatima for AI / Machine Learning Engineer roles and collaborations.",
       },
       { property: "og:title", content: "Contact — Noor Fatima" },
       {
         property: "og:description",
-        content: "Open to research collaborations, internships and PhD positions.",
+        content: "Open to AI / Machine Learning Engineer roles and project collaborations.",
       },
     ],
   }),
@@ -45,8 +45,8 @@ function ContactPage() {
         Let's <span className="text-gradient">collaborate</span>.
       </h1>
       <p className="mt-4 max-w-2xl text-muted-foreground">
-        Open to research collaborations, internship opportunities and PhD positions in AI / Quantum
-        Machine Learning.
+        Open to AI / Machine Learning Engineer roles, freelance ML projects and applied research
+        collaborations.
       </p>
 
       <div className="mt-12 grid md:grid-cols-5 gap-8">

@@ -8,13 +8,13 @@ export const Route = createFileRoute("/experience")({
       {
         name: "description",
         content:
-          "Research and engineering experience: MITACS Canada, NCQC, KICS-UET, Datalabb, Dpoint Technologies and University of Cyprus.",
+          "Machine Learning engineering experience: KICS-UET, Datalabb, Dpoint Technologies, MITACS Canada and University of Cyprus.",
       },
       { property: "og:title", content: "Experience — Noor Fatima" },
       {
         property: "og:description",
         content:
-          "International research and engineering experience across quantum computing, neuroscience and medical AI.",
+          "International ML engineering experience across healthcare, predictive maintenance and LLM applications.",
       },
     ],
   }),
@@ -38,19 +38,8 @@ const experience: Item[] = [
     date: "Jun 2026 — Sep 2026",
     highlight: true,
     bullets: [
-      "Researching a hybrid AI–Quantum framework for efficient variational circuit design and ansatz optimization using PennyLane / Qiskit.",
-      "Benchmarking hybrid approaches against VQE / QAOA baselines, collaborating with an international team toward publication-ready results.",
-    ],
-  },
-  {
-    role: "Research Intern",
-    org: "National Center for Quantum Computing (NCQC)",
-    location: "Lahore, Pakistan",
-    date: "May 2025 — Jul 2025",
-    highlight: true,
-    bullets: [
-      "Developed QAOA-based optimization algorithms for NP-hard feature selection in healthcare diagnostics, processing 2000+ patient samples.",
-      "Implemented a Variational Quantum Classifier achieving 98.4% accuracy — +3.7% over classical baselines, demonstrating measurable quantum advantage.",
+      "Selected for the competitive MITACS Globalink program to work on applied machine learning research with an international team.",
+      "Building benchmarking pipelines and reproducible experiments for advanced ML model design.",
     ],
   },
   {
@@ -61,17 +50,18 @@ const experience: Item[] = [
     highlight: true,
     bullets: [
       "Built end-to-end ML pipelines for EEG-based emotion recognition across 3 datasets and 150+ subjects.",
-      "Developed predictive models for Alzheimer's / MCI classification using 80+ patient EEGs and integrated computational neuroscience models for stress decoding.",
+      "Developed predictive models for Alzheimer's / MCI classification using 80+ patient EEGs and shipped real-time signal-decoding services.",
     ],
   },
   {
-    role: "Research Assistant",
+    role: "Machine Learning Engineer",
     org: "Dpoint Technologies Ltd",
     location: "Cyprus",
     date: "Jul 2025 — Present",
+    highlight: true,
     bullets: [
-      "Researching predictive maintenance for industrial cranes — improving operational reliability and reducing downtime.",
-      "Built ML models for anomaly detection and fault prediction from vibration / temperature / current sensor data, integrated into real-time dashboards.",
+      "Shipping predictive-maintenance models for industrial cranes — improving operational reliability and reducing downtime.",
+      "Built ML services for anomaly detection and fault prediction from vibration / temperature / current sensor data, integrated into real-time dashboards.",
     ],
   },
   {
@@ -104,23 +94,6 @@ const experience: Item[] = [
       "Selected among the top 9% of 2,300+ applicants; completed 8+ ML modeling and optimization projects.",
       "Automated preprocessing workflows, reducing runtime from 2 days to under 6 hours.",
     ],
-  },
-];
-
-const publications = [
-  {
-    title:
-      "TriNet-MTL: A Multi-Branch Deep Learning Framework for Biometric Identification and Cognitive State Inference from Auditory-Evoked EEG",
-    authors: "N. Fatima, G. Nabi",
-    venue: "eNeuro",
-    status: "Accepted",
-  },
-  {
-    title:
-      "Multimodal EEG-Based Classification of Alzheimer's and MCI Using Olfactory Event-Related Potentials and Transformers",
-    authors: "N. Fatima, G. Nabi",
-    venue: "Brain-Apparatus Communication",
-    status: "Accepted",
   },
 ];
 
@@ -161,16 +134,16 @@ const skills = {
     "Spiking NNs",
     "LoRA / QLoRA",
   ],
-  "Quantum Computing": ["PennyLane", "Qiskit", "QAOA", "VQC", "VQE", "Bloch dynamics"],
-  "Tools & Frameworks": ["NumPy", "Pandas", "MNE", "OpenCV", "LangChain", "FAISS", "CLIP"],
-  "Systems & Deployment": ["Docker", "AWS", "Flask", "Streamlit", "React", "MySQL"],
+  "LLM & RAG": ["LangChain", "FAISS", "CLIP", "Groq", "OpenAI", "Meditron", "PEFT"],
+  "Tools & Frameworks": ["NumPy", "Pandas", "MNE", "OpenCV", "Librosa", "pydicom"],
+  "Systems & Deployment": ["Docker", "AWS", "Flask", "FastAPI", "Streamlit", "React", "MySQL"],
 };
 
 export default function ExperiencePage() {
   return (
     <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
       <div className="text-xs font-mono uppercase tracking-widest text-primary">
-        Experience & Research
+        Experience
       </div>
       <h1 className="mt-3 font-display text-4xl md:text-5xl font-semibold tracking-tight">
         Built across <span className="text-gradient">3 continents</span>.
@@ -248,28 +221,6 @@ export default function ExperiencePage() {
         </div>
       </div>
 
-      {/* Publications */}
-      <div className="mt-24">
-        <div className="text-xs font-mono uppercase tracking-widest text-primary">Publications</div>
-        <h2 className="mt-2 font-display text-3xl font-semibold tracking-tight">Peer-reviewed</h2>
-        <div className="mt-8 space-y-4">
-          {publications.map((p) => (
-            <div key={p.title} className="rounded-xl border border-border bg-card p-6">
-              <div className="flex items-start justify-between gap-4">
-                <h3 className="font-display text-base md:text-lg font-medium leading-snug">
-                  {p.title}
-                </h3>
-                <span className="text-xs font-mono text-primary border border-primary/30 px-2 py-0.5 rounded shrink-0">
-                  {p.status}
-                </span>
-              </div>
-              <p className="mt-2 text-sm text-muted-foreground">{p.authors}</p>
-              <p className="mt-1 text-sm italic text-foreground/80">{p.venue}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
       {/* Honors */}
       <div className="mt-24">
         <div className="text-xs font-mono uppercase tracking-widest text-primary">Honors</div>
@@ -293,4 +244,3 @@ export default function ExperiencePage() {
     </div>
   );
 }
-

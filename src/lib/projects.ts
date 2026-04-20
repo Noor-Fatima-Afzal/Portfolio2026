@@ -1,12 +1,8 @@
 import neuroai from "@/assets/proj-neuroai.jpg";
-import quantumPlatform from "@/assets/proj-quantum-platform.jpg";
 import seizure from "@/assets/proj-seizure.jpg";
 import ragXray from "@/assets/proj-rag-xray.jpg";
 import sleep from "@/assets/proj-sleep.jpg";
 import multiview from "@/assets/proj-multiview.jpg";
-import vqc from "@/assets/proj-vqc.jpg";
-import distributed from "@/assets/proj-distributed.jpg";
-import bloch from "@/assets/proj-bloch.jpg";
 import dental from "@/assets/proj-dental.jpg";
 import groqvision from "@/assets/proj-groqvision.jpg";
 import audio from "@/assets/proj-audio.jpg";
@@ -20,7 +16,7 @@ import neurogenesis from "@/assets/proj-neurogenesis.jpg";
 import breast from "@/assets/proj-breast.jpg";
 import emotion from "@/assets/proj-emotion.jpg";
 
-export type Category = "AI / ML" | "Quantum Computing" | "Healthcare AI" | "LLM Applications";
+export type Category = "AI / ML" | "Healthcare AI" | "LLM Applications";
 
 export interface Project {
   slug: string;
@@ -52,22 +48,6 @@ export const projects: Project[] = [
     image: neuroai,
     flagship: true,
     demo: "#",
-    github: "#",
-  },
-  {
-    slug: "quantum-platform",
-    title: "End-to-End Quantum ML Platform",
-    date: "2025",
-    description:
-      "Unified quantum computing platform integrating VQC training, distributed circuit simulation, and educational visualization.",
-    results: [
-      "Hybrid quantum-classical training pipeline",
-      "GHZ, QFT & Grover with noise-aware benchmarking",
-    ],
-    stack: ["PennyLane", "Qiskit", "PyTorch", "Streamlit", "Plotly"],
-    categories: ["Quantum Computing"],
-    image: quantumPlatform,
-    flagship: true,
     github: "#",
   },
   {
@@ -112,6 +92,7 @@ export const projects: Project[] = [
     stack: ["Python", "TensorFlow", "snnTorch", "MNE"],
     categories: ["AI / ML", "Healthcare AI"],
     image: sleep,
+    flagship: true,
   },
   {
     slug: "multiview-decoding",
@@ -123,39 +104,6 @@ export const projects: Project[] = [
     stack: ["Python", "PyTorch", "Attention"],
     categories: ["AI / ML"],
     image: multiview,
-  },
-  {
-    slug: "vqc",
-    title: "Variational Quantum Classifier",
-    date: "Jul 2025",
-    description:
-      "Variational quantum circuit with entangling gates for binary classification using expectation measurements.",
-    results: ["Hybrid training pipeline", "Interactive decision boundaries"],
-    stack: ["PennyLane", "PyTorch", "Streamlit", "Plotly"],
-    categories: ["Quantum Computing"],
-    image: vqc,
-  },
-  {
-    slug: "distributed-quantum",
-    title: "Distributed Quantum Algorithms Simulator",
-    date: "Jun 2025",
-    description:
-      "Distributed execution of GHZ, QFT and Grover's algorithms with circuit partitioning and noise modeling.",
-    results: ["Aer noise benchmarking", "Interactive circuit visualizer"],
-    stack: ["Python", "Qiskit", "Streamlit"],
-    categories: ["Quantum Computing"],
-    image: distributed,
-  },
-  {
-    slug: "bloch-visualizer",
-    title: "Quantum Gate Visualizer",
-    date: "May 2025",
-    description:
-      "Interactive Bloch sphere visualization for quantum gate operations and qubit transformations.",
-    results: ["Real-time superposition & entanglement", "3D Plotly UI"],
-    stack: ["Python", "Qiskit", "Plotly"],
-    categories: ["Quantum Computing"],
-    image: bloch,
   },
   {
     slug: "dental-dicom",
@@ -293,7 +241,6 @@ export const projects: Project[] = [
 
 export const categories: Category[] = [
   "AI / ML",
-  "Quantum Computing",
   "Healthcare AI",
   "LLM Applications",
 ];

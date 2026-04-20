@@ -32,18 +32,18 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Noor Fatima — AI Engineer & Quantum ML Researcher" },
+      { title: "Noor Fatima — AI Engineer & Machine Learning Engineer" },
       {
         name: "description",
         content:
-          "Portfolio of Noor Fatima — AI Engineer and Quantum Machine Learning researcher working at the intersection of AI, Neuroscience and Quantum Computing.",
+          "Portfolio of Noor Fatima — AI Engineer and Machine Learning Engineer building deployed ML systems for healthcare, LLM applications and signal decoding.",
       },
       { name: "author", content: "Noor Fatima" },
-      { property: "og:title", content: "Noor Fatima — AI Engineer & Quantum ML Researcher" },
+      { property: "og:title", content: "Noor Fatima — AI Engineer & Machine Learning Engineer" },
       {
         property: "og:description",
         content:
-          "Hybrid AI + Quantum + Neuroscience research. Publications, flagship projects and international research experience.",
+          "Deployed ML pipelines, LLM applications and peer-reviewed research in applied deep learning.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
