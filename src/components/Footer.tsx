@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer className="border-t border-border/60 mt-32">
       <div className="mx-auto max-w-6xl px-6 py-10 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-        <p>© {new Date().getFullYear()} Noor Fatima · AI Engineer & Quantum ML Researcher</p>
+        <p>© {new Date().getFullYear()} Noor Fatima · AI Engineer & Machine Learning Engineer</p>
         <div className="flex items-center gap-3">
           <a
             href="mailto:noorfatimaafzalbutt@gmail.com"

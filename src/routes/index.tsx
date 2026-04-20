@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Download, Mail, Atom, Brain, Cpu } from "lucide-react";
+import { ArrowRight, Download, Mail, Brain, Cpu, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import NeuralBackground from "@/components/NeuralBackground";
 import ProjectCard from "@/components/ProjectCard";
@@ -8,11 +8,11 @@ import { projects } from "@/lib/projects";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Noor Fatima — AI Engineer & Quantum ML Researcher" },
+      { title: "Noor Fatima — AI Engineer & Machine Learning Engineer" },
       {
         name: "description",
         content:
-          "AI Engineer and Quantum ML researcher. Hybrid AI–Quantum frameworks, neural decoding and scalable ML systems for healthcare.",
+          "AI Engineer and Machine Learning Engineer building deployed ML systems across healthcare, neuroscience and LLM applications. Two peer-reviewed publications.",
       },
     ],
   }),
@@ -20,9 +20,9 @@ export const Route = createFileRoute("/")({
 });
 
 const stats = [
-  { v: "98.4%", l: "VQC accuracy on healthcare diagnostics" },
-  { v: "+3.7%", l: "quantum advantage over classical baselines" },
-  { v: "2", l: "peer-reviewed publications accepted" },
+  { v: "17+", l: "shipped ML projects across healthcare & LLM apps" },
+  { v: "2", l: "peer-reviewed publications in applied AI" },
+  { v: "10k+", l: "medical images segmented in production" },
   { v: "Top 1%", l: "CGPA, Computer Engineering UET" },
 ];
 
@@ -48,19 +48,19 @@ function Index() {
           >
             <span className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-3 py-1 text-xs font-mono text-primary">
               <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse-glow" />
-              Open to PhD positions · Research collaborations · 2026
+              Open to AI / ML Engineer roles · 2026
             </span>
             <h1 className="mt-6 font-display text-5xl md:text-7xl font-semibold tracking-tight leading-[1.05]">
               Noor <span className="text-gradient">Fatima</span>
             </h1>
             <p className="mt-4 text-lg md:text-xl text-muted-foreground font-display">
-              AI Engineer · Quantum Machine Learning Researcher
+              AI Engineer · Machine Learning Engineer
             </p>
             <p className="mt-6 max-w-xl text-base text-muted-foreground leading-relaxed">
-              Working at the intersection of <span className="text-foreground">AI</span>,{" "}
-              <span className="text-foreground">Neuroscience</span> and{" "}
-              <span className="text-foreground">Quantum Computing</span> — building hybrid systems
-              that push past classical limits.
+              I build <span className="text-foreground">deployed ML systems</span> — production
+              pipelines for <span className="text-foreground">healthcare AI</span>,{" "}
+              <span className="text-foreground">LLM applications</span> and large-scale signal
+              decoding, with measurable real-world impact.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-3">
@@ -114,34 +114,35 @@ function Index() {
               01 — About
             </div>
             <h2 className="mt-3 font-display text-3xl md:text-4xl font-semibold tracking-tight">
-              Research-led, production-grade.
+              Engineering ML for the real world.
             </h2>
           </div>
           <div className="md:col-span-8 space-y-5 text-muted-foreground leading-relaxed">
             <p>
-              I'm a Computer Engineering researcher building <span className="text-foreground">hybrid AI–Quantum systems</span>{" "}
-              for problems classical compute cannot scale to. My current focus is variational
-              circuit design for NP-hard optimization, with applications in healthcare diagnostics
-              and neural decoding.
+              I'm an AI / Machine Learning Engineer focused on shipping{" "}
+              <span className="text-foreground">production ML systems</span> — end-to-end pipelines
+              that move from raw data to deployed inference, with measurable impact on accuracy,
+              latency and cost.
             </p>
             <p>
-              I've shipped end-to-end ML pipelines used by clinicians and researchers — from{" "}
-              <span className="text-foreground">EEG-based emotion recognition</span> across 150+ subjects
-              to <span className="text-foreground">U-Net segmentation</span> on 10k+ medical images. My
-              quantum work at NCQC achieved <span className="text-foreground">98.4% accuracy</span> via
-              a Variational Quantum Classifier, demonstrating measurable quantum advantage.
+              I've built and deployed pipelines used by clinicians and researchers — from{" "}
+              <span className="text-foreground">EEG-based emotion and seizure models</span> across
+              500+ subjects to <span className="text-foreground">U-Net segmentation</span> on 10k+
+              medical images, plus a suite of <span className="text-foreground">LLM applications</span>{" "}
+              spanning RAG, vision-language OCR and fine-tuned clinical assistants.
             </p>
             <p>
-              Two papers accepted at <em>eNeuro</em> and <em>Brain-Apparatus Communication</em>.
-              Incoming MITACS Globalink Research Intern at the University of Saskatchewan, where I'll
-              be benchmarking hybrid quantum frameworks against VQE/QAOA baselines.
+              My work is grounded in research credibility: two peer-reviewed papers accepted at{" "}
+              <em>eNeuro</em> and <em>Brain-Apparatus Communication</em> on applied deep learning
+              for brain-signal analysis — bringing rigor to the engineering, not the other way
+              around.
             </p>
 
             <div className="grid sm:grid-cols-3 gap-3 pt-4">
               {[
-                { icon: Brain, label: "Neuroscience + AI" },
-                { icon: Atom, label: "Quantum ML" },
-                { icon: Cpu, label: "Scalable systems" },
+                { icon: Cpu, label: "Production ML pipelines" },
+                { icon: Brain, label: "Healthcare & neuroscience AI" },
+                { icon: Sparkles, label: "LLM applications & RAG" },
               ].map(({ icon: Icon, label }) => (
                 <div
                   key={label}
