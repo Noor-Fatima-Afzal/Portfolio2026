@@ -4,17 +4,17 @@ import { MapPin, Calendar } from "lucide-react";
 export const Route = createFileRoute("/experience")({
   head: () => ({
     meta: [
-      { title: "Experience — Noor Fatima" },
+      { title: "Experience | Noor Fatima" },
       {
         name: "description",
         content:
-          "Machine Learning engineering experience: KICS-UET, Datalabb, Dpoint Technologies, MITACS Canada and University of Cyprus.",
+          "Machine Learning engineering experience: KICS-UET, Datalabb, Dpoint Technologies, MITACS Canada, and University of Cyprus.",
       },
-      { property: "og:title", content: "Experience — Noor Fatima" },
+      { property: "og:title", content: "Experience | Noor Fatima" },
       {
         property: "og:description",
         content:
-          "International ML engineering experience across healthcare, predictive maintenance and LLM applications.",
+          "International ML engineering experience across healthcare, predictive maintenance, and LLM applications.",
       },
     ],
   }),
@@ -35,7 +35,7 @@ const experience: Item[] = [
     role: "Research Intern (MITACS Globalink)",
     org: "University of Saskatchewan",
     location: "Saskatoon, Canada",
-    date: "Jun 2026 — Sep 2026",
+    date: "Jun 2026 · Sep 2026",
     highlight: true,
     bullets: [
       "Selected for the competitive MITACS Globalink program to work on applied machine learning research with an international team.",
@@ -46,29 +46,29 @@ const experience: Item[] = [
     role: "Research Assistant",
     org: "Al-Khawarizmi Institute of Computer Science (KICS), UET",
     location: "Lahore, Pakistan",
-    date: "Jun 2024 — Present",
+    date: "Jun 2024 · Present",
     highlight: true,
     bullets: [
       "Built end-to-end ML pipelines for EEG-based emotion recognition across 3 datasets and 150+ subjects.",
-      "Developed predictive models for Alzheimer's / MCI classification using 80+ patient EEGs and shipped real-time signal-decoding services.",
+      "Developed predictive models for Alzheimer's and MCI classification using 80+ patient EEGs and shipped real-time signal-decoding services.",
     ],
   },
   {
     role: "Machine Learning Engineer",
     org: "Dpoint Technologies Ltd",
     location: "Cyprus",
-    date: "Jul 2025 — Present",
+    date: "Jul 2025 · Present",
     highlight: true,
     bullets: [
-      "Shipping predictive-maintenance models for industrial cranes — improving operational reliability and reducing downtime.",
-      "Built ML services for anomaly detection and fault prediction from vibration / temperature / current sensor data, integrated into real-time dashboards.",
+      "Shipping predictive-maintenance models for industrial cranes, improving operational reliability and reducing downtime.",
+      "Built ML services for anomaly detection and fault prediction from vibration, temperature, and current sensor data, integrated into real-time dashboards.",
     ],
   },
   {
     role: "Machine Learning Intern",
     org: "Datalabb",
     location: "Lahore, Pakistan",
-    date: "Mar 2024 — Jun 2024",
+    date: "Mar 2024 · Jun 2024",
     highlight: true,
     bullets: [
       "Designed and optimized a U-Net segmentation framework for 10k+ medical images, achieving 90% mean Dice score.",
@@ -79,17 +79,17 @@ const experience: Item[] = [
     role: "Teaching Assistant",
     org: "University of Cyprus",
     location: "Nicosia, Cyprus",
-    date: "Fall 2025 — Spring 2026",
+    date: "Fall 2025 · Spring 2026",
     bullets: [
-      "TA for Programming Fundamentals, Information Security, Software Engineering and Computer Graphics.",
-      "Supported students through lab sessions, debugging clinics and applied problem-solving.",
+      "TA for Programming Fundamentals, Information Security, Software Engineering, and Computer Graphics.",
+      "Supported students through lab sessions, debugging clinics, and applied problem-solving.",
     ],
   },
   {
     role: "Machine Learning Fellow",
     org: "Bytewise Limited",
     location: "Lahore, Pakistan",
-    date: "Jun 2024 — Sep 2024",
+    date: "Jun 2024 · Sep 2024",
     bullets: [
       "Selected among the top 9% of 2,300+ applicants; completed 8+ ML modeling and optimization projects.",
       "Automated preprocessing workflows, reducing runtime from 2 days to under 6 hours.",
@@ -102,7 +102,7 @@ const honors = [
     title: "Excellence in Neuroscience Research",
     org: "KICS-UET Lahore",
     date: "Jun 2025",
-    note: "AI/ML pipelines, signal processing and innovative computational methods.",
+    note: "AI/ML pipelines, signal processing, and innovative computational methods.",
   },
   {
     title: "Chief Minister Punjab's Honhaar Scholarship",
@@ -111,7 +111,7 @@ const honors = [
     note: "Top 1% CGPA in Computer Engineering at UET Lahore.",
   },
   {
-    title: "Top 6 — Optimized AI Conference 2025",
+    title: "Top 6, Optimized AI Conference 2025",
     org: "Traversaal.ai",
     date: "Mar 2025",
     note: "Team TROJAN_AI ranked top 6 of 200+ global teams.",

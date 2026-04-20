@@ -39,7 +39,7 @@ const publications: Pub[] = [
     venue: "eNeuro",
     status: "Accepted",
     relevance:
-      "A multi-branch deep learning architecture solving two real-world problems at once — secure biometric ID and cognitive-state inference — directly from raw EEG signals.",
+      "A multi-branch deep learning architecture solving two real-world problems at once: secure biometric ID and cognitive-state inference, both directly from raw EEG signals.",
     tags: ["Deep Learning", "Multi-Task Learning", "EEG", "Biometrics"],
     icon: Brain,
   },
@@ -50,7 +50,7 @@ const publications: Pub[] = [
     venue: "Brain-Apparatus Communication",
     status: "Accepted",
     relevance:
-      "Transformer-based pipeline for early Alzheimer's and MCI screening from multimodal EEG — applying modern sequence models to a high-impact healthcare problem.",
+      "Transformer-based pipeline for early Alzheimer's and MCI screening from multimodal EEG, applying modern sequence models to a high-impact healthcare problem.",
     tags: ["Transformers", "Multimodal", "Healthcare AI", "EEG"],
     icon: FileText,
   },
@@ -115,7 +115,7 @@ function PublicationsPage() {
         <p className="text-sm text-muted-foreground leading-relaxed">
           These publications back the engineering work with{" "}
           <span className="text-foreground">strong AI/ML fundamentals</span> and depth in complex,
-          real-world domains like healthcare and neuroscience — the same rigor I bring to shipping
+          real-world domains like healthcare and neuroscience. The same rigor I bring to shipping
           production ML systems.
         </p>
       </div>
