@@ -1,4 +1,5 @@
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
+import { GithubIcon, LinkedinIcon } from "./icons";
 
 export default function Footer() {
   return (
@@ -20,7 +21,7 @@ export default function Footer() {
             className="h-9 w-9 grid place-items-center rounded-md border border-border hover:bg-secondary hover:text-foreground transition-colors"
             aria-label="LinkedIn"
           >
-            <Linkedin className="h-4 w-4" />
+            <LinkedinIcon className="h-4 w-4" />
           </a>
           <a
             href="https://github.com/"
@@ -29,7 +30,7 @@ export default function Footer() {
             className="h-9 w-9 grid place-items-center rounded-md border border-border hover:bg-secondary hover:text-foreground transition-colors"
             aria-label="GitHub"
           >
-            <Github className="h-4 w-4" />
+            <GithubIcon className="h-4 w-4" />
           </a>
         </div>
       </div>

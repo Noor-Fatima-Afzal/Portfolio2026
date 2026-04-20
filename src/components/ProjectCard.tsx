@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { Github, ExternalLink, Sparkles } from "lucide-react";
+import { ExternalLink, Sparkles } from "lucide-react";
+import { GithubIcon } from "./icons";
 import type { Project } from "@/lib/projects";
 
 export default function ProjectCard({ p, large }: { p: Project; large?: boolean }) {
@@ -65,7 +66,7 @@ export default function ProjectCard({ p, large }: { p: Project; large?: boolean 
         <div className="mt-5 flex items-center gap-3 text-xs text-muted-foreground">
           {p.github && (
             <span className="inline-flex items-center gap-1 hover:text-foreground">
-              <Github className="h-3.5 w-3.5" /> Code
+              <GithubIcon className="h-3.5 w-3.5" /> Code
             </span>
           )}
           {p.demo && (
