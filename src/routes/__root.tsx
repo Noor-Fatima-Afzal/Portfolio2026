@@ -32,25 +32,23 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Noor Fatima — AI Engineer & Quantum ML Researcher" },
+      { title: "Noor Fatima | AI Engineer & Machine Learning Engineer" },
       {
         name: "description",
         content:
-          "Portfolio of Noor Fatima — AI Engineer and Quantum Machine Learning researcher working at the intersection of AI, Neuroscience and Quantum Computing.",
+          "AI Engineer and Machine Learning Engineer portfolio showcasing deployed ML systems, healthcare AI, LLM applications, and peer-reviewed publications.",
       },
       { name: "author", content: "Noor Fatima" },
-      { property: "og:title", content: "Noor Fatima — AI Engineer & Quantum ML Researcher" },
+      { property: "og:title", content: "Noor Fatima | AI Engineer & Machine Learning Engineer" },
       {
         property: "og:description",
         content:
-          "Hybrid AI + Quantum + Neuroscience research. Publications, flagship projects and international research experience.",
+          "Deployed ML systems across healthcare, neuroscience, and LLM applications. Two peer-reviewed publications in applied AI.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Noor Fatima — AI Engineer & Quantum ML Researcher" },
-      { name: "description", content: "AI Engineer | Machine Learning Engineer portfolio showcasing projects, experience, and skills." },
-      { property: "og:description", content: "AI Engineer | Machine Learning Engineer portfolio showcasing projects, experience, and skills." },
-      { name: "twitter:description", content: "AI Engineer | Machine Learning Engineer portfolio showcasing projects, experience, and skills." },
+      { name: "twitter:title", content: "Noor Fatima | AI Engineer & Machine Learning Engineer" },
+      { name: "twitter:description", content: "Deployed ML systems across healthcare, neuroscience, and LLM applications." },
       { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/ecda2c78-2fda-44c8-beca-0bf122205ec2/id-preview-f9d54a5e--c7e93e09-9153-4b98-b563-3300db6bc53b.lovable.app-1776675795889.png" },
       { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/ecda2c78-2fda-44c8-beca-0bf122205ec2/id-preview-f9d54a5e--c7e93e09-9153-4b98-b563-3300db6bc53b.lovable.app-1776675795889.png" },
     ],

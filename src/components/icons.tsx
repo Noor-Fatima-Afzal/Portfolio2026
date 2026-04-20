@@ -23,3 +23,11 @@ export function ScholarIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
+export function OrcidIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden {...props}>
+      <path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378a1.349 1.349 0 1 1 .002 2.698 1.349 1.349 0 0 1-.002-2.698zM6.623 8.418h1.5v9.928h-1.5V8.418zm3.635 0h3.847c3.66 0 5.272 2.616 5.272 4.964 0 2.553-1.997 4.964-5.252 4.964h-3.867V8.418zm1.5 1.355v7.218h2.247c3.205 0 3.94-2.434 3.94-3.609 0-1.91-1.215-3.609-4.014-3.609h-2.173z"/>
+    </svg>
+  );
+}
