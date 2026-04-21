@@ -27,7 +27,6 @@ export interface Project {
   stack: string[];
   categories: Category[];
   image: string;
-  flagship?: boolean;
   github?: string;
   demo?: string;
 }
