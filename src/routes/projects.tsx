@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import ProjectCard from "@/components/ProjectCard";
 import { categories, projects, type Category } from "@/lib/projects";
 
@@ -16,25 +16,87 @@ export const Route = createFileRoute("/projects")({
       {
         property: "og:description",
         content:
-          "Flagship projects including NeuroAI Platform, Real-time Seizure Detection, and Multimodal RAG for chest X-ray.",
+          "Shipped projects spanning EEG modeling, medical imaging, RAG systems and production LLM applications.",
       },
     ],
   }),
   component: ProjectsPage,
 });
 
+// Per-category ordering: each filter view has its own curated sequence so the
+// same project never appears in the same slot across categories.
+const ORDER: Record<Category | "All", string[]> = {
+  All: [
+    "neuroai-platform",
+    "multimodal-rag-xray",
+    "seizure-detection",
+    "groqvision",
+    "sleep-snn",
+    "edupath",
+    "dental-dicom",
+    "lahore-legacy",
+    "multiview-decoding",
+    "audio-analyzer",
+    "clinical-llm",
+    "lawyer-assistant",
+    "emotion-eeg",
+    "neurogenesis",
+    "crane-gpt",
+    "madina-chatbot",
+    "breast-cancer",
+  ],
+  "AI / ML": [
+    "multiview-decoding",
+    "neuroai-platform",
+    "seizure-detection",
+    "emotion-eeg",
+    "sleep-snn",
+    "neurogenesis",
+    "breast-cancer",
+    "dental-dicom",
+  ],
+  "Healthcare AI": [
+    "seizure-detection",
+    "dental-dicom",
+    "multimodal-rag-xray",
+    "neurogenesis",
+    "clinical-llm",
+    "neuroai-platform",
+    "sleep-snn",
+    "emotion-eeg",
+    "breast-cancer",
+  ],
+  "LLM Applications": [
+    "groqvision",
+    "lahore-legacy",
+    "crane-gpt",
+    "multimodal-rag-xray",
+    "edupath",
+    "clinical-llm",
+    "madina-chatbot",
+    "audio-analyzer",
+    "lawyer-assistant",
+  ],
+};
+
 function ProjectsPage() {
   const [filter, setFilter] = useState<Category | "All">("All");
 
-  const filtered = projects.filter(
-    (p) => filter === "All" || p.categories.includes(filter),
-  );
+  const filtered = useMemo(() => {
+    const pool = projects.filter(
+      (p) => filter === "All" || p.categories.includes(filter as Category),
+    );
+    const order = ORDER[filter];
+    const indexOf = (slug: string) => {
+      const i = order.indexOf(slug);
+      return i === -1 ? order.length + 1 : i;
+    };
+    return [...pool].sort((a, b) => indexOf(a.slug) - indexOf(b.slug));
+  }, [filter]);
 
   return (
     <section className="mx-auto max-w-6xl px-6 py-16 md:py-24">
-      <div className="text-xs font-mono uppercase tracking-widest text-primary">
-        Projects
-      </div>
+      <div className="text-xs font-mono uppercase tracking-widest text-primary">Projects</div>
       <h1 className="mt-3 font-display text-4xl md:text-5xl font-semibold tracking-tight">
         Building at the <span className="text-gradient">edge of applied AI</span>.
       </h1>
@@ -67,9 +129,9 @@ function ProjectsPage() {
         })}
       </div>
 
-      <div className="mt-10 grid md:grid-cols-2 gap-5">
+      <div className="mt-10 grid sm:grid-cols-2 gap-5">
         {filtered.map((p) => (
-          <ProjectCard key={p.slug} p={p} large={p.flagship} />
+          <ProjectCard key={p.slug} p={p} />
         ))}
       </div>
     </section>
