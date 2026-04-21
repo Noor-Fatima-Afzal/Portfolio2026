@@ -1,35 +1,28 @@
 import { Link } from "@tanstack/react-router";
-import { ExternalLink, Sparkles } from "lucide-react";
-import { GithubIcon } from "./icons";
+import { ExternalLink } from "lucide-react";
 import type { Project } from "@/lib/projects";
+import { GithubIcon } from "./icons";
 
-export default function ProjectCard({ p, large }: { p: Project; large?: boolean }) {
+export default function ProjectCard({ p }: { p: Project }) {
   return (
     <Link
       to="/projects/$slug"
       params={{ slug: p.slug }}
-      className={`group relative overflow-hidden rounded-2xl border border-border bg-card shadow-card hover:shadow-glow transition-all duration-500 hover:-translate-y-1 ${
-        large ? "md:col-span-2" : ""
-      }`}
+      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-card hover:shadow-glow transition-all duration-500 hover:-translate-y-1"
     >
-      <div className={`relative overflow-hidden ${large ? "aspect-[2.4/1]" : "aspect-[16/10]"}`}>
+      <div className="relative overflow-hidden aspect-[16/10]">
         <img
           src={p.image}
           alt={p.title}
           loading="lazy"
           width={1024}
-          height={large ? 426 : 640}
+          height={640}
           className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-card via-card/40 to-transparent" />
-        {p.flagship && (
-          <span className="absolute top-3 left-3 inline-flex items-center gap-1 rounded-full bg-background/80 backdrop-blur px-2.5 py-1 text-xs font-medium border border-primary/40 text-primary">
-            <Sparkles className="h-3 w-3" /> Flagship
-          </span>
-        )}
       </div>
 
-      <div className="p-5">
+      <div className="p-5 flex flex-col flex-1">
         <div className="flex items-start justify-between gap-3">
           <h3 className="font-display text-lg font-semibold tracking-tight group-hover:text-primary transition-colors">
             {p.title}
@@ -63,7 +56,7 @@ export default function ProjectCard({ p, large }: { p: Project; large?: boolean 
           ))}
         </div>
 
-        <div className="mt-5 flex items-center gap-3 text-xs text-muted-foreground">
+        <div className="mt-auto pt-5 flex items-center gap-3 text-xs text-muted-foreground">
           {p.github && (
             <span className="inline-flex items-center gap-1 hover:text-foreground">
               <GithubIcon className="h-3.5 w-3.5" /> Code

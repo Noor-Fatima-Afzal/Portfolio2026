@@ -27,7 +27,7 @@ const stats = [
 ];
 
 function Index() {
-  const flagship = projects.filter((p) => p.flagship);
+  const featured = projects.slice(0, 4);
 
   return (
     <>
@@ -157,7 +157,7 @@ function Index() {
         </div>
       </section>
 
-      {/* FLAGSHIP PROJECTS */}
+      {/* SELECTED PROJECTS */}
       <section className="mx-auto max-w-6xl px-6 py-12">
         <div className="flex items-end justify-between mb-8">
           <div>
@@ -165,7 +165,7 @@ function Index() {
               02 · Selected Work
             </div>
             <h2 className="mt-2 font-display text-3xl md:text-4xl font-semibold tracking-tight">
-              Flagship projects
+              Recent projects
             </h2>
           </div>
           <Link
@@ -176,8 +176,8 @@ function Index() {
           </Link>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-5">
-          {flagship.map((p) => (
+        <div className="grid sm:grid-cols-2 gap-5">
+          {featured.map((p) => (
             <ProjectCard key={p.slug} p={p} />
           ))}
         </div>

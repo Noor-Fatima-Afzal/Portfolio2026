@@ -27,7 +27,6 @@ export interface Project {
   stack: string[];
   categories: Category[];
   image: string;
-  flagship?: boolean;
   github?: string;
   demo?: string;
 }
@@ -46,7 +45,6 @@ export const projects: Project[] = [
     stack: ["Python", "PyTorch", "MNE", "ReactJS", "Docker", "AWS"],
     categories: ["AI / ML", "Healthcare AI"],
     image: neuroai,
-    flagship: true,
     demo: "#",
     github: "#",
   },
@@ -63,7 +61,6 @@ export const projects: Project[] = [
     stack: ["Python", "PyTorch Geometric", "GNNs"],
     categories: ["AI / ML", "Healthcare AI"],
     image: seizure,
-    flagship: true,
     github: "#",
   },
   {
@@ -79,7 +76,6 @@ export const projects: Project[] = [
     stack: ["Python", "CLIP", "Groq LLM", "FAISS", "Streamlit"],
     categories: ["LLM Applications", "Healthcare AI"],
     image: ragXray,
-    flagship: true,
     github: "#",
   },
   {
@@ -92,7 +88,6 @@ export const projects: Project[] = [
     stack: ["Python", "TensorFlow", "snnTorch", "MNE"],
     categories: ["AI / ML", "Healthcare AI"],
     image: sleep,
-    flagship: true,
   },
   {
     slug: "multiview-decoding",
