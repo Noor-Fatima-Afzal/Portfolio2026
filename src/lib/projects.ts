@@ -15,6 +15,11 @@ import clinical from "@/assets/proj-clinical.jpg";
 import neurogenesis from "@/assets/proj-neurogenesis.jpg";
 import breast from "@/assets/proj-breast.jpg";
 import emotion from "@/assets/proj-emotion.jpg";
+import gnnPdm from "@/assets/proj-gnn-pdm.jpg";
+import neurographTsc from "@/assets/proj-neurograph-tsc.jpg";
+import obeRubrics from "@/assets/proj-obe-rubrics.jpg";
+import olympics from "@/assets/proj-olympics.jpg";
+import pdfExplora from "@/assets/proj-pdfexplora.jpg";
 
 export type Category = "AI / ML" | "Healthcare AI" | "LLM Applications";
 
@@ -231,6 +236,66 @@ export const projects: Project[] = [
     stack: ["Python", "MNE", "Scikit-learn", "Streamlit"],
     categories: ["AI / ML", "Healthcare AI"],
     image: emotion,
+  },
+  {
+    slug: "gnn-pdm",
+    title: "GNN-PdM: Predictive Maintenance",
+    date: "2024",
+    description:
+      "Graph neural network–based predictive maintenance system for industrial crane systems using sensor data and digital twins.",
+    results: ["Sensor + digital-twin fusion", "Failure-mode early warning"],
+    stack: ["Python", "PyTorch Geometric", "GNNs", "Digital Twins"],
+    categories: ["AI / ML"],
+    image: gnnPdm,
+    github: "https://github.com/Noor-Fatima-Afzal/GNN-PdM",
+  },
+  {
+    slug: "neurograph-tsc",
+    title: "NeuroGraph-TSC: EEG Cognitive State Prediction",
+    date: "2024",
+    description:
+      "Neuro-inspired graph-based temporal-spatial model combining GAT and LSTM for EEG cognitive state prediction.",
+    results: ["GAT + LSTM hybrid architecture", "Temporal-spatial EEG modeling"],
+    stack: ["Python", "PyTorch", "GAT", "LSTM"],
+    categories: ["AI / ML", "Healthcare AI"],
+    image: neurographTsc,
+    github: "https://github.com/Noor-Fatima-Afzal/Neurograph-TSC",
+  },
+  {
+    slug: "obe-rubrics",
+    title: "OBE Rubrics Management System",
+    date: "2024",
+    description:
+      "Streamlit + MySQL system for managing educational rubrics, CLOs, assessments, and student performance.",
+    results: ["End-to-end CLO tracking", "Structured assessment workflows"],
+    stack: ["Python", "Streamlit", "MySQL"],
+    categories: ["AI / ML"],
+    image: obeRubrics,
+    github: "https://github.com/Noor-Fatima-Afzal/OBE-Rubrics-Management-System",
+  },
+  {
+    slug: "olympics-data-analysis",
+    title: "Olympics Data Analysis",
+    date: "2023",
+    description:
+      "Data analysis dashboard for Olympic history with insights into medals, countries, athletes, and trends.",
+    results: ["Interactive medal & country insights", "Trend analysis across decades"],
+    stack: ["Python", "Pandas", "Streamlit", "Plotly"],
+    categories: ["AI / ML"],
+    image: olympics,
+    github: "https://github.com/Noor-Fatima-Afzal/Olympics-Data-Analysis",
+  },
+  {
+    slug: "pdfexplora",
+    title: "PDFExplora: Smart Document Q&A",
+    date: "2024",
+    description:
+      "AI-powered document Q&A system using LLMs and FAISS to answer questions from uploaded PDFs.",
+    results: ["FAISS-backed retrieval", "Context-grounded LLM answers"],
+    stack: ["Python", "LLMs", "FAISS", "LangChain"],
+    categories: ["LLM Applications"],
+    image: pdfExplora,
+    github: "https://github.com/Noor-Fatima-Afzal/PDFExplora-Smart-Document-Q-A",
   },
 ];
 
