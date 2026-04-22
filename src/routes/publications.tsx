@@ -1,5 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { BookOpen, Brain, FileText } from "lucide-react";
+import { BookOpen, Brain, FileText, ExternalLink, ChevronDown } from "lucide-react";
+import { useState } from "react";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 
 export const Route = createFileRoute("/publications")({
   head: () => ({
