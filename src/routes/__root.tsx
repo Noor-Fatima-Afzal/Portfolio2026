@@ -4,6 +4,7 @@ import appCss from "../styles.css?url";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import ChatWidget from "@/components/ChatWidget";
 
 function NotFoundComponent() {
   return (
@@ -90,6 +91,7 @@ function RootComponent() {
           <Outlet />
         </main>
         <Footer />
+        <ChatWidget />
       </div>
     </ThemeProvider>
   );
