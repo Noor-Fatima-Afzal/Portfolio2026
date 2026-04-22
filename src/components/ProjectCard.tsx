@@ -3,14 +3,34 @@ import { ExternalLink } from "lucide-react";
 import type { Project } from "@/lib/projects";
 import { GithubIcon } from "./icons";
 
+const GITHUB_PROFILE = "https://github.com/Noor-Fatima-Afzal";
+
 export default function ProjectCard({ p }: { p: Project }) {
+  const hasCode = Boolean(p.github);
+  const hasDemo = Boolean(p.demo);
+  const hasAnyLink = hasCode || hasDemo;
+
   return (
-    <Link
-      to="/projects/$slug"
-      params={{ slug: p.slug }}
-      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-card hover:shadow-glow transition-all duration-500 hover:-translate-y-1"
-    >
-      <div className="relative overflow-hidden aspect-[16/10]">
+    <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-card hover:shadow-glow transition-all duration-500 hover:-translate-y-1">
+      {/* Stretched link to detail page (or GitHub profile if no links provided) */}
+      {hasAnyLink ? (
+        <Link
+          to="/projects/$slug"
+          params={{ slug: p.slug }}
+          aria-label={`View ${p.title}`}
+          className="absolute inset-0 z-0"
+        />
+      ) : (
+        <a
+          href={GITHUB_PROFILE}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`View ${p.title} on GitHub profile`}
+          className="absolute inset-0 z-0"
+        />
+      )}
+
+      <div className="relative overflow-hidden aspect-[16/10] pointer-events-none">
         <img
           src={p.image}
           alt={p.title}
@@ -22,7 +42,7 @@ export default function ProjectCard({ p }: { p: Project }) {
         <div className="absolute inset-0 bg-gradient-to-t from-card via-card/40 to-transparent" />
       </div>
 
-      <div className="p-5 flex flex-col flex-1">
+      <div className="relative z-10 p-5 flex flex-col flex-1 pointer-events-none">
         <div className="flex items-start justify-between gap-3">
           <h3 className="font-display text-lg font-semibold tracking-tight group-hover:text-primary transition-colors">
             {p.title}
@@ -56,22 +76,34 @@ export default function ProjectCard({ p }: { p: Project }) {
           ))}
         </div>
 
-        <div className="mt-auto pt-5 flex items-center gap-3 text-xs text-muted-foreground">
-          {p.github && (
-            <span className="inline-flex items-center gap-1 hover:text-foreground">
+        <div className="mt-auto pt-5 flex items-center gap-3 text-xs">
+          {hasCode && (
+            <a
+              href={p.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="pointer-events-auto inline-flex items-center gap-1.5 rounded-md border border-border px-2.5 py-1 text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+            >
               <GithubIcon className="h-3.5 w-3.5" /> Code
-            </span>
+            </a>
           )}
-          {p.demo && (
-            <span className="inline-flex items-center gap-1 hover:text-foreground">
-              <ExternalLink className="h-3.5 w-3.5" /> Demo
-            </span>
+          {hasDemo && (
+            <a
+              href={p.demo}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="pointer-events-auto inline-flex items-center gap-1.5 rounded-md bg-primary/10 border border-primary/30 px-2.5 py-1 text-primary hover:bg-primary hover:text-primary-foreground transition-colors"
+            >
+              <ExternalLink className="h-3.5 w-3.5" /> Live App
+            </a>
           )}
           <span className="ml-auto text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-            View →
+            {hasAnyLink ? "View →" : "GitHub →"}
           </span>
         </div>
       </div>
-    </Link>
+    </div>
   );
 }
