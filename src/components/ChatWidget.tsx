@@ -42,6 +42,75 @@ export default function ChatWidget() {
     }
   }, [open]);
 
+  async function callApi(question: string, attempt = 0): Promise<void> {
+    const MAX_ATTEMPTS = 3;
+    const TIMEOUT_MS = 45000; // 45s — accommodates Render cold starts
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), TIMEOUT_MS);
+
+    const payload = { question, top_k: 4 };
+    console.log("[ChatWidget] Request →", API_URL, payload, `(attempt ${attempt + 1}/${MAX_ATTEMPTS})`);
+
+    try {
+      const res = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(payload),
+        signal: controller.signal,
+      });
+      clearTimeout(timeoutId);
+
+      console.log("[ChatWidget] Response status:", res.status);
+
+      if (!res.ok) {
+        const text = await res.text().catch(() => "");
+        console.warn("[ChatWidget] Non-OK body:", text);
+        throw new Error(`HTTP ${res.status}`);
+      }
+
+      const data = await res.json();
+      console.log("[ChatWidget] Response body:", data);
+
+      const answer: string =
+        data?.answer ?? data?.response ?? "I couldn't generate a response.";
+
+      let sources: string[] | undefined;
+      if (Array.isArray(data?.sources_used)) {
+        sources = data.sources_used.map((s: unknown) => String(s));
+      } else if (typeof data?.sources_used === "number" && data.sources_used > 0) {
+        sources = Array.from({ length: data.sources_used }, (_, i) => `Source ${i + 1}`);
+      }
+
+      setMessages((m) => [
+        ...m,
+        { id: crypto.randomUUID(), role: "ai", content: answer, sources },
+      ]);
+    } catch (err) {
+      clearTimeout(timeoutId);
+      console.error("[ChatWidget] Error on attempt", attempt + 1, err);
+
+      if (attempt + 1 < MAX_ATTEMPTS) {
+        const delay = 1500 * (attempt + 1);
+        console.log(`[ChatWidget] Retrying in ${delay}ms…`);
+        await new Promise((r) => setTimeout(r, delay));
+        return callApi(question, attempt + 1);
+      }
+
+      setMessages((m) => [
+        ...m,
+        {
+          id: crypto.randomUUID(),
+          role: "ai",
+          content:
+            "I couldn't reach the assistant right now. Please try again in a moment.",
+        },
+      ]);
+    }
+  }
+
   async function send() {
     const q = input.trim();
     if (!q || loading) return;
@@ -49,34 +118,8 @@ export default function ChatWidget() {
     setMessages((m) => [...m, userMsg]);
     setInput("");
     setLoading(true);
-
     try {
-      const res = await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ question: q, top_k: 4 }),
-      });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = await res.json();
-      const answer: string =
-        data?.answer ?? data?.response ?? "I couldn't generate a response.";
-      const sources: string[] | undefined = Array.isArray(data?.sources_used)
-        ? data.sources_used
-        : undefined;
-      setMessages((m) => [
-        ...m,
-        { id: crypto.randomUUID(), role: "ai", content: answer, sources },
-      ]);
-    } catch (err) {
-      setMessages((m) => [
-        ...m,
-        {
-          id: crypto.randomUUID(),
-          role: "ai",
-          content:
-            "Something went wrong. The assistant may be waking up (cold start) — please try again in a few seconds.",
-        },
-      ]);
+      await callApi(q);
     } finally {
       setLoading(false);
     }
