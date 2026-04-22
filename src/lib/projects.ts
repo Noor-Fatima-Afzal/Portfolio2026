@@ -50,8 +50,6 @@ export const projects: Project[] = [
     stack: ["Python", "PyTorch", "MNE", "ReactJS", "Docker", "AWS"],
     categories: ["AI / ML", "Healthcare AI"],
     image: neuroai,
-    demo: "#",
-    github: "#",
   },
   {
     slug: "seizure-detection",
@@ -66,7 +64,6 @@ export const projects: Project[] = [
     stack: ["Python", "PyTorch Geometric", "GNNs"],
     categories: ["AI / ML", "Healthcare AI"],
     image: seizure,
-    github: "#",
   },
   {
     slug: "multimodal-rag-xray",
@@ -81,7 +78,6 @@ export const projects: Project[] = [
     stack: ["Python", "CLIP", "Groq LLM", "FAISS", "Streamlit"],
     categories: ["LLM Applications", "Healthcare AI"],
     image: ragXray,
-    github: "#",
   },
   {
     slug: "sleep-snn",
