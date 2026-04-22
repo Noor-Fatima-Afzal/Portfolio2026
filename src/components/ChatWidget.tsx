@@ -10,7 +10,7 @@ type Msg = {
   sources?: string[];
 };
 
-const API_URL = "https://portfolioapi-bte0.onrender.com/chat";
+const API_URL = "/api/chat";
 
 const WELCOME: Msg = {
   id: "welcome",
