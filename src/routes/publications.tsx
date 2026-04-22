@@ -33,6 +33,8 @@ interface Pub {
   venue: string;
   status: string;
   relevance: string;
+  abstract: string;
+  link: string;
   tags: string[];
   icon: typeof Brain;
 }
@@ -41,22 +43,28 @@ const publications: Pub[] = [
   {
     title:
       "TriNet-MTL: A Multi-Branch Deep Learning Framework for Biometric Identification and Cognitive State Inference from Auditory-Evoked EEG",
-    authors: "N. Fatima, G. Nabi",
-    venue: "eNeuro",
-    status: "Accepted",
+    authors: "Noor Fatima, Ghulam Nabi",
+    venue: "eNeuro (2026)",
+    status: "Published",
     relevance:
       "A multi-branch deep learning architecture solving two real-world problems at once: secure biometric ID and cognitive-state inference, both directly from raw EEG signals.",
+    abstract:
+      "Auditory-evoked EEG signals contain rich temporal and cognitive features reflecting both individual identity and neural responses to external stimuli. This work introduces TriNet-MTL, a multi-branch deep learning framework combining a shared temporal encoder with a transformer-based sequence modeling unit. The model jointly performs biometric identification, stimulus language classification, and device modality recognition using multitask learning. Trained on EEG data from 20 participants, it achieves over 93% accuracy in biometric identification while maintaining strong generalization in cognitive inference tasks. The framework improves representation learning, reduces inter-task interference, and demonstrates strong potential for real-world EEG-based biometric authentication and cognitive monitoring systems.",
+    link: "https://www.eneuro.org/content/13/2/ENEURO.0265-25.2025.abstract",
     tags: ["Deep Learning", "Multi-Task Learning", "EEG", "Biometrics"],
     icon: Brain,
   },
   {
     title:
-      "Multimodal EEG-Based Classification of Alzheimer's and MCI Using Olfactory Event-Related Potentials and Transformers",
-    authors: "N. Fatima, G. Nabi",
-    venue: "Brain-Apparatus Communication",
-    status: "Accepted",
+      "Multimodal EEG-based Classification of Alzheimer's and MCI using Olfactory Event-Related Potentials and Transformers",
+    authors: "Noor Fatima, Ghulam Nabi",
+    venue: "Brain-Apparatus Communication Journal (2025)",
+    status: "Published",
     relevance:
       "Transformer-based pipeline for early Alzheimer's and MCI screening from multimodal EEG, applying modern sequence models to a high-impact healthcare problem.",
+    abstract:
+      "Neurodegenerative diseases such as Alzheimer's Disease and Mild Cognitive Impairment often present early olfactory dysfunction. This study proposes a Transformer-based deep learning framework leveraging olfactory event-related potentials (ERPs) from EEG signals for early diagnosis. EEG data from 35 participants were processed using time-frequency and spatial feature extraction. The model achieved 87% accuracy and a macro F1-score of 0.88, outperforming traditional approaches. It demonstrated strong sensitivity for MCI detection and provided interpretable attention patterns aligned with known ERP components, highlighting its potential as a noninvasive and cost-effective neurodiagnostic tool.",
+    link: "https://doi.org/10.1080/27706710.2025.2602997",
     tags: ["Transformers", "Multimodal", "Healthcare AI", "EEG"],
     icon: FileText,
   },
