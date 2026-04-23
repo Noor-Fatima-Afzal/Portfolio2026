@@ -14,6 +14,7 @@ const aboutItems = [
 const primaryNav = [
   { to: "/", label: "Home" },
   { to: "/projects", label: "Projects" },
+  { to: "/case-studies", label: "Case Studies" },
   { to: "/publications", label: "Publications" },
   { to: "/blog", label: "Blog" },
   { to: "/contact", label: "Contact" },
