@@ -14,6 +14,7 @@ const aboutItems = [
 const primaryNav = [
   { to: "/", label: "Home" },
   { to: "/projects", label: "Projects" },
+  { to: "/case-studies", label: "Case Studies" },
   { to: "/publications", label: "Publications" },
   { to: "/blog", label: "Blog" },
   { to: "/contact", label: "Contact" },
@@ -42,7 +43,7 @@ export default function Header() {
         </Link>
 
         <nav className="hidden md:flex items-center gap-1">
-          {primaryNav.slice(0, 2).map((n) => {
+          {primaryNav.slice(0, 3).map((n) => {
             const active = pathname === n.to || (n.to !== "/" && pathname.startsWith(n.to));
             return (
               <Link
@@ -92,7 +93,7 @@ export default function Header() {
             )}
           </div>
 
-          {primaryNav.slice(2).map((n) => {
+          {primaryNav.slice(3).map((n) => {
             const active = pathname === n.to || (n.to !== "/" && pathname.startsWith(n.to));
             return (
               <Link
@@ -130,7 +131,7 @@ export default function Header() {
 
       {open && (
         <div className="md:hidden border-t border-border/60 px-6 py-3 space-y-0.5 glass">
-          {primaryNav.slice(0, 2).map((n) => (
+          {primaryNav.slice(0, 3).map((n) => (
             <Link
               key={n.to}
               to={n.to}
@@ -154,7 +155,7 @@ export default function Header() {
             </Link>
           ))}
           <div className="pt-2" />
-          {primaryNav.slice(2).map((n) => (
+          {primaryNav.slice(3).map((n) => (
             <Link
               key={n.to}
               to={n.to}
