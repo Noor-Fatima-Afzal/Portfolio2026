@@ -256,6 +256,28 @@ function ContactPage() {
             </label>
           </div>
           <label className="block">
+            <span className="text-xs font-mono text-muted-foreground">
+              Purpose of Contact <span className="text-primary">*</span>
+            </span>
+            <select
+              required
+              name="purpose"
+              value={purpose}
+              onChange={(e) => setPurpose(e.target.value as PurposeValue)}
+              disabled={sending}
+              className="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 disabled:opacity-60 transition-all duration-200"
+            >
+              <option value="" disabled>
+                Select a purpose…
+              </option>
+              {PURPOSE_OPTIONS.map((opt) => (
+                <option key={opt.value} value={opt.value}>
+                  {opt.label}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="block">
             <span className="text-xs font-mono text-muted-foreground">Subject</span>
             <input
               name="subject"
@@ -267,12 +289,18 @@ function ContactPage() {
           <label className="block">
             <span className="text-xs font-mono text-muted-foreground">Message</span>
             <textarea
+              key={purpose || "default"}
               required
               name="message"
               rows={6}
               maxLength={2000}
               disabled={sending}
-              className="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 resize-y disabled:opacity-60"
+              placeholder={
+                purpose
+                  ? PURPOSE_PLACEHOLDERS[purpose]
+                  : "Tell me a bit about why you're reaching out…"
+              }
+              className="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 resize-y disabled:opacity-60 animate-in fade-in duration-300"
             />
           </label>
           <button
