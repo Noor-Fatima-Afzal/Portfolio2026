@@ -93,6 +93,7 @@ function RootComponent() {
         </main>
         <Footer />
         <ChatWidget />
+        <Toaster position="bottom-right" richColors closeButton />
       </div>
     </ThemeProvider>
   );
