@@ -6,6 +6,27 @@ import { toast } from "sonner";
 import { z } from "zod";
 import { GithubIcon, LinkedinIcon, ScholarIcon, OrcidIcon } from "@/components/icons";
 
+const PURPOSE_OPTIONS = [
+  { value: "hiring", label: "Hiring / Job Opportunity" },
+  { value: "freelance", label: "Freelance / Project Collaboration" },
+  { value: "technical", label: "Technical Question" },
+  { value: "networking", label: "Networking / General Inquiry" },
+  { value: "other", label: "Other" },
+] as const;
+
+type PurposeValue = (typeof PURPOSE_OPTIONS)[number]["value"];
+
+const PURPOSE_PLACEHOLDERS: Record<PurposeValue, string> = {
+  hiring: "Describe the role, company, and expectations",
+  freelance: "Briefly describe your project and timeline",
+  technical: "Explain your problem or question clearly",
+  networking: "What would you like to connect about?",
+  other: "Write your message",
+};
+
+const purposeLabel = (v: string) =>
+  PURPOSE_OPTIONS.find((o) => o.value === v)?.label ?? v;
+
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
@@ -45,6 +66,9 @@ const contactSchema = z.object({
     .email({ message: "Please enter a valid email" })
     .max(255, { message: "Email must be under 255 characters" }),
   subject: z.string().trim().max(200, { message: "Subject must be under 200 characters" }).optional(),
+  purpose: z.enum(["hiring", "freelance", "technical", "networking", "other"], {
+    message: "Please select a purpose of contact",
+  }),
   message: z
     .string()
     .trim()
@@ -54,6 +78,7 @@ const contactSchema = z.object({
 
 function ContactPage() {
   const [sending, setSending] = useState(false);
+  const [purpose, setPurpose] = useState<PurposeValue | "">("");
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -65,6 +90,7 @@ function ContactPage() {
       name: String(fd.get("name") ?? ""),
       email: String(fd.get("email") ?? ""),
       subject: String(fd.get("subject") ?? ""),
+      purpose: String(fd.get("purpose") ?? ""),
       message: String(fd.get("message") ?? ""),
     };
 
@@ -77,14 +103,16 @@ function ContactPage() {
 
     setSending(true);
     try {
+      const purposeText = purposeLabel(parsed.data.purpose);
       await emailjs.send(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
         {
           name: parsed.data.name,
           email: parsed.data.email,
-          subject: parsed.data.subject || "Portfolio inquiry",
-          message: parsed.data.message,
+          subject: parsed.data.subject || `[${purposeText}] Portfolio inquiry`,
+          purpose: purposeText,
+          message: `Purpose: ${purposeText}\n\n${parsed.data.message}`,
           to_email: "noorfatimaafzalbutt@gmail.com",
           reply_to: parsed.data.email,
         },
@@ -92,6 +120,7 @@ function ContactPage() {
       );
       toast.success("Message sent! I'll get back to you soon.");
       form.reset();
+      setPurpose("");
     } catch (err) {
       console.error("[contact] EmailJS send failed:", err);
       toast.error("Couldn't send message. Please email noorfatimaafzalbutt@gmail.com directly.");
