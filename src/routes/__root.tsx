@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import ChatWidget from "@/components/ChatWidget";
+import { Toaster } from "@/components/ui/sonner";
 
 function NotFoundComponent() {
   return (
@@ -92,6 +93,7 @@ function RootComponent() {
         </main>
         <Footer />
         <ChatWidget />
+        <Toaster position="bottom-right" richColors closeButton />
       </div>
     </ThemeProvider>
   );

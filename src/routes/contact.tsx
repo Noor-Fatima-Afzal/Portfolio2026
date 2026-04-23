@@ -1,6 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Mail, MapPin, Phone, Send } from "lucide-react";
+import { Loader2, Mail, MapPin, Phone, Send } from "lucide-react";
 import { useState, type FormEvent } from "react";
+import emailjs from "@emailjs/browser";
+import { toast } from "sonner";
+import { z } from "zod";
 import { GithubIcon, LinkedinIcon, ScholarIcon, OrcidIcon } from "@/components/icons";
 
 export const Route = createFileRoute("/contact")({
@@ -22,20 +25,79 @@ export const Route = createFileRoute("/contact")({
   component: ContactPage,
 });
 
-function ContactPage() {
-  const [sent, setSent] = useState(false);
+// EmailJS configuration. Public keys are safe to expose in frontend code.
+const EMAILJS_SERVICE_ID =
+  (import.meta.env.VITE_EMAILJS_SERVICE_ID as string | undefined) ?? "service_gz3wcfo";
+const EMAILJS_TEMPLATE_ID =
+  (import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string | undefined) ?? "template_p5e37ho";
+const EMAILJS_PUBLIC_KEY =
+  (import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string | undefined) ?? "MI2E_70EUUyLFpOSH";
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+const contactSchema = z.object({
+  name: z
+    .string()
+    .trim()
+    .min(1, { message: "Name is required" })
+    .max(100, { message: "Name must be under 100 characters" }),
+  email: z
+    .string()
+    .trim()
+    .email({ message: "Please enter a valid email" })
+    .max(255, { message: "Email must be under 255 characters" }),
+  subject: z.string().trim().max(200, { message: "Subject must be under 200 characters" }).optional(),
+  message: z
+    .string()
+    .trim()
+    .min(5, { message: "Message must be at least 5 characters" })
+    .max(2000, { message: "Message must be under 2000 characters" }),
+});
+
+function ContactPage() {
+  const [sending, setSending] = useState(false);
+
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const fd = new FormData(e.currentTarget);
-    const name = fd.get("name");
-    const email = fd.get("email");
-    const message = fd.get("message");
-    const body = encodeURIComponent(`From: ${name} <${email}>\n\n${message}`);
-    window.location.href = `mailto:noorfatimaafzalbutt@gmail.com?subject=${encodeURIComponent(
-      `Portfolio inquiry from ${name}`,
-    )}&body=${body}`;
-    setSent(true);
+    if (sending) return;
+
+    const form = e.currentTarget;
+    const fd = new FormData(form);
+    const raw = {
+      name: String(fd.get("name") ?? ""),
+      email: String(fd.get("email") ?? ""),
+      subject: String(fd.get("subject") ?? ""),
+      message: String(fd.get("message") ?? ""),
+    };
+
+    const parsed = contactSchema.safeParse(raw);
+    if (!parsed.success) {
+      const first = parsed.error.issues[0];
+      toast.error(first?.message ?? "Please check your inputs");
+      return;
+    }
+
+    setSending(true);
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          name: parsed.data.name,
+          email: parsed.data.email,
+          subject: parsed.data.subject || "Portfolio inquiry",
+          message: parsed.data.message,
+          to_email: "noorfatimaafzalbutt@gmail.com",
+          reply_to: parsed.data.email,
+        },
+        { publicKey: EMAILJS_PUBLIC_KEY },
+      );
+      toast.success("Message sent! I'll get back to you soon.");
+      form.reset();
+    } catch (err) {
+      console.error("[contact] EmailJS send failed:", err);
+      toast.error("Couldn't send message. Please email noorfatimaafzalbutt@gmail.com directly.");
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -147,7 +209,9 @@ function ContactPage() {
               <input
                 required
                 name="name"
-                className="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40"
+                maxLength={100}
+                disabled={sending}
+                className="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 disabled:opacity-60"
               />
             </label>
             <label className="block">
@@ -156,7 +220,9 @@ function ContactPage() {
                 required
                 type="email"
                 name="email"
-                className="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40"
+                maxLength={255}
+                disabled={sending}
+                className="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 disabled:opacity-60"
               />
             </label>
           </div>
@@ -164,7 +230,9 @@ function ContactPage() {
             <span className="text-xs font-mono text-muted-foreground">Subject</span>
             <input
               name="subject"
-              className="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40"
+              maxLength={200}
+              disabled={sending}
+              className="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 disabled:opacity-60"
             />
           </label>
           <label className="block">
@@ -173,21 +241,26 @@ function ContactPage() {
               required
               name="message"
               rows={6}
-              className="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 resize-y"
+              maxLength={2000}
+              disabled={sending}
+              className="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 resize-y disabled:opacity-60"
             />
           </label>
           <button
             type="submit"
-            className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground shadow-glow hover:opacity-90 transition"
+            disabled={sending}
+            className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground shadow-glow hover:opacity-90 transition disabled:opacity-70 disabled:cursor-not-allowed"
           >
-            <Send className="h-4 w-4" /> Send message
+            {sending ? (
+              <>
+                <Loader2 className="h-4 w-4 animate-spin" /> Sending…
+              </>
+            ) : (
+              <>
+                <Send className="h-4 w-4" /> Send message
+              </>
+            )}
           </button>
-          {sent && (
-            <p className="text-xs text-muted-foreground">
-              Opening your mail client… If nothing happens, write directly to
-              noorfatimaafzalbutt@gmail.com.
-            </p>
-          )}
         </form>
       </div>
     </div>

@@ -8,13 +8,13 @@ const CORS_HEADERS = {
   "Access-Control-Allow-Headers": "Content-Type",
 } as const;
 
-export const Route = createFileRoute("/api/chat")({
+export const Route = createFileRoute("/api/chat")(({
   server: {
     handlers: {
       OPTIONS: async () =>
         new Response(null, { status: 204, headers: CORS_HEADERS }),
 
-      POST: async ({ request }) => {
+      POST: async ({ request }: { request: Request }) => {
         try {
           const body = await request.json().catch(() => ({}));
           const question = String((body as any)?.question ?? "").trim();
@@ -77,4 +77,4 @@ export const Route = createFileRoute("/api/chat")({
       },
     },
   },
-});
+}) as any);
