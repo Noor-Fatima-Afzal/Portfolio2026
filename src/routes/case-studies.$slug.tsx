@@ -329,7 +329,7 @@ function NeuroAICaseStudy({ study }: { study: CaseStudy }) {
             { icon: Cpu, t: "Train & eval", d: "PyTorch trainers with shared metrics." },
             { icon: LineChart, t: "Dashboard", d: "Job status, leaderboards, artifacts." },
           ].map((c) => (
-            <Card key={t(c.t)} className="text-center">
+            <Card key={c.t} className="text-center">
               <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
                 <c.icon className="h-4.5 w-4.5" />
               </div>
@@ -590,10 +590,6 @@ function NeuroAICaseStudy({ study }: { study: CaseStudy }) {
 }
 
 /* ---------------- Inline architecture diagram (no images) ---------------- */
-
-function t(s: string) {
-  return s;
-}
 
 function ArchitectureDiagram() {
   const stages = [
