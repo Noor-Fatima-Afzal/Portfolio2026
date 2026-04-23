@@ -14,7 +14,7 @@ export const Route = createFileRoute("/api/chat")({
       OPTIONS: async () =>
         new Response(null, { status: 204, headers: CORS_HEADERS }),
 
-      POST: async ({ request }) => {
+      POST: async ({ request }: { request: Request }) => {
         try {
           const body = await request.json().catch(() => ({}));
           const question = String((body as any)?.question ?? "").trim();
