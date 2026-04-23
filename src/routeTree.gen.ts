@@ -16,9 +16,11 @@ import { Route as ExperienceRouteImport } from './routes/experience'
 import { Route as EducationRouteImport } from './routes/education'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CertificatesRouteImport } from './routes/certificates'
+import { Route as CaseStudiesRouteImport } from './routes/case-studies'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProjectsSlugRouteImport } from './routes/projects.$slug'
+import { Route as CaseStudiesSlugRouteImport } from './routes/case-studies.$slug'
 import { Route as ApiChatRouteImport } from './routes/api.chat'
 
 const TalksRoute = TalksRouteImport.update({
@@ -56,6 +58,11 @@ const CertificatesRoute = CertificatesRouteImport.update({
   path: '/certificates',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CaseStudiesRoute = CaseStudiesRouteImport.update({
+  id: '/case-studies',
+  path: '/case-studies',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogRoute = BlogRouteImport.update({
   id: '/blog',
   path: '/blog',
@@ -71,6 +78,11 @@ const ProjectsSlugRoute = ProjectsSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => ProjectsRoute,
 } as any)
+const CaseStudiesSlugRoute = CaseStudiesSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => CaseStudiesRoute,
+} as any)
 const ApiChatRoute = ApiChatRouteImport.update({
   id: '/api/chat',
   path: '/api/chat',
@@ -80,6 +92,7 @@ const ApiChatRoute = ApiChatRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/blog': typeof BlogRoute
+  '/case-studies': typeof CaseStudiesRouteWithChildren
   '/certificates': typeof CertificatesRoute
   '/contact': typeof ContactRoute
   '/education': typeof EducationRoute
@@ -88,11 +101,13 @@ export interface FileRoutesByFullPath {
   '/publications': typeof PublicationsRoute
   '/talks': typeof TalksRoute
   '/api/chat': typeof ApiChatRoute
+  '/case-studies/$slug': typeof CaseStudiesSlugRoute
   '/projects/$slug': typeof ProjectsSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/blog': typeof BlogRoute
+  '/case-studies': typeof CaseStudiesRouteWithChildren
   '/certificates': typeof CertificatesRoute
   '/contact': typeof ContactRoute
   '/education': typeof EducationRoute
@@ -101,12 +116,14 @@ export interface FileRoutesByTo {
   '/publications': typeof PublicationsRoute
   '/talks': typeof TalksRoute
   '/api/chat': typeof ApiChatRoute
+  '/case-studies/$slug': typeof CaseStudiesSlugRoute
   '/projects/$slug': typeof ProjectsSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/blog': typeof BlogRoute
+  '/case-studies': typeof CaseStudiesRouteWithChildren
   '/certificates': typeof CertificatesRoute
   '/contact': typeof ContactRoute
   '/education': typeof EducationRoute
@@ -115,6 +132,7 @@ export interface FileRoutesById {
   '/publications': typeof PublicationsRoute
   '/talks': typeof TalksRoute
   '/api/chat': typeof ApiChatRoute
+  '/case-studies/$slug': typeof CaseStudiesSlugRoute
   '/projects/$slug': typeof ProjectsSlugRoute
 }
 export interface FileRouteTypes {
@@ -122,6 +140,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/blog'
+    | '/case-studies'
     | '/certificates'
     | '/contact'
     | '/education'
@@ -130,11 +149,13 @@ export interface FileRouteTypes {
     | '/publications'
     | '/talks'
     | '/api/chat'
+    | '/case-studies/$slug'
     | '/projects/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/blog'
+    | '/case-studies'
     | '/certificates'
     | '/contact'
     | '/education'
@@ -143,11 +164,13 @@ export interface FileRouteTypes {
     | '/publications'
     | '/talks'
     | '/api/chat'
+    | '/case-studies/$slug'
     | '/projects/$slug'
   id:
     | '__root__'
     | '/'
     | '/blog'
+    | '/case-studies'
     | '/certificates'
     | '/contact'
     | '/education'
@@ -156,12 +179,14 @@ export interface FileRouteTypes {
     | '/publications'
     | '/talks'
     | '/api/chat'
+    | '/case-studies/$slug'
     | '/projects/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BlogRoute: typeof BlogRoute
+  CaseStudiesRoute: typeof CaseStudiesRouteWithChildren
   CertificatesRoute: typeof CertificatesRoute
   ContactRoute: typeof ContactRoute
   EducationRoute: typeof EducationRoute
@@ -223,6 +248,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CertificatesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/case-studies': {
+      id: '/case-studies'
+      path: '/case-studies'
+      fullPath: '/case-studies'
+      preLoaderRoute: typeof CaseStudiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog': {
       id: '/blog'
       path: '/blog'
@@ -244,6 +276,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProjectsSlugRouteImport
       parentRoute: typeof ProjectsRoute
     }
+    '/case-studies/$slug': {
+      id: '/case-studies/$slug'
+      path: '/$slug'
+      fullPath: '/case-studies/$slug'
+      preLoaderRoute: typeof CaseStudiesSlugRouteImport
+      parentRoute: typeof CaseStudiesRoute
+    }
     '/api/chat': {
       id: '/api/chat'
       path: '/api/chat'
@@ -253,6 +292,18 @@ declare module '@tanstack/react-router' {
     }
   }
 }
+
+interface CaseStudiesRouteChildren {
+  CaseStudiesSlugRoute: typeof CaseStudiesSlugRoute
+}
+
+const CaseStudiesRouteChildren: CaseStudiesRouteChildren = {
+  CaseStudiesSlugRoute: CaseStudiesSlugRoute,
+}
+
+const CaseStudiesRouteWithChildren = CaseStudiesRoute._addFileChildren(
+  CaseStudiesRouteChildren,
+)
 
 interface ProjectsRouteChildren {
   ProjectsSlugRoute: typeof ProjectsSlugRoute
@@ -269,6 +320,7 @@ const ProjectsRouteWithChildren = ProjectsRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BlogRoute: BlogRoute,
+  CaseStudiesRoute: CaseStudiesRouteWithChildren,
   CertificatesRoute: CertificatesRoute,
   ContactRoute: ContactRoute,
   EducationRoute: EducationRoute,
