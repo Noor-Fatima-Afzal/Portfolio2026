@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Brain } from "lucide-react";
 import neuroai from "@/assets/proj-neuroai.jpg";
 
-export const Route = createFileRoute("/case-studies")({
+export const Route = createFileRoute("/case-studies/")({
   head: () => ({
     meta: [
       { title: "Case Studies | Noor Fatima" },
