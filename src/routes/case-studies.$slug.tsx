@@ -6,15 +6,10 @@ import {
   Cpu,
   Database,
   ExternalLink,
-  Gauge,
-  GitBranch,
-  Layers,
   LineChart,
-  Lightbulb,
-  Rocket,
-  ShieldAlert,
+  Quote,
+  Server,
   Sparkles,
-  Target,
   Workflow,
 } from "lucide-react";
 import { GithubIcon } from "@/components/icons";
@@ -38,12 +33,12 @@ const STUDIES: Record<string, CaseStudy> = {
     slug: "neuroai-platform",
     title: "NeuroAI Platform",
     tagline:
-      "Scalable EEG ML platform reducing model benchmarking time from days to minutes.",
-    domain: "Healthcare AI · MLOps · Neural Signal Processing",
+      "An end-to-end EEG ML system that turns raw brain signals into ranked, reproducible model results — built by a small, cross-functional team.",
+    domain: "Healthcare AI · EEG · Team Project",
     year: "2025",
-    role: "ML Engineer & System Designer",
+    role: "Backend Developer — core system, ML pipeline integration, architecture",
     image: neuroai,
-    stack: ["Python", "PyTorch", "MNE", "ReactJS", "FastAPI", "Docker", "AWS"],
+    stack: ["Python", "PyTorch", "MNE", "FastAPI", "ReactJS", "Docker", "AWS"],
   },
 };
 
@@ -83,94 +78,334 @@ function CaseStudyPage() {
   return <NeuroAICaseStudy study={study} />;
 }
 
-/* ------------------------------- UI Helpers ------------------------------- */
+/* ------------------------------ Small atoms ------------------------------ */
 
-function SectionHeader({
-  eyebrow,
-  title,
-  icon: Icon,
-}: {
-  eyebrow: string;
-  title: string;
-  icon: React.ComponentType<{ className?: string }>;
-}) {
+function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex items-start gap-4">
-      <div className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-primary/30 bg-primary/10 text-primary">
-        <Icon className="h-5 w-5" />
-      </div>
-      <div>
-        <div className="text-[11px] font-mono uppercase tracking-widest text-primary">
-          {eyebrow}
-        </div>
-        <h2 className="mt-1 font-display text-2xl md:text-3xl font-semibold tracking-tight">
-          {title}
-        </h2>
-      </div>
-    </div>
-  );
-}
-
-function Card({
-  children,
-  className = "",
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
-  return (
-    <div
-      className={`rounded-xl border border-border bg-card/60 p-5 backdrop-blur-sm ${className}`}
-    >
+    <div className="text-[11px] font-mono uppercase tracking-[0.2em] text-primary">
       {children}
     </div>
   );
 }
 
-/* --------------------------- NeuroAI Case Study -------------------------- */
+function SectionTitle({ children }: { children: React.ReactNode }) {
+  return (
+    <h2 className="mt-3 font-display text-3xl md:text-5xl font-semibold tracking-tight leading-[1.05]">
+      {children}
+    </h2>
+  );
+}
+
+function Divider() {
+  return (
+    <div className="my-20 md:my-28 flex items-center gap-4">
+      <div className="h-px flex-1 bg-border" />
+      <div className="h-1.5 w-1.5 rounded-full bg-primary/60" />
+      <div className="h-px flex-1 bg-border" />
+    </div>
+  );
+}
+
+function Caption({ children }: { children: React.ReactNode }) {
+  return (
+    <p className="mt-3 text-xs font-mono uppercase tracking-wider text-muted-foreground">
+      {children}
+    </p>
+  );
+}
+
+function PullQuote({ children, by }: { children: React.ReactNode; by?: string }) {
+  return (
+    <figure className="my-12 md:my-16 border-l-2 border-primary pl-6 md:pl-8">
+      <Quote className="h-5 w-5 text-primary/70" />
+      <blockquote className="mt-3 font-display text-2xl md:text-3xl leading-snug tracking-tight text-foreground">
+        “{children}”
+      </blockquote>
+      {by && (
+        <figcaption className="mt-3 text-xs font-mono uppercase tracking-wider text-muted-foreground">
+          — {by}
+        </figcaption>
+      )}
+    </figure>
+  );
+}
+
+/* ------------------------------- Team data ------------------------------- */
+
+type Member = {
+  name: string;
+  role: string;
+  responsibility: string;
+  gender: "f" | "m";
+  initials: string;
+};
+
+const TEAM: Member[] = [
+  {
+    name: "Noor Fatima",
+    role: "Backend Developer (Lead)",
+    responsibility:
+      "Core system, ML pipeline integration, architecture design, deployment.",
+    gender: "f",
+    initials: "NF",
+  },
+  {
+    name: "Sonia Shahid",
+    role: "Logo Designer",
+    responsibility: "Branding and visual identity for the product.",
+    gender: "f",
+    initials: "SS",
+  },
+  {
+    name: "Maneeha Noor",
+    role: "Figma / UI Designer",
+    responsibility: "UI/UX design, wireframes, and the researcher-facing interface.",
+    gender: "f",
+    initials: "MN",
+  },
+  {
+    name: "Areeba Razzaq",
+    role: "Frontend Developer",
+    responsibility: "React implementation and integration with backend APIs.",
+    gender: "f",
+    initials: "AR",
+  },
+  {
+    name: "Ghulam Nabi",
+    role: "Data Module Engineer",
+    responsibility:
+      "Data pipeline, preprocessing, dataset handling, feature engineering.",
+    gender: "m",
+    initials: "GN",
+  },
+];
+
+function TeamCard({ m }: { m: Member }) {
+  return (
+    <div className="group relative rounded-2xl border border-border bg-card/60 p-6 transition-all duration-500 hover:-translate-y-0.5 hover:shadow-card hover:border-primary/40">
+      <div className="flex items-start gap-4">
+        <div className="relative">
+          <div className="grid h-14 w-14 place-items-center rounded-full bg-gradient-to-br from-primary/20 to-accent/20 ring-1 ring-border font-display text-base font-semibold text-foreground">
+            {m.initials}
+          </div>
+          <div
+            aria-hidden
+            className="absolute -bottom-1 -right-1 grid h-6 w-6 place-items-center rounded-full bg-background ring-1 ring-border text-base"
+            title={m.gender === "f" ? "Female" : "Male"}
+          >
+            {m.gender === "f" ? "👩" : "👨"}
+          </div>
+        </div>
+        <div className="min-w-0">
+          <div className="font-display text-base font-semibold tracking-tight">
+            {m.name}
+          </div>
+          <div className="mt-0.5 text-xs font-mono uppercase tracking-wider text-primary">
+            {m.role}
+          </div>
+        </div>
+      </div>
+      <p className="mt-4 text-sm text-muted-foreground leading-relaxed">
+        {m.responsibility}
+      </p>
+    </div>
+  );
+}
+
+/* ------------------------- Visuals (SVG diagrams) ------------------------ */
+
+function ArchitectureDiagram() {
+  const Box = ({
+    x,
+    y,
+    w,
+    h,
+    title,
+    sub,
+  }: {
+    x: number;
+    y: number;
+    w: number;
+    h: number;
+    title: string;
+    sub: string;
+  }) => (
+    <g>
+      <rect
+        x={x}
+        y={y}
+        width={w}
+        height={h}
+        rx={10}
+        className="fill-card stroke-border"
+        strokeWidth={1}
+      />
+      <text
+        x={x + w / 2}
+        y={y + 22}
+        textAnchor="middle"
+        className="fill-foreground"
+        style={{ fontSize: 12, fontWeight: 600 }}
+      >
+        {title}
+      </text>
+      <text
+        x={x + w / 2}
+        y={y + 40}
+        textAnchor="middle"
+        className="fill-muted-foreground"
+        style={{ fontSize: 10 }}
+      >
+        {sub}
+      </text>
+    </g>
+  );
+
+  const arrow = (x1: number, y1: number, x2: number, y2: number) => (
+    <line
+      x1={x1}
+      y1={y1}
+      x2={x2}
+      y2={y2}
+      className="stroke-primary/60"
+      strokeWidth={1.4}
+      markerEnd="url(#ah)"
+    />
+  );
+
+  return (
+    <svg viewBox="0 0 760 360" className="w-full h-auto">
+      <defs>
+        <marker
+          id="ah"
+          viewBox="0 0 10 10"
+          refX="9"
+          refY="5"
+          markerWidth="6"
+          markerHeight="6"
+          orient="auto-start-reverse"
+        >
+          <path d="M0,0 L10,5 L0,10 z" className="fill-primary/70" />
+        </marker>
+      </defs>
+
+      {/* Row 1 — Data plane */}
+      <Box x={20} y={30} w={150} h={60} title="EEG Data" sub="EDF · FIF · BIDS" />
+      <Box x={210} y={30} w={170} h={60} title="Data Module" sub="Clean · Epoch · Features" />
+      <Box x={420} y={30} w={170} h={60} title="Param Predictor" sub="Suggests hyperparams" />
+      <Box x={620} y={30} w={120} h={60} title="Model Zoo" sub="PyTorch" />
+
+      {arrow(170, 60, 210, 60)}
+      {arrow(380, 60, 420, 60)}
+      {arrow(590, 60, 620, 60)}
+
+      {/* Row 2 — Backend / Compute */}
+      <Box x={120} y={150} w={200} h={70} title="FastAPI Backend" sub="Jobs · Datasets · Runs" />
+      <Box x={360} y={150} w={220} h={70} title="Worker Pool (Docker)" sub="Train · Eval · Log" />
+      <Box x={620} y={150} w={120} h={70} title="Artifacts" sub="S3 · Metrics" />
+
+      {arrow(220, 90, 220, 150)}
+      {arrow(505, 90, 470, 150)}
+      {arrow(320, 185, 360, 185)}
+      {arrow(580, 185, 620, 185)}
+
+      {/* Row 3 — Frontend */}
+      <Box x={220} y={270} w={320} h={70} title="React Dashboard" sub="Upload · Monitor · Compare" />
+      {arrow(220, 220, 320, 270)}
+      {arrow(680, 220, 540, 270)}
+    </svg>
+  );
+}
+
+function PipelineFlow() {
+  const steps = [
+    { t: "Upload", d: "Researcher uploads EEG dataset" },
+    { t: "Preprocess", d: "MNE filtering, ICA, epoching" },
+    { t: "Predict params", d: "Auto hyperparameter suggestion" },
+    { t: "Train", d: "PyTorch on Docker workers" },
+    { t: "Compare", d: "Leaderboard + reports" },
+  ];
+  return (
+    <div className="grid gap-3 md:grid-cols-5">
+      {steps.map((s, i) => (
+        <div
+          key={s.t}
+          className="relative rounded-xl border border-border bg-card/60 p-4"
+        >
+          <div className="text-[11px] font-mono uppercase tracking-wider text-primary">
+            Step {i + 1}
+          </div>
+          <div className="mt-1 text-sm font-semibold">{s.t}</div>
+          <div className="mt-1 text-xs text-muted-foreground leading-relaxed">{s.d}</div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/* --------------------------- Case study page --------------------------- */
 
 function NeuroAICaseStudy({ study }: { study: CaseStudy }) {
   return (
-    <article className="mx-auto max-w-5xl px-6 py-12 md:py-16">
-      <Link
-        to="/case-studies"
-        className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"
-      >
-        <ArrowLeft className="h-4 w-4" /> All case studies
-      </Link>
+    <article className="pb-24">
+      {/* Top bar */}
+      <div className="mx-auto max-w-6xl px-6 pt-10">
+        <Link
+          to="/case-studies"
+          className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"
+        >
+          <ArrowLeft className="h-4 w-4" /> All case studies
+        </Link>
+      </div>
 
       {/* HERO */}
-      <header className="mt-8">
-        <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-muted-foreground">
-          <span className="rounded-md border border-primary/30 bg-primary/5 px-2 py-0.5 text-primary">
-            Case Study
-          </span>
-          <span>{study.domain}</span>
-          <span className="opacity-50">·</span>
-          <span>{study.year}</span>
-          <span className="opacity-50">·</span>
-          <span>{study.role}</span>
-        </div>
-
-        <h1 className="mt-5 font-display text-4xl md:text-6xl font-semibold tracking-tight leading-[1.05]">
+      <header className="mx-auto max-w-6xl px-6 pt-10 md:pt-16">
+        <Eyebrow>Case Study · {study.year}</Eyebrow>
+        <h1 className="mt-4 font-display text-5xl md:text-7xl font-semibold tracking-tight leading-[1.02]">
           {study.title}
         </h1>
-        <p className="mt-5 max-w-3xl text-lg md:text-xl text-muted-foreground leading-relaxed">
+        <p className="mt-6 max-w-3xl text-lg md:text-xl text-muted-foreground leading-relaxed">
           {study.tagline}
         </p>
 
-        <div className="mt-6 flex flex-wrap gap-1.5">
-          {study.stack.map((t) => (
-            <span
-              key={t}
-              className="text-xs px-2.5 py-1 rounded-md bg-secondary text-secondary-foreground font-mono"
-            >
-              {t}
-            </span>
-          ))}
+        {/* Meta strip */}
+        <div className="mt-10 grid gap-6 md:grid-cols-4 border-y border-border py-6">
+          <div>
+            <div className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground">
+              My role
+            </div>
+            <div className="mt-1.5 text-sm font-medium">Backend Developer</div>
+          </div>
+          <div>
+            <div className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground">
+              Team
+            </div>
+            <div className="mt-1.5 text-sm font-medium">5 — design, frontend, data, backend</div>
+          </div>
+          <div>
+            <div className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground">
+              Domain
+            </div>
+            <div className="mt-1.5 text-sm font-medium">{study.domain}</div>
+          </div>
+          <div>
+            <div className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground">
+              Stack
+            </div>
+            <div className="mt-1.5 flex flex-wrap gap-1.5">
+              {study.stack.map((t) => (
+                <span
+                  key={t}
+                  className="text-[11px] px-2 py-0.5 rounded-md bg-secondary text-secondary-foreground font-mono"
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
 
-        <div className="mt-7 flex flex-wrap items-center gap-3">
+        <div className="mt-8 flex flex-wrap items-center gap-3">
           {study.github && (
             <a
               href={study.github}
@@ -198,443 +433,343 @@ function NeuroAICaseStudy({ study }: { study: CaseStudy }) {
             Discuss this work <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
+      </header>
 
-        {/* Headline metrics */}
-        <div className="mt-10 grid sm:grid-cols-3 gap-4">
+      {/* HERO IMAGE — full bleed */}
+      <figure className="mt-14 md:mt-20">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="overflow-hidden rounded-3xl border border-border shadow-card">
+            <img
+              src={study.image}
+              alt="NeuroAI Platform — EEG ML system overview"
+              className="w-full h-auto"
+            />
+          </div>
+          <div className="mx-auto max-w-6xl">
+            <Caption>Fig. 01 — NeuroAI: an EEG-first ML platform built by a five-person team.</Caption>
+          </div>
+        </div>
+      </figure>
+
+      <Divider />
+
+      {/* INTRO */}
+      <section className="mx-auto max-w-3xl px-6">
+        <Eyebrow>01 · Intro</Eyebrow>
+        <SectionTitle>An EEG ML platform, made for researchers.</SectionTitle>
+        <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
+          NeuroAI helps researchers go from raw EEG recordings to ranked, reproducible
+          model results in a single workflow. Upload data, let the system preprocess it,
+          and compare models side-by-side — without rewriting pipelines.
+        </p>
+        <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
+          It was built as a team project. The system, ML integration, and architecture
+          were my responsibility; design, frontend, and data engineering were owned by
+          teammates I worked with closely.
+        </p>
+      </section>
+
+      <Divider />
+
+      {/* CONTEXT & GOAL */}
+      <section className="mx-auto max-w-6xl px-6">
+        <div className="grid gap-12 md:grid-cols-2 md:gap-16 items-start">
+          <div>
+            <Eyebrow>02 · Context</Eyebrow>
+            <SectionTitle>Why this project existed.</SectionTitle>
+            <p className="mt-6 text-base md:text-lg leading-relaxed text-muted-foreground">
+              EEG research workflows are slow. Each new experiment usually means
+              re-implementing preprocessing, re-tuning hyperparameters, and waiting
+              days for benchmarks to finish.
+            </p>
+            <p className="mt-4 text-base md:text-lg leading-relaxed text-muted-foreground">
+              We wanted a single system where researchers could upload data, run a
+              standardized pipeline, and compare models — quickly and reproducibly.
+            </p>
+          </div>
+          <div className="grid gap-3">
+            {[
+              { t: "Manual pipelines", d: "Pre-processing rebuilt for every project." },
+              { t: "Slow iteration", d: "Benchmarks took 2–3 days per experiment." },
+              { t: "Hard to reproduce", d: "Results varied across machines and people." },
+              { t: "Not researcher-friendly", d: "Heavy infra knowledge was required." },
+            ].map((p) => (
+              <div
+                key={p.t}
+                className="rounded-xl border border-border bg-card/60 p-4"
+              >
+                <div className="text-sm font-semibold">{p.t}</div>
+                <div className="mt-1 text-sm text-muted-foreground">{p.d}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <PullQuote by="Project goal">
+          Take EEG benchmarking from days of manual work to minutes of automated runs —
+          without hiding the science from the researcher.
+        </PullQuote>
+      </section>
+
+      <Divider />
+
+      {/* TEAM */}
+      <section className="mx-auto max-w-6xl px-6">
+        <Eyebrow>03 · Team & Roles</Eyebrow>
+        <SectionTitle>Built collaboratively.</SectionTitle>
+        <p className="mt-6 max-w-2xl text-base md:text-lg leading-relaxed text-muted-foreground">
+          A small, focused team. Each role mattered — branding, interface, data, and
+          backend all came together to make NeuroAI feel like a single product.
+        </p>
+
+        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {TEAM.map((m) => (
+            <TeamCard key={m.name} m={m} />
+          ))}
+        </div>
+        <Caption>Fig. 02 — Team structure: design, frontend, data, and backend.</Caption>
+      </section>
+
+      <Divider />
+
+      {/* PROCESS */}
+      <section className="mx-auto max-w-6xl px-6">
+        <Eyebrow>04 · Process</Eyebrow>
+        <SectionTitle>From problem to product.</SectionTitle>
+
+        <div className="mt-10 grid gap-6 md:grid-cols-2">
           {[
-            { k: "Benchmark cycle", v: "2–3 days → minutes", sub: "~99% wall-clock reduction" },
-            { k: "Researchers onboarded", v: "5+", sub: "Production usage" },
-            { k: "Manual tuning steps", v: "Eliminated", sub: "Automated parameter prediction" },
+            {
+              n: "Phase 01",
+              t: "Understanding the problem",
+              d: "We mapped the researcher’s journey — from messy EEG files to a final report — and listed every step that wasted time.",
+            },
+            {
+              n: "Phase 02",
+              t: "System design",
+              d: "I sketched a modular architecture: data, ML, backend, and frontend as independent layers connected by clear contracts.",
+            },
+            {
+              n: "Phase 03",
+              t: "Implementation",
+              d: "Backend, data pipeline, and frontend were built in parallel against shared API schemas to avoid blocking each other.",
+            },
+            {
+              n: "Phase 04",
+              t: "Integration & feedback",
+              d: "We connected modules, ran end-to-end tests with real EEG data, and iterated on UI based on researcher feedback.",
+            },
+          ].map((p) => (
+            <div
+              key={p.t}
+              className="rounded-2xl border border-border bg-card/60 p-6"
+            >
+              <div className="text-[11px] font-mono uppercase tracking-wider text-primary">
+                {p.n}
+              </div>
+              <div className="mt-2 font-display text-xl font-semibold tracking-tight">
+                {p.t}
+              </div>
+              <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{p.d}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <Divider />
+
+      {/* SOLUTION + ARCHITECTURE */}
+      <section className="mx-auto max-w-6xl px-6">
+        <Eyebrow>05 · Solution</Eyebrow>
+        <SectionTitle>One pipeline, four collaborating modules.</SectionTitle>
+        <p className="mt-6 max-w-3xl text-base md:text-lg leading-relaxed text-muted-foreground">
+          NeuroAI is composed of a data module, an ML pipeline, a backend control plane,
+          and a frontend dashboard. Each module is owned independently but speaks a
+          shared, typed contract.
+        </p>
+
+        <figure className="mt-10 overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-card to-background p-6 md:p-10">
+          <ArchitectureDiagram />
+        </figure>
+        <Caption>Fig. 03 — System architecture across data, backend, compute, and UI.</Caption>
+
+        <div className="mt-12">
+          <PipelineFlow />
+          <Caption>Fig. 04 — End-to-end pipeline a researcher experiences.</Caption>
+        </div>
+
+        <div className="mt-12 grid gap-4 md:grid-cols-4">
+          {[
+            { icon: Database, t: "Data module", d: "Ingestion, cleaning, features." },
+            { icon: Server, t: "Backend", d: "FastAPI control plane + jobs." },
+            { icon: Cpu, t: "ML pipeline", d: "PyTorch trainers, shared metrics." },
+            { icon: LineChart, t: "Frontend", d: "React dashboard for researchers." },
+          ].map((c) => (
+            <div
+              key={c.t}
+              className="rounded-xl border border-border bg-card/60 p-5"
+            >
+              <div className="grid h-9 w-9 place-items-center rounded-lg bg-primary/10 text-primary">
+                <c.icon className="h-4.5 w-4.5" />
+              </div>
+              <div className="mt-3 text-sm font-semibold">{c.t}</div>
+              <div className="mt-1 text-xs text-muted-foreground leading-relaxed">{c.d}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <Divider />
+
+      {/* MY CONTRIBUTIONS */}
+      <section className="mx-auto max-w-6xl px-6">
+        <div className="grid gap-12 md:grid-cols-[1fr_1.2fr] md:gap-16 items-start">
+          <div>
+            <Eyebrow>06 · My Contribution</Eyebrow>
+            <SectionTitle>Backend & system integration.</SectionTitle>
+            <p className="mt-6 text-base md:text-lg leading-relaxed text-muted-foreground">
+              I owned the backend, the ML pipeline integration, and the overall
+              architecture — the parts that make the rest of the system run.
+            </p>
+            <PullQuote>
+              The backend isn’t just APIs — it’s the contract that lets design, data, and
+              frontend move in parallel.
+            </PullQuote>
+          </div>
+
+          <div className="grid gap-3">
+            {[
+              {
+                icon: Server,
+                t: "FastAPI control plane",
+                d: "Designed endpoints for datasets, jobs, and runs with typed schemas shared with the frontend.",
+              },
+              {
+                icon: Workflow,
+                t: "ML pipeline integration",
+                d: "Wrapped the data module and PyTorch trainers behind a single job API so the UI never touches raw ML code.",
+              },
+              {
+                icon: Sparkles,
+                t: "Parameter prediction layer",
+                d: "Integrated a hyperparameter suggestion step that removes most of the manual tuning loop.",
+              },
+              {
+                icon: Brain,
+                t: "Architecture & deployment",
+                d: "Containerized services with Docker and deployed on AWS so workers scale horizontally for parallel runs.",
+              },
+            ].map((c) => (
+              <div
+                key={c.t}
+                className="rounded-xl border border-border bg-card/60 p-5 flex items-start gap-4"
+              >
+                <div className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary">
+                  <c.icon className="h-4.5 w-4.5" />
+                </div>
+                <div>
+                  <div className="text-sm font-semibold">{c.t}</div>
+                  <p className="mt-1.5 text-sm text-muted-foreground leading-relaxed">
+                    {c.d}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <Divider />
+
+      {/* CHALLENGES */}
+      <section className="mx-auto max-w-6xl px-6">
+        <Eyebrow>07 · Challenges</Eyebrow>
+        <SectionTitle>Where it got hard.</SectionTitle>
+
+        <div className="mt-10 grid gap-4 md:grid-cols-3">
+          {[
+            {
+              t: "Noisy EEG signals",
+              d: "Artifacts (blinks, muscle, line noise) varied per recording. We standardized preprocessing so models saw comparable inputs.",
+            },
+            {
+              t: "Module integration",
+              d: "Four modules built in parallel had to fit together. Shared schemas and contract tests kept everyone unblocked.",
+            },
+            {
+              t: "Speed vs scale",
+              d: "Single-node speed was easy; horizontal scale was the real win. We chose containerized workers for parallel sweeps.",
+            },
+          ].map((c) => (
+            <div
+              key={c.t}
+              className="rounded-2xl border border-border bg-card/60 p-6"
+            >
+              <div className="text-sm font-semibold">{c.t}</div>
+              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{c.d}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <Divider />
+
+      {/* OUTCOME */}
+      <section className="mx-auto max-w-6xl px-6">
+        <Eyebrow>08 · Outcome</Eyebrow>
+        <SectionTitle>Days of work, compressed into minutes.</SectionTitle>
+
+        <div className="mt-10 grid gap-4 md:grid-cols-3">
+          {[
+            { v: "2–3 days → minutes", k: "Benchmark cycle" },
+            { v: "5+", k: "Researchers using it" },
+            { v: "Eliminated", k: "Manual tuning steps" },
           ].map((m) => (
             <div
               key={m.k}
-              className="rounded-2xl border border-border bg-gradient-to-br from-card to-background p-5"
+              className="rounded-2xl border border-border bg-gradient-to-br from-card to-background p-6"
             >
               <div className="text-[11px] font-mono uppercase tracking-widest text-muted-foreground">
                 {m.k}
               </div>
-              <div className="mt-2 font-display text-2xl font-semibold tracking-tight">
+              <div className="mt-2 font-display text-3xl md:text-4xl font-semibold tracking-tight">
                 {m.v}
               </div>
-              <div className="mt-1 text-xs text-muted-foreground">{m.sub}</div>
             </div>
           ))}
         </div>
 
-        {/* Hero visual */}
-        <div className="mt-10 overflow-hidden rounded-2xl border border-border shadow-card">
-          <img src={study.image} alt={study.title} className="w-full h-auto" />
-        </div>
-      </header>
-
-      {/* TOC */}
-      <nav className="mt-12 rounded-xl border border-border bg-card/40 p-4">
-        <div className="text-[11px] font-mono uppercase tracking-widest text-muted-foreground">
-          On this page
-        </div>
-        <ul className="mt-2 grid sm:grid-cols-2 gap-x-6 gap-y-1 text-sm">
-          {[
-            ["problem", "Problem"],
-            ["goals", "Goals & requirements"],
-            ["solution", "Solution overview"],
-            ["architecture", "Architecture"],
-            ["deep-dive", "Technical deep dive"],
-            ["innovations", "Key innovations"],
-            ["challenges", "Challenges & trade-offs"],
-            ["results", "Results & impact"],
-            ["future", "Future improvements"],
-          ].map(([id, label]) => (
-            <li key={id}>
-              <a
-                href={`#${id}`}
-                className="text-muted-foreground hover:text-primary transition-colors"
-              >
-                → {label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
-
-      {/* PROBLEM */}
-      <section id="problem" className="mt-16 scroll-mt-24">
-        <SectionHeader eyebrow="01 · Context" title="The problem" icon={ShieldAlert} />
-        <div className="mt-6 grid md:grid-cols-3 gap-4">
-          <Card>
-            <div className="text-sm font-semibold">Manual, brittle workflows</div>
-            <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-              EEG research pipelines were stitched together in notebooks — preprocessing,
-              feature extraction, and model training were re-implemented per project.
-            </p>
-          </Card>
-          <Card>
-            <div className="text-sm font-semibold">2–3 days per benchmark</div>
-            <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-              A single comparative experiment across architectures and hyperparameters
-              consumed days of researcher time, blocking iteration.
-            </p>
-          </Card>
-          <Card>
-            <div className="text-sm font-semibold">Reproducibility gap</div>
-            <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-              Without standardized pipelines, results were hard to reproduce across
-              datasets, machines, and team members — eroding trust in findings.
-            </p>
-          </Card>
-        </div>
-        <p className="mt-6 max-w-3xl text-muted-foreground leading-relaxed">
-          In neuroscience and clinical AI, slow iteration directly slows discovery. Every day
-          spent re-wiring a pipeline is a day not spent validating a hypothesis. The platform
-          had to remove the friction without hiding the science.
-        </p>
+        <PullQuote by="Outcome">
+          Researchers stopped fighting the pipeline and started running experiments.
+          That was the real win.
+        </PullQuote>
       </section>
 
-      {/* GOALS */}
-      <section id="goals" className="mt-16 scroll-mt-24">
-        <SectionHeader eyebrow="02 · North Star" title="Goals & requirements" icon={Target} />
-        <ul className="mt-6 grid md:grid-cols-2 gap-3">
-          {[
-            "Automate end-to-end EEG model benchmarking across architectures.",
-            "Cut experiment turnaround from days to minutes.",
-            "Make pipelines reproducible across datasets, machines, and users.",
-            "Expose a researcher-friendly UI — no infra knowledge required.",
-            "Scale horizontally on commodity cloud (AWS) with containerized workers.",
-            "Standardize artifacts: configs, metrics, models, and reports.",
-          ].map((g) => (
-            <li
-              key={g}
-              className="flex items-start gap-3 rounded-lg border border-border bg-card/40 p-4 text-sm"
-            >
-              <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
-              <span className="text-foreground/90">{g}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      {/* SOLUTION */}
-      <section id="solution" className="mt-16 scroll-mt-24">
-        <SectionHeader eyebrow="03 · Approach" title="Solution overview" icon={Lightbulb} />
-        <p className="mt-6 max-w-3xl text-muted-foreground leading-relaxed">
-          NeuroAI is a modular pipeline platform: raw EEG flows through standardized
-          ingestion, MNE-based preprocessing, an automated parameter predictor, and a
-          PyTorch training/evaluation engine. Researchers interact via a React dashboard
-          that orchestrates jobs and surfaces metrics, plots, and ranked model leaderboards.
-        </p>
-        <div className="mt-6 grid md:grid-cols-5 gap-3">
-          {[
-            { icon: Database, t: "Ingestion", d: "EDF / FIF / BIDS uploads, validated and versioned." },
-            { icon: Workflow, t: "Preprocessing", d: "Filtering, ICA, epoching via MNE." },
-            { icon: Sparkles, t: "Param predictor", d: "Suggests hyperparameters from data stats." },
-            { icon: Cpu, t: "Train & eval", d: "PyTorch trainers with shared metrics." },
-            { icon: LineChart, t: "Dashboard", d: "Job status, leaderboards, artifacts." },
-          ].map((c) => (
-            <Card key={c.t} className="text-center">
-              <div className="mx-auto flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                <c.icon className="h-4.5 w-4.5" />
-              </div>
-              <div className="mt-3 text-sm font-semibold">{c.t}</div>
-              <p className="mt-1 text-xs text-muted-foreground leading-relaxed">{c.d}</p>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      {/* ARCHITECTURE */}
-      <section id="architecture" className="mt-16 scroll-mt-24">
-        <SectionHeader eyebrow="04 · System design" title="Architecture" icon={Layers} />
-        <div className="mt-6 rounded-2xl border border-border bg-gradient-to-br from-card via-card/60 to-background p-6 md:p-8">
-          <ArchitectureDiagram />
-        </div>
-        <div className="mt-6 grid md:grid-cols-2 gap-4">
-          <Card>
-            <div className="text-sm font-semibold">Control plane</div>
-            <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-              FastAPI service exposes job, dataset, and experiment APIs. The React dashboard
-              consumes them, while a job queue dispatches work to containerized workers.
-            </p>
-          </Card>
-          <Card>
-            <div className="text-sm font-semibold">Data plane</div>
-            <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-              EEG recordings live in S3-backed object storage; preprocessed epochs and
-              trained checkpoints are written back as immutable, content-addressed artifacts.
-            </p>
-          </Card>
-          <Card>
-            <div className="text-sm font-semibold">Compute plane</div>
-            <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-              Docker images bundle MNE + PyTorch with pinned versions. Workers scale
-              horizontally on AWS, allowing parallel sweeps across architectures.
-            </p>
-          </Card>
-          <Card>
-            <div className="text-sm font-semibold">Observability</div>
-            <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-              Every run emits structured metrics, configs, and seeds. Reproducibility is a
-              first-class artifact, not a side-effect.
-            </p>
-          </Card>
-        </div>
-      </section>
-
-      {/* DEEP DIVE */}
-      <section id="deep-dive" className="mt-16 scroll-mt-24">
-        <SectionHeader eyebrow="05 · Engineering" title="Technical deep dive" icon={Cpu} />
-        <div className="mt-6 space-y-4">
-          {[
-            {
-              icon: Brain,
-              t: "Handling messy EEG signals",
-              d: "EEG is dominated by artifacts: eye blinks, muscle tension, line noise, electrode drift. The pipeline standardizes channel layouts, applies bandpass + notch filtering, and runs ICA-based artifact rejection so downstream models see comparable inputs across recordings.",
-            },
-            {
-              icon: Workflow,
-              t: "MNE for signal processing",
-              d: "MNE drives preprocessing because it’s the de-facto standard in the neuroscience community. Wrapping it in declarative configs lets researchers describe what they want (filter band, epoch length, baseline) without re-implementing primitives.",
-            },
-            {
-              icon: Cpu,
-              t: "Model pipeline in PyTorch",
-              d: "Models implement a small interface (forward, training_step, eval_step). A shared trainer handles AMP, gradient clipping, early stopping, and metric logging — so adding a new architecture is one file, not one project.",
-            },
-            {
-              icon: Sparkles,
-              t: "Parameter prediction",
-              d: "A meta-model inspects dataset statistics — sampling rate, channel count, class balance, signal energy — and suggests a starting hyperparameter set (learning rate, batch size, window length). This collapses the manual sweep step that used to dominate wall-clock time.",
-            },
-            {
-              icon: GitBranch,
-              t: "Frontend ↔ backend contract",
-              d: "The React dashboard talks to FastAPI over a typed schema. Long-running jobs are tracked via a status endpoint; artifacts (plots, leaderboards, exported models) are linked from the run page so researchers stay in one place.",
-            },
-            {
-              icon: Rocket,
-              t: "Docker + AWS for scale",
-              d: "Pinned Docker images guarantee reproducibility. On AWS, workers scale out to run sweeps in parallel; a single researcher can launch what used to be a week of experiments and have ranked results in minutes.",
-            },
-          ].map((row) => (
-            <Card key={row.t} className="md:flex md:items-start md:gap-4">
-              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                <row.icon className="h-4.5 w-4.5" />
-              </div>
-              <div className="mt-3 md:mt-0">
-                <div className="text-sm font-semibold">{row.t}</div>
-                <p className="mt-1.5 text-sm text-muted-foreground leading-relaxed">{row.d}</p>
-              </div>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      {/* INNOVATIONS */}
-      <section id="innovations" className="mt-16 scroll-mt-24">
-        <SectionHeader eyebrow="06 · What’s novel" title="Key innovations" icon={Sparkles} />
-        <div className="mt-6 grid md:grid-cols-2 gap-4">
-          {[
-            {
-              t: "Automated parameter prediction",
-              d: "Removes the most time-consuming manual step in EEG benchmarking by suggesting strong starting hyperparameters from data characteristics.",
-            },
-            {
-              t: "End-to-end pipeline integration",
-              d: "Ingestion, preprocessing, training, and reporting share one config and one artifact store — no glue code between stages.",
-            },
-            {
-              t: "Near real-time benchmarking",
-              d: "Parallel containerized workers turn multi-day comparative studies into minute-scale runs.",
-            },
-            {
-              t: "Researcher-first UX",
-              d: "A dashboard, not a terminal: upload data, pick a study, get a leaderboard. Adopted by 5+ researchers without onboarding overhead.",
-            },
-          ].map((c) => (
-            <Card key={c.t}>
-              <div className="text-sm font-semibold">{c.t}</div>
-              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{c.d}</p>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      {/* CHALLENGES */}
-      <section id="challenges" className="mt-16 scroll-mt-24">
-        <SectionHeader
-          eyebrow="07 · Honest engineering"
-          title="Challenges & trade-offs"
-          icon={Gauge}
-        />
-        <div className="mt-6 space-y-4">
-          {[
-            {
-              t: "Noisy, heterogeneous EEG data",
-              d: "Different montages, sampling rates, and recording conditions break naive pipelines. We pay an upfront standardization cost to get consistent downstream behavior.",
-            },
-            {
-              t: "Generalization across datasets",
-              d: "A model that wins on one dataset can collapse on another. The platform encourages cross-dataset evaluation as a default, even though it’s slower than single-dataset benchmarks.",
-            },
-            {
-              t: "Accuracy vs speed",
-              d: "The parameter predictor optimizes for fast, strong baselines — not absolute SOTA. Researchers can opt into deeper sweeps when warranted; the default biases toward iteration speed.",
-            },
-            {
-              t: "Deployment & scaling",
-              d: "Cold-start cost on AWS workers was non-trivial. Warm worker pools and image layer caching brought job startup into the seconds-range without leaving cost on the table.",
-            },
-          ].map((row) => (
-            <Card key={row.t}>
-              <div className="text-sm font-semibold">{row.t}</div>
-              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{row.d}</p>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      {/* RESULTS */}
-      <section id="results" className="mt-16 scroll-mt-24">
-        <SectionHeader eyebrow="08 · Outcome" title="Results & impact" icon={LineChart} />
-        <div className="mt-6 grid sm:grid-cols-2 md:grid-cols-4 gap-4">
-          {[
-            { v: "2–3 days → mins", k: "Benchmark cycle" },
-            { v: "5+", k: "Researchers in production" },
-            { v: "1 config", k: "From raw EEG to report" },
-            { v: "Reproducible", k: "Runs by default" },
-          ].map((m) => (
-            <div
-              key={m.k}
-              className="rounded-2xl border border-border bg-gradient-to-br from-card to-background p-5"
-            >
-              <div className="font-display text-2xl font-semibold tracking-tight">{m.v}</div>
-              <div className="mt-1 text-xs text-muted-foreground">{m.k}</div>
-            </div>
-          ))}
-        </div>
-        <p className="mt-6 max-w-3xl text-muted-foreground leading-relaxed">
-          The most meaningful signal wasn’t a metric — it was behavior change. Researchers
-          began running comparative studies they previously avoided because the cost dropped
-          below the friction threshold. Iteration speed compounded into better science.
-        </p>
-      </section>
-
-      {/* FUTURE */}
-      <section id="future" className="mt-16 scroll-mt-24">
-        <SectionHeader eyebrow="09 · What’s next" title="Future improvements" icon={Rocket} />
-        <ul className="mt-6 grid md:grid-cols-2 gap-3">
-          {[
-            "Onboard additional public EEG datasets and montages.",
-            "Improve cross-subject and cross-dataset generalization.",
-            "Real-time EEG streaming for live inference scenarios.",
-            "Deeper UI affordances: comparison views, annotation, sharing.",
-            "Active learning loops to prioritize informative experiments.",
-            "Cost-aware scheduling for sweeps on spot capacity.",
-          ].map((g) => (
-            <li
-              key={g}
-              className="flex items-start gap-3 rounded-lg border border-border bg-card/40 p-4 text-sm"
-            >
-              <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
-              <span className="text-foreground/90">{g}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
+      <Divider />
 
       {/* CTA */}
-      <section className="mt-20 rounded-2xl border border-border bg-gradient-to-br from-primary/10 via-card to-background p-8 md:p-10">
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-          <div>
-            <div className="text-[11px] font-mono uppercase tracking-widest text-primary">
-              Want to go deeper?
-            </div>
-            <h3 className="mt-2 font-display text-2xl md:text-3xl font-semibold tracking-tight">
-              Let’s talk about the engineering behind it.
-            </h3>
-            <p className="mt-2 max-w-xl text-sm text-muted-foreground">
-              Happy to walk through architecture decisions, trade-offs, or how this could
-              translate to your stack.
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-3">
-            {study.github && (
-              <a
-                href={study.github}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-lg border border-border bg-background/60 px-4 py-2 text-sm hover:bg-secondary"
-              >
-                <GithubIcon className="h-4 w-4" /> Source
-              </a>
-            )}
-            {study.demo && (
-              <a
-                href={study.demo}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-lg border border-border bg-background/60 px-4 py-2 text-sm hover:bg-secondary"
-              >
-                <ExternalLink className="h-4 w-4" /> Live demo
-              </a>
-            )}
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm text-primary-foreground hover:opacity-90"
-            >
-              Get in touch <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
+      <section className="mx-auto max-w-3xl px-6 text-center">
+        <Eyebrow>Next</Eyebrow>
+        <SectionTitle>Want to build something like this?</SectionTitle>
+        <p className="mt-6 text-base md:text-lg text-muted-foreground leading-relaxed">
+          I work on the backend and ML side of products — pipelines, APIs, and the glue
+          that makes a team’s work feel like one system.
+        </p>
+        <div className="mt-8 flex flex-wrap justify-center items-center gap-3">
+          <Link
+            to="/contact"
+            className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm text-primary-foreground hover:opacity-90"
+          >
+            Get in touch <ArrowRight className="h-4 w-4" />
+          </Link>
+          <Link
+            to="/case-studies"
+            className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm hover:bg-secondary"
+          >
+            <ArrowLeft className="h-4 w-4" /> All case studies
+          </Link>
         </div>
       </section>
     </article>
-  );
-}
-
-/* ---------------- Inline architecture diagram (no images) ---------------- */
-
-function ArchitectureDiagram() {
-  const stages = [
-    { t: "EEG Sources", s: "EDF · FIF · BIDS", icon: Database },
-    { t: "Ingestion", s: "Validate · version", icon: Workflow },
-    { t: "Preprocess", s: "MNE · ICA · filters", icon: Brain },
-    { t: "Param Predictor", s: "Suggests HPs", icon: Sparkles },
-    { t: "Train / Eval", s: "PyTorch workers", icon: Cpu },
-    { t: "Dashboard", s: "React · leaderboards", icon: LineChart },
-  ];
-  return (
-    <div>
-      <div className="grid grid-cols-2 md:grid-cols-6 gap-3">
-        {stages.map((s, i) => (
-          <div key={s.t} className="relative">
-            <div className="rounded-xl border border-border bg-background/60 p-3 text-center h-full">
-              <div className="mx-auto flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                <s.icon className="h-4 w-4" />
-              </div>
-              <div className="mt-2 text-xs font-semibold">{s.t}</div>
-              <div className="mt-0.5 text-[10px] text-muted-foreground">{s.s}</div>
-            </div>
-            {i < stages.length - 1 && (
-              <div className="hidden md:block absolute top-1/2 -right-2 -translate-y-1/2 text-primary/60">
-                <ArrowRight className="h-4 w-4" />
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-      <div className="mt-6 grid md:grid-cols-3 gap-3">
-        {[
-          { t: "S3 artifact store", s: "Datasets · checkpoints · reports" },
-          { t: "Job queue", s: "FastAPI control plane → Docker workers" },
-          { t: "AWS autoscaling", s: "Parallel sweeps, warm pools" },
-        ].map((b) => (
-          <div
-            key={b.t}
-            className="rounded-lg border border-dashed border-border/70 bg-background/40 p-3 text-xs"
-          >
-            <div className="font-semibold">{b.t}</div>
-            <div className="text-muted-foreground">{b.s}</div>
-          </div>
-        ))}
-      </div>
-    </div>
   );
 }
