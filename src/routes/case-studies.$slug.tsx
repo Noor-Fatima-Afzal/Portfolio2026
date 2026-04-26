@@ -14,6 +14,32 @@ import {
 } from "lucide-react";
 import { GithubIcon } from "@/components/icons";
 import neuroai from "@/assets/proj-neuroai.jpg";
+import slideProblems from "@/assets/neuroai/slide-problems.png";
+import slideSolutions from "@/assets/neuroai/slide-solutions.png";
+import slideModules from "@/assets/neuroai/slide-modules.png";
+import slideLandscape from "@/assets/neuroai/slide-landscape.png";
+import slideMarket from "@/assets/neuroai/slide-market.png";
+import slideValue from "@/assets/neuroai/slide-value.png";
+import slideCustomers from "@/assets/neuroai/slide-customers.png";
+
+function SlideFigure({
+  src,
+  alt,
+  caption,
+}: {
+  src: string;
+  alt: string;
+  caption: string;
+}) {
+  return (
+    <figure className="my-10">
+      <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-card">
+        <img src={src} alt={alt} className="w-full h-auto" loading="lazy" />
+      </div>
+      <Caption>{caption}</Caption>
+    </figure>
+  );
+}
 
 type CaseStudy = {
   slug: string;
@@ -505,6 +531,12 @@ function NeuroAICaseStudy({ study }: { study: CaseStudy }) {
           </div>
         </div>
 
+        <SlideFigure
+          src={slideProblems}
+          alt="Problems in EEG research workflows"
+          caption="Slide 02 — Problems we set out to solve: reproducibility, data acquisition, annotation, deployment, noise, and a missing unified platform."
+        />
+
         <PullQuote by="Project goal">
           Take EEG benchmarking from days of manual work to minutes of automated runs —
           without hiding the science from the researcher.
@@ -588,10 +620,22 @@ function NeuroAICaseStudy({ study }: { study: CaseStudy }) {
           shared, typed contract.
         </p>
 
+        <SlideFigure
+          src={slideSolutions}
+          alt="NeuroAI solutions overview"
+          caption="Slide 03 — Solutions: a unified platform with plug-and-play ML, denoising, task-specific annotators, and real-time deployment."
+        />
+
         <figure className="mt-10 overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-card to-background p-6 md:p-10">
           <ArchitectureDiagram />
         </figure>
         <Caption>Fig. 03 — System architecture across data, backend, compute, and UI.</Caption>
+
+        <SlideFigure
+          src={slideModules}
+          alt="Data, Core, Label, and Deploy modules"
+          caption="Slide 04 — The four modules: Data, Core, Label, and Deploy — each owning a slice of the EEG-to-model journey."
+        />
 
         <div className="mt-12">
           <PipelineFlow />
@@ -710,6 +754,12 @@ function NeuroAICaseStudy({ study }: { study: CaseStudy }) {
             </div>
           ))}
         </div>
+
+        <SlideFigure
+          src={slideLandscape}
+          alt="Competitive landscape: NeuroAI vs MNE, EEGLAB, BCILAB, OpenBCI, NeuroPype"
+          caption="Slide 05 — Competitive landscape: NeuroAI sits in the high-stability, deployment-ready quadrant alongside legacy research tooling."
+        />
       </section>
 
       <Divider />
@@ -743,6 +793,25 @@ function NeuroAICaseStudy({ study }: { study: CaseStudy }) {
           Researchers stopped fighting the pipeline and started running experiments.
           That was the real win.
         </PullQuote>
+
+        <SlideFigure
+          src={slideValue}
+          alt="Value proposition wheel"
+          caption="Slide 06 — Value proposition: a unified, researcher-friendly platform across acquisition, preprocessing, training, and deployment."
+        />
+
+        <div className="grid gap-6 md:grid-cols-2">
+          <SlideFigure
+            src={slideCustomers}
+            alt="Customer segmentation"
+            caption="Slide 07 — Customer segmentation: research labs, neuroscientists, hospitals, clinicians, students, EEG engineers."
+          />
+          <SlideFigure
+            src={slideMarket}
+            alt="TAM SAM SOM market sizing"
+            caption="Slide 08 — Market sizing: TAM $60M / SAM $9.6M / SOM $1.2M per year across neurotech research and clinical use."
+          />
+        </div>
       </section>
 
       <Divider />
