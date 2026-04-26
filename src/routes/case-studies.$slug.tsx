@@ -793,6 +793,25 @@ function NeuroAICaseStudy({ study }: { study: CaseStudy }) {
           Researchers stopped fighting the pipeline and started running experiments.
           That was the real win.
         </PullQuote>
+
+        <SlideFigure
+          src={slideValue}
+          alt="Value proposition wheel"
+          caption="Slide 06 — Value proposition: a unified, researcher-friendly platform across acquisition, preprocessing, training, and deployment."
+        />
+
+        <div className="grid gap-6 md:grid-cols-2">
+          <SlideFigure
+            src={slideCustomers}
+            alt="Customer segmentation"
+            caption="Slide 07 — Customer segmentation: research labs, neuroscientists, hospitals, clinicians, students, EEG engineers."
+          />
+          <SlideFigure
+            src={slideMarket}
+            alt="TAM SAM SOM market sizing"
+            caption="Slide 08 — Market sizing: TAM $60M / SAM $9.6M / SOM $1.2M per year across neurotech research and clinical use."
+          />
+        </div>
       </section>
 
       <Divider />
