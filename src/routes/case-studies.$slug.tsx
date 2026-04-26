@@ -14,6 +14,32 @@ import {
 } from "lucide-react";
 import { GithubIcon } from "@/components/icons";
 import neuroai from "@/assets/proj-neuroai.jpg";
+import slideProblems from "@/assets/neuroai/slide-problems.png";
+import slideSolutions from "@/assets/neuroai/slide-solutions.png";
+import slideModules from "@/assets/neuroai/slide-modules.png";
+import slideLandscape from "@/assets/neuroai/slide-landscape.png";
+import slideMarket from "@/assets/neuroai/slide-market.png";
+import slideValue from "@/assets/neuroai/slide-value.png";
+import slideCustomers from "@/assets/neuroai/slide-customers.png";
+
+function SlideFigure({
+  src,
+  alt,
+  caption,
+}: {
+  src: string;
+  alt: string;
+  caption: string;
+}) {
+  return (
+    <figure className="my-10">
+      <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-card">
+        <img src={src} alt={alt} className="w-full h-auto" loading="lazy" />
+      </div>
+      <Caption>{caption}</Caption>
+    </figure>
+  );
+}
 
 type CaseStudy = {
   slug: string;
