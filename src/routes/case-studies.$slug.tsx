@@ -531,6 +531,12 @@ function NeuroAICaseStudy({ study }: { study: CaseStudy }) {
           </div>
         </div>
 
+        <SlideFigure
+          src={slideProblems}
+          alt="Problems in EEG research workflows"
+          caption="Slide 02 — Problems we set out to solve: reproducibility, data acquisition, annotation, deployment, noise, and a missing unified platform."
+        />
+
         <PullQuote by="Project goal">
           Take EEG benchmarking from days of manual work to minutes of automated runs —
           without hiding the science from the researcher.
@@ -614,10 +620,22 @@ function NeuroAICaseStudy({ study }: { study: CaseStudy }) {
           shared, typed contract.
         </p>
 
+        <SlideFigure
+          src={slideSolutions}
+          alt="NeuroAI solutions overview"
+          caption="Slide 03 — Solutions: a unified platform with plug-and-play ML, denoising, task-specific annotators, and real-time deployment."
+        />
+
         <figure className="mt-10 overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-card to-background p-6 md:p-10">
           <ArchitectureDiagram />
         </figure>
         <Caption>Fig. 03 — System architecture across data, backend, compute, and UI.</Caption>
+
+        <SlideFigure
+          src={slideModules}
+          alt="Data, Core, Label, and Deploy modules"
+          caption="Slide 04 — The four modules: Data, Core, Label, and Deploy — each owning a slice of the EEG-to-model journey."
+        />
 
         <div className="mt-12">
           <PipelineFlow />
