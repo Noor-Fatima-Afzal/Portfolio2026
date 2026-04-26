@@ -754,6 +754,12 @@ function NeuroAICaseStudy({ study }: { study: CaseStudy }) {
             </div>
           ))}
         </div>
+
+        <SlideFigure
+          src={slideLandscape}
+          alt="Competitive landscape: NeuroAI vs MNE, EEGLAB, BCILAB, OpenBCI, NeuroPype"
+          caption="Slide 05 — Competitive landscape: NeuroAI sits in the high-stability, deployment-ready quadrant alongside legacy research tooling."
+        />
       </section>
 
       <Divider />
