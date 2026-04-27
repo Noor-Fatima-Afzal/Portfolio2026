@@ -753,7 +753,7 @@ function NeuroAICaseStudy({ study }: { study: CaseStudy }) {
 
       {/* SOLUTION + ARCHITECTURE */}
       <section className="mx-auto max-w-6xl px-6">
-        <Eyebrow>05 · Solution</Eyebrow>
+        <Eyebrow>06 · Architecture</Eyebrow>
         <SectionTitle>One pipeline, four collaborating modules.</SectionTitle>
         <p className="mt-6 max-w-3xl text-base md:text-lg leading-relaxed text-muted-foreground">
           NeuroAI is composed of a data module, an ML pipeline, a backend control plane,
