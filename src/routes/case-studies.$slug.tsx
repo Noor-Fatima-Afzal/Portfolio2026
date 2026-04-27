@@ -926,30 +926,58 @@ function NeuroAICaseStudy({ study }: { study: CaseStudy }) {
 
       {/* CHALLENGES */}
       <section className="mx-auto max-w-6xl px-6">
-        <Eyebrow>07 · Challenges</Eyebrow>
-        <SectionTitle>Where it got hard.</SectionTitle>
+        <Eyebrow>09 · Challenges & Solutions</Eyebrow>
+        <SectionTitle>Where it got hard — and what we did about it.</SectionTitle>
+        <p className="mt-6 max-w-2xl text-base md:text-lg leading-relaxed text-muted-foreground">
+          The hard parts weren’t the algorithms. They were the seams between people,
+          modules, and runtimes. Each challenge below shaped a concrete engineering
+          decision that still defines the platform today.
+        </p>
 
         <div className="mt-10 grid gap-4 md:grid-cols-3">
           {[
             {
-              t: "Noisy EEG signals",
-              d: "Artifacts (blinks, muscle, line noise) varied per recording. We standardized preprocessing so models saw comparable inputs.",
+              p: "Noisy, inconsistent EEG signals",
+              s: "Built a standardized MNE-based preprocessing pipeline (filter → ICA → epoch) so every model sees comparable inputs across recordings.",
             },
             {
-              t: "Module integration",
-              d: "Four modules built in parallel had to fit together. Shared schemas and contract tests kept everyone unblocked.",
+              p: "Four modules built in parallel",
+              s: "Locked typed, contract-based APIs early. Each module shipped against the contract, not the other team’s implementation.",
             },
             {
-              t: "Speed vs scale",
-              d: "Single-node speed was easy; horizontal scale was the real win. We chose containerized workers for parallel sweeps.",
+              p: "Single-node speed wasn’t enough",
+              s: "Replaced ad-hoc training scripts with a Docker worker pool, letting hyperparameter sweeps fan out horizontally on demand.",
+            },
+            {
+              p: "Manual hyperparameter tuning loops",
+              s: "Added a parameter-prediction layer that suggests sensible starting configs, removing most of the cold-start guesswork.",
+            },
+            {
+              p: "Results that didn’t reproduce",
+              s: "Made every run versioned end-to-end (data hash + config + code + metrics) so any result can be re-executed exactly.",
+            },
+            {
+              p: "High infra barrier for researchers",
+              s: "Hid containers, queues, and storage behind a small, intentional API the dashboard consumes — researchers never see the plumbing.",
             },
           ].map((c) => (
             <div
-              key={c.t}
+              key={c.p}
               className="rounded-2xl border border-border bg-card/60 p-6"
             >
-              <div className="text-sm font-semibold">{c.t}</div>
-              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{c.d}</p>
+              <div className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground">
+                Problem
+              </div>
+              <div className="mt-1 text-sm font-semibold">{c.p}</div>
+              <div className="mt-4 flex items-start gap-2">
+                <CheckCircle2 className="h-4 w-4 mt-0.5 shrink-0 text-primary" />
+                <div>
+                  <div className="text-[10px] font-mono uppercase tracking-wider text-primary">
+                    Solution
+                  </div>
+                  <p className="mt-1 text-sm text-muted-foreground leading-relaxed">{c.s}</p>
+                </div>
+              </div>
             </div>
           ))}
         </div>
