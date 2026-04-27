@@ -697,37 +697,53 @@ function NeuroAICaseStudy({ study }: { study: CaseStudy }) {
         <div className="mt-10 grid gap-6 md:grid-cols-2">
           {[
             {
-              n: "Phase 01",
+              n: "Phase 01 · Research",
+              dur: "Weeks 1–2",
               t: "Understanding the problem",
-              d: "We mapped the researcher’s journey — from messy EEG files to a final report — and listed every step that wasted time.",
+              d: "Mapped the researcher’s journey from messy EEG files to a final report with the design and data leads. Documented every step that wasted time.",
+              who: "Backend · Design · Data",
             },
             {
-              n: "Phase 02",
+              n: "Phase 02 · Architecture",
+              dur: "Weeks 2–3",
               t: "System design",
-              d: "I sketched a modular architecture: data, ML, backend, and frontend as independent layers connected by clear contracts.",
+              d: "I sketched a modular architecture — data, ML, backend, and frontend as independent layers connected by typed contracts — and aligned the team on API schemas before any code shipped.",
+              who: "Backend (lead) · Frontend",
             },
             {
-              n: "Phase 03",
-              t: "Implementation",
-              d: "Backend, data pipeline, and frontend were built in parallel against shared API schemas to avoid blocking each other.",
+              n: "Phase 03 · Development",
+              dur: "Weeks 3–7",
+              t: "Parallel implementation",
+              d: "Backend, data pipeline, and frontend were built in parallel against shared schemas. Branding and UI iterated alongside the API surface so nothing waited on anything.",
+              who: "Full team",
             },
             {
-              n: "Phase 04",
-              t: "Integration & feedback",
-              d: "We connected modules, ran end-to-end tests with real EEG data, and iterated on UI based on researcher feedback.",
+              n: "Phase 04 · Integration",
+              dur: "Weeks 7–9",
+              t: "End-to-end & feedback",
+              d: "Connected modules, ran end-to-end tests with real EEG data, then iterated on the UI based on researcher feedback before locking the first stable release.",
+              who: "Backend · Frontend · Data",
             },
           ].map((p) => (
             <div
               key={p.t}
-              className="rounded-2xl border border-border bg-card/60 p-6"
+              className="rounded-2xl border border-border bg-card/60 p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40"
             >
-              <div className="text-[11px] font-mono uppercase tracking-wider text-primary">
-                {p.n}
+              <div className="flex items-center justify-between gap-3">
+                <div className="text-[11px] font-mono uppercase tracking-wider text-primary">
+                  {p.n}
+                </div>
+                <div className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground">
+                  {p.dur}
+                </div>
               </div>
               <div className="mt-2 font-display text-xl font-semibold tracking-tight">
                 {p.t}
               </div>
               <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{p.d}</p>
+              <div className="mt-4 inline-flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-wider text-muted-foreground">
+                <GitBranch className="h-3 w-3" /> {p.who}
+              </div>
             </div>
           ))}
         </div>
