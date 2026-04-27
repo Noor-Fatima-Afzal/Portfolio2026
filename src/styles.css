@@ -213,7 +213,7 @@
   }
 }
 
-/* Global cursor-follow ambient glow — subtle, dark mode only */
+/* Global cursor-follow ambient glow — active in both themes, tuned per mode */
 .cursor-glow {
   position: fixed;
   top: 0;
@@ -226,15 +226,23 @@
   transform: translate3d(var(--cursor-x, 50vw), var(--cursor-y, 50vh), 0) translate(-50%, -50%);
   background: radial-gradient(
     circle,
+    color-mix(in oklab, var(--accent) 18%, transparent) 0%,
+    transparent 60%
+  );
+  opacity: 1;
+  transition: opacity 0.6s ease, background 0.4s ease;
+  mix-blend-mode: multiply;
+  filter: blur(48px);
+}
+.dark .cursor-glow {
+  background: radial-gradient(
+    circle,
     color-mix(in oklab, var(--primary) 14%, transparent) 0%,
     transparent 60%
   );
-  opacity: 0;
-  transition: opacity 0.6s ease;
   mix-blend-mode: screen;
   filter: blur(40px);
 }
-.dark .cursor-glow { opacity: 1; }
 @media (prefers-reduced-motion: reduce) {
   .cursor-glow { display: none; }
   .animate-float, .animate-pulse-glow { animation: none; }
