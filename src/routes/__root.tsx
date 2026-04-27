@@ -94,6 +94,7 @@ function RootComponent() {
         </main>
         <Footer />
         <ChatWidget />
+        <InteractionEffects />
         <Toaster position="bottom-right" richColors closeButton />
       </div>
     </ThemeProvider>
