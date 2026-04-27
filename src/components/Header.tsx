@@ -5,7 +5,7 @@ import { useTheme } from "./ThemeProvider";
 import logo from "@/assets/noor-logo.jpg";
 
 const aboutItems = [
-  { to: "/experience", label: "Experience" },
+  { to: "/case-studies", label: "Case Studies" },
   { to: "/education", label: "Education" },
   { to: "/certificates", label: "Certificates" },
   { to: "/talks", label: "Invited Talks" },
@@ -14,7 +14,7 @@ const aboutItems = [
 const primaryNav = [
   { to: "/", label: "Home" },
   { to: "/projects", label: "Projects" },
-  { to: "/case-studies", label: "Case Studies" },
+  { to: "/experience", label: "Experience" },
   { to: "/publications", label: "Publications" },
   { to: "/blog", label: "Blog" },
   { to: "/contact", label: "Contact" },
