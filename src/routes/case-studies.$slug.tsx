@@ -667,7 +667,7 @@ function NeuroAICaseStudy({ study }: { study: CaseStudy }) {
 
       {/* TEAM */}
       <section className="mx-auto max-w-6xl px-6">
-        <Eyebrow>03 · Team & Roles</Eyebrow>
+        <Eyebrow>04 · Team & Roles</Eyebrow>
         <SectionTitle>Built collaboratively.</SectionTitle>
         <p className="mt-6 max-w-2xl text-base md:text-lg leading-relaxed text-muted-foreground">
           A small, focused team. Each role mattered — branding, interface, data, and
@@ -686,8 +686,13 @@ function NeuroAICaseStudy({ study }: { study: CaseStudy }) {
 
       {/* PROCESS */}
       <section className="mx-auto max-w-6xl px-6">
-        <Eyebrow>04 · Process</Eyebrow>
-        <SectionTitle>From problem to product.</SectionTitle>
+        <Eyebrow>05 · Design & Development Process</Eyebrow>
+        <SectionTitle>From problem to product, in four phases.</SectionTitle>
+        <p className="mt-6 max-w-2xl text-base md:text-lg leading-relaxed text-muted-foreground">
+          We worked in tight, overlapping phases — research informing architecture,
+          architecture unblocking parallel development, and integration feeding back
+          into the next research loop.
+        </p>
 
         <div className="mt-10 grid gap-6 md:grid-cols-2">
           {[
