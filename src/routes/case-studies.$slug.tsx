@@ -993,30 +993,37 @@ function NeuroAICaseStudy({ study }: { study: CaseStudy }) {
 
       {/* OUTCOME */}
       <section className="mx-auto max-w-6xl px-6">
-        <Eyebrow>08 · Outcome</Eyebrow>
+        <Eyebrow>10 · Outcome</Eyebrow>
         <SectionTitle>Days of work, compressed into minutes.</SectionTitle>
+        <p className="mt-6 max-w-2xl text-base md:text-lg leading-relaxed text-muted-foreground">
+          The win wasn’t a single benchmark number — it was the pipeline disappearing
+          as a problem. Researchers shifted their time from plumbing to questions worth
+          asking.
+        </p>
 
-        <div className="mt-10 grid gap-4 md:grid-cols-3">
+        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {[
-            { v: "2–3 days → minutes", k: "Benchmark cycle" },
-            { v: "5+", k: "Researchers using it" },
-            { v: "Eliminated", k: "Manual tuning steps" },
+            { v: "~95%", k: "Reduction in benchmark cycle time", s: "From 2–3 days of manual work down to minutes per run." },
+            { v: "End-to-end", k: "Pipeline automation", s: "Upload → preprocess → train → compare, in a single job." },
+            { v: "+UX", k: "Researcher usability", s: "Zero infra knowledge required to run modern EEG ML." },
+            { v: "5+", k: "Active researchers onboarded", s: "Adopted by the team’s research collaborators within weeks." },
           ].map((m) => (
             <div
               key={m.k}
-              className="rounded-2xl border border-border bg-gradient-to-br from-card to-background p-6"
+              className="rounded-2xl border border-border bg-gradient-to-br from-card to-background p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40"
             >
-              <div className="text-[11px] font-mono uppercase tracking-widest text-muted-foreground">
+              <div className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
                 {m.k}
               </div>
-              <div className="mt-2 font-display text-3xl md:text-4xl font-semibold tracking-tight">
+              <div className="mt-2 font-display text-3xl md:text-4xl font-semibold tracking-tight text-gradient">
                 {m.v}
               </div>
+              <p className="mt-2 text-xs text-muted-foreground leading-relaxed">{m.s}</p>
             </div>
           ))}
         </div>
 
-        <PullQuote by="Outcome">
+        <PullQuote by="Takeaway">
           Researchers stopped fighting the pipeline and started running experiments.
           That was the real win.
         </PullQuote>
@@ -1038,6 +1045,52 @@ function NeuroAICaseStudy({ study }: { study: CaseStudy }) {
             alt="TAM SAM SOM market sizing"
             caption="Slide 08 — Market sizing: TAM $60M / SAM $9.6M / SOM $1.2M per year across neurotech research and clinical use."
           />
+        </div>
+      </section>
+
+      <Divider />
+
+      {/* KEY LEARNINGS */}
+      <section className="mx-auto max-w-6xl px-6">
+        <Eyebrow>11 · Key Learnings & Takeaways</Eyebrow>
+        <SectionTitle>What this project taught us.</SectionTitle>
+        <p className="mt-6 max-w-2xl text-base md:text-lg leading-relaxed text-muted-foreground">
+          A few principles came out of NeuroAI that now shape how I approach any
+          ML-heavy product — not just EEG.
+        </p>
+
+        <div className="mt-10 grid gap-4 md:grid-cols-2">
+          {[
+            {
+              t: "Reproducibility beats raw performance",
+              d: "A 1% accuracy gain that nobody can re-run is worth less than a stable baseline anyone can extend. Versioning is a feature, not a chore.",
+            },
+            {
+              t: "Abstraction layers unlock team velocity",
+              d: "Typed contracts between modules let four people ship in parallel without stepping on each other. The contract is the product.",
+            },
+            {
+              t: "UX matters even in research tooling",
+              d: "‘For experts only’ is a constraint, not a virtue. Removing infra friction broadened who could actually use the system.",
+            },
+            {
+              t: "Architecture is a team decision, not a solo one",
+              d: "Clear interfaces let designers, frontend, data, and backend make local decisions without breaking the whole. Good seams = good teamwork.",
+            },
+          ].map((l) => (
+            <div
+              key={l.t}
+              className="rounded-2xl border border-border bg-card/60 p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40"
+            >
+              <div className="flex items-start gap-3">
+                <Sparkles className="h-4 w-4 mt-1 shrink-0 text-primary" />
+                <div>
+                  <div className="text-sm font-semibold">{l.t}</div>
+                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{l.d}</p>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
