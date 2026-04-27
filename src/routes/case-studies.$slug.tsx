@@ -502,32 +502,44 @@ function NeuroAICaseStudy({ study }: { study: CaseStudy }) {
 
       <Divider />
 
-      {/* CONTEXT & GOAL */}
+      {/* CHALLENGE */}
       <section className="mx-auto max-w-6xl px-6">
         <div className="grid gap-12 md:grid-cols-2 md:gap-16 items-start">
           <div>
-            <Eyebrow>02 · Context</Eyebrow>
-            <SectionTitle>Why this project existed.</SectionTitle>
+            <Eyebrow>02 · Challenge</Eyebrow>
+            <SectionTitle>EEG research is powerful — and painfully slow.</SectionTitle>
             <p className="mt-6 text-base md:text-lg leading-relaxed text-muted-foreground">
-              EEG research workflows are slow. Each new experiment usually means
-              re-implementing preprocessing, re-tuning hyperparameters, and waiting
-              days for benchmarks to finish.
+              Talking to researchers, the same friction kept surfacing: every new
+              experiment meant rebuilding the same plumbing, waiting days for
+              benchmarks, and hoping the results would reproduce on someone else’s
+              machine.
             </p>
             <p className="mt-4 text-base md:text-lg leading-relaxed text-muted-foreground">
-              We wanted a single system where researchers could upload data, run a
-              standardized pipeline, and compare models — quickly and reproducibly.
+              The science was the easy part. The tooling around it was the bottleneck.
             </p>
           </div>
           <div className="grid gap-3">
             {[
-              { t: "Manual pipelines", d: "Pre-processing rebuilt for every project." },
-              { t: "Slow iteration", d: "Benchmarks took 2–3 days per experiment." },
-              { t: "Hard to reproduce", d: "Results varied across machines and people." },
-              { t: "Not researcher-friendly", d: "Heavy infra knowledge was required." },
+              {
+                t: "Lack of reproducibility",
+                d: "Results varied across machines, library versions, and preprocessing tweaks — making findings hard to trust.",
+              },
+              {
+                t: "Slow experimentation cycles",
+                d: "Benchmarking new models on EEG datasets routinely took 2–3 days of manual tuning and re-runs.",
+              },
+              {
+                t: "Fragmented tools",
+                d: "Researchers stitched together MNE, custom scripts, notebooks, and ad-hoc trainers — none of which talked to each other.",
+              },
+              {
+                t: "High technical barrier",
+                d: "Running modern deep learning on EEG required infra knowledge most labs simply didn’t have in-house.",
+              },
             ].map((p) => (
               <div
                 key={p.t}
-                className="rounded-xl border border-border bg-card/60 p-4"
+                className="rounded-xl border border-border bg-card/60 p-4 transition-colors hover:border-primary/40"
               >
                 <div className="text-sm font-semibold">{p.t}</div>
                 <div className="mt-1 text-sm text-muted-foreground">{p.d}</div>
@@ -539,13 +551,116 @@ function NeuroAICaseStudy({ study }: { study: CaseStudy }) {
         <SlideFigure
           src={slideProblems}
           alt="Problems in EEG research workflows"
-          caption="Slide 02 — Problems we set out to solve: reproducibility, data acquisition, annotation, deployment, noise, and a missing unified platform."
+          caption="Slide 02 — The pain points we set out to solve: reproducibility, data acquisition, annotation, deployment, noise, and a missing unified platform."
         />
 
         <PullQuote by="Project goal">
           Take EEG benchmarking from days of manual work to minutes of automated runs —
           without hiding the science from the researcher.
         </PullQuote>
+      </section>
+
+      <Divider />
+
+      {/* SOLUTION NARRATIVE */}
+      <section className="mx-auto max-w-6xl px-6">
+        <Eyebrow>03 · Solution</Eyebrow>
+        <SectionTitle>A unified, end-to-end EEG ML platform.</SectionTitle>
+        <p className="mt-6 max-w-3xl text-base md:text-lg leading-relaxed text-muted-foreground">
+          NeuroAI collapses the EEG research workflow into a single product:
+          ingest raw recordings, run a standardized preprocessing pipeline, train and
+          compare models in parallel, and export a reproducible report — all behind a
+          researcher-friendly interface.
+        </p>
+        <p className="mt-4 max-w-3xl text-base md:text-lg leading-relaxed text-muted-foreground">
+          The goal wasn’t to replace researcher judgment. It was to remove the
+          repetitive plumbing around it.
+        </p>
+
+        <div className="mt-10 grid gap-4 md:grid-cols-2">
+          {[
+            {
+              t: "Automation by default",
+              d: "Preprocessing, hyperparameter suggestion, training, and reporting run as a single orchestrated job.",
+            },
+            {
+              t: "Reproducibility as a feature",
+              d: "Every run is versioned — dataset, config, code, and metrics — so any result can be re-executed exactly.",
+            },
+            {
+              t: "Modular architecture",
+              d: "Data, ML, backend, and frontend are independent modules connected by typed contracts, not shared state.",
+            },
+            {
+              t: "Researcher-friendly UX",
+              d: "A clean dashboard hides the infrastructure: no Docker, no SSH, no YAML — just upload, run, compare.",
+            },
+          ].map((d) => (
+            <div
+              key={d.t}
+              className="rounded-2xl border border-border bg-card/60 p-6"
+            >
+              <div className="text-sm font-semibold">{d.t}</div>
+              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{d.d}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Key features */}
+        <div className="mt-12">
+          <div className="text-[11px] font-mono uppercase tracking-[0.2em] text-primary">
+            Key features
+          </div>
+          <h3 className="mt-2 font-display text-2xl md:text-3xl font-semibold tracking-tight">
+            What researchers actually use.
+          </h3>
+
+          <div className="mt-6 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+            {[
+              {
+                icon: Database,
+                t: "Automated preprocessing",
+                d: "Filtering, ICA, epoching, and artifact rejection out of the box via MNE.",
+              },
+              {
+                icon: LineChart,
+                t: "Model comparison",
+                d: "Side-by-side leaderboards across architectures with shared metrics.",
+              },
+              {
+                icon: Sparkles,
+                t: "Hyperparameter prediction",
+                d: "Suggests sensible starting configs so users skip the cold-start tuning loop.",
+              },
+              {
+                icon: Cpu,
+                t: "Scalable training",
+                d: "Containerized worker pool runs sweeps in parallel on demand.",
+              },
+              {
+                icon: Repeat,
+                t: "Reproducible pipelines",
+                d: "Versioned runs — same input, same code, same result, anywhere.",
+              },
+              {
+                icon: Layers,
+                t: "Pluggable modules",
+                d: "Swap in new model architectures or denoisers without touching the UI.",
+              },
+            ].map((f) => (
+              <div
+                key={f.t}
+                className="rounded-xl border border-border bg-card/60 p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-card"
+              >
+                <div className="grid h-9 w-9 place-items-center rounded-lg bg-primary/10 text-primary">
+                  <f.icon className="h-4.5 w-4.5" />
+                </div>
+                <div className="mt-3 text-sm font-semibold">{f.t}</div>
+                <p className="mt-1 text-xs text-muted-foreground leading-relaxed">{f.d}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
 
       <Divider />
