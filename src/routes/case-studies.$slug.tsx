@@ -3,14 +3,19 @@ import {
   ArrowLeft,
   ArrowRight,
   Brain,
+  CheckCircle2,
   Cpu,
   Database,
   ExternalLink,
+  GitBranch,
+  Layers,
   LineChart,
   Quote,
+  Repeat,
   Server,
   Sparkles,
   Workflow,
+  Zap,
 } from "lucide-react";
 import { GithubIcon } from "@/components/icons";
 import neuroai from "@/assets/proj-neuroai.jpg";
