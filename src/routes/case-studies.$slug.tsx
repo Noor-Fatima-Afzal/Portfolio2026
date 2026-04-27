@@ -868,7 +868,7 @@ function NeuroAICaseStudy({ study }: { study: CaseStudy }) {
       <section className="mx-auto max-w-6xl px-6">
         <div className="grid gap-12 md:grid-cols-[1fr_1.2fr] md:gap-16 items-start">
           <div>
-            <Eyebrow>06 · My Contribution</Eyebrow>
+            <Eyebrow>08 · My Contribution</Eyebrow>
             <SectionTitle>Backend & system integration.</SectionTitle>
             <p className="mt-6 text-base md:text-lg leading-relaxed text-muted-foreground">
               I owned the backend, the ML pipeline integration, and the overall
