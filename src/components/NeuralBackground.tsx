@@ -39,8 +39,8 @@ export default function NeuralBackground() {
     const colorOf = (alpha: number) => {
       const isDark = document.documentElement.classList.contains("dark");
       return isDark
-        ? `rgba(120, 220, 230, ${alpha})`
-        : `rgba(40, 130, 170, ${alpha})`;
+        ? `rgba(150, 180, 220, ${alpha})`
+        : `rgba(60, 110, 160, ${alpha})`;
     };
 
     const tick = () => {
