@@ -3,14 +3,19 @@ import {
   ArrowLeft,
   ArrowRight,
   Brain,
+  CheckCircle2,
   Cpu,
   Database,
   ExternalLink,
+  GitBranch,
+  Layers,
   LineChart,
   Quote,
+  Repeat,
   Server,
   Sparkles,
   Workflow,
+  Zap,
 } from "lucide-react";
 import { GithubIcon } from "@/components/icons";
 import neuroai from "@/assets/proj-neuroai.jpg";
@@ -497,32 +502,44 @@ function NeuroAICaseStudy({ study }: { study: CaseStudy }) {
 
       <Divider />
 
-      {/* CONTEXT & GOAL */}
+      {/* CHALLENGE */}
       <section className="mx-auto max-w-6xl px-6">
         <div className="grid gap-12 md:grid-cols-2 md:gap-16 items-start">
           <div>
-            <Eyebrow>02 · Context</Eyebrow>
-            <SectionTitle>Why this project existed.</SectionTitle>
+            <Eyebrow>02 · Challenge</Eyebrow>
+            <SectionTitle>EEG research is powerful — and painfully slow.</SectionTitle>
             <p className="mt-6 text-base md:text-lg leading-relaxed text-muted-foreground">
-              EEG research workflows are slow. Each new experiment usually means
-              re-implementing preprocessing, re-tuning hyperparameters, and waiting
-              days for benchmarks to finish.
+              Talking to researchers, the same friction kept surfacing: every new
+              experiment meant rebuilding the same plumbing, waiting days for
+              benchmarks, and hoping the results would reproduce on someone else’s
+              machine.
             </p>
             <p className="mt-4 text-base md:text-lg leading-relaxed text-muted-foreground">
-              We wanted a single system where researchers could upload data, run a
-              standardized pipeline, and compare models — quickly and reproducibly.
+              The science was the easy part. The tooling around it was the bottleneck.
             </p>
           </div>
           <div className="grid gap-3">
             {[
-              { t: "Manual pipelines", d: "Pre-processing rebuilt for every project." },
-              { t: "Slow iteration", d: "Benchmarks took 2–3 days per experiment." },
-              { t: "Hard to reproduce", d: "Results varied across machines and people." },
-              { t: "Not researcher-friendly", d: "Heavy infra knowledge was required." },
+              {
+                t: "Lack of reproducibility",
+                d: "Results varied across machines, library versions, and preprocessing tweaks — making findings hard to trust.",
+              },
+              {
+                t: "Slow experimentation cycles",
+                d: "Benchmarking new models on EEG datasets routinely took 2–3 days of manual tuning and re-runs.",
+              },
+              {
+                t: "Fragmented tools",
+                d: "Researchers stitched together MNE, custom scripts, notebooks, and ad-hoc trainers — none of which talked to each other.",
+              },
+              {
+                t: "High technical barrier",
+                d: "Running modern deep learning on EEG required infra knowledge most labs simply didn’t have in-house.",
+              },
             ].map((p) => (
               <div
                 key={p.t}
-                className="rounded-xl border border-border bg-card/60 p-4"
+                className="rounded-xl border border-border bg-card/60 p-4 transition-colors hover:border-primary/40"
               >
                 <div className="text-sm font-semibold">{p.t}</div>
                 <div className="mt-1 text-sm text-muted-foreground">{p.d}</div>
@@ -534,7 +551,7 @@ function NeuroAICaseStudy({ study }: { study: CaseStudy }) {
         <SlideFigure
           src={slideProblems}
           alt="Problems in EEG research workflows"
-          caption="Slide 02 — Problems we set out to solve: reproducibility, data acquisition, annotation, deployment, noise, and a missing unified platform."
+          caption="Slide 02 — The pain points we set out to solve: reproducibility, data acquisition, annotation, deployment, noise, and a missing unified platform."
         />
 
         <PullQuote by="Project goal">
@@ -545,9 +562,112 @@ function NeuroAICaseStudy({ study }: { study: CaseStudy }) {
 
       <Divider />
 
+      {/* SOLUTION NARRATIVE */}
+      <section className="mx-auto max-w-6xl px-6">
+        <Eyebrow>03 · Solution</Eyebrow>
+        <SectionTitle>A unified, end-to-end EEG ML platform.</SectionTitle>
+        <p className="mt-6 max-w-3xl text-base md:text-lg leading-relaxed text-muted-foreground">
+          NeuroAI collapses the EEG research workflow into a single product:
+          ingest raw recordings, run a standardized preprocessing pipeline, train and
+          compare models in parallel, and export a reproducible report — all behind a
+          researcher-friendly interface.
+        </p>
+        <p className="mt-4 max-w-3xl text-base md:text-lg leading-relaxed text-muted-foreground">
+          The goal wasn’t to replace researcher judgment. It was to remove the
+          repetitive plumbing around it.
+        </p>
+
+        <div className="mt-10 grid gap-4 md:grid-cols-2">
+          {[
+            {
+              t: "Automation by default",
+              d: "Preprocessing, hyperparameter suggestion, training, and reporting run as a single orchestrated job.",
+            },
+            {
+              t: "Reproducibility as a feature",
+              d: "Every run is versioned — dataset, config, code, and metrics — so any result can be re-executed exactly.",
+            },
+            {
+              t: "Modular architecture",
+              d: "Data, ML, backend, and frontend are independent modules connected by typed contracts, not shared state.",
+            },
+            {
+              t: "Researcher-friendly UX",
+              d: "A clean dashboard hides the infrastructure: no Docker, no SSH, no YAML — just upload, run, compare.",
+            },
+          ].map((d) => (
+            <div
+              key={d.t}
+              className="rounded-2xl border border-border bg-card/60 p-6"
+            >
+              <div className="text-sm font-semibold">{d.t}</div>
+              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{d.d}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Key features */}
+        <div className="mt-12">
+          <div className="text-[11px] font-mono uppercase tracking-[0.2em] text-primary">
+            Key features
+          </div>
+          <h3 className="mt-2 font-display text-2xl md:text-3xl font-semibold tracking-tight">
+            What researchers actually use.
+          </h3>
+
+          <div className="mt-6 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+            {[
+              {
+                icon: Database,
+                t: "Automated preprocessing",
+                d: "Filtering, ICA, epoching, and artifact rejection out of the box via MNE.",
+              },
+              {
+                icon: LineChart,
+                t: "Model comparison",
+                d: "Side-by-side leaderboards across architectures with shared metrics.",
+              },
+              {
+                icon: Sparkles,
+                t: "Hyperparameter prediction",
+                d: "Suggests sensible starting configs so users skip the cold-start tuning loop.",
+              },
+              {
+                icon: Cpu,
+                t: "Scalable training",
+                d: "Containerized worker pool runs sweeps in parallel on demand.",
+              },
+              {
+                icon: Repeat,
+                t: "Reproducible pipelines",
+                d: "Versioned runs — same input, same code, same result, anywhere.",
+              },
+              {
+                icon: Layers,
+                t: "Pluggable modules",
+                d: "Swap in new model architectures or denoisers without touching the UI.",
+              },
+            ].map((f) => (
+              <div
+                key={f.t}
+                className="rounded-xl border border-border bg-card/60 p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-card"
+              >
+                <div className="grid h-9 w-9 place-items-center rounded-lg bg-primary/10 text-primary">
+                  <f.icon className="h-4.5 w-4.5" />
+                </div>
+                <div className="mt-3 text-sm font-semibold">{f.t}</div>
+                <p className="mt-1 text-xs text-muted-foreground leading-relaxed">{f.d}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <Divider />
+
       {/* TEAM */}
       <section className="mx-auto max-w-6xl px-6">
-        <Eyebrow>03 · Team & Roles</Eyebrow>
+        <Eyebrow>04 · Team & Roles</Eyebrow>
         <SectionTitle>Built collaboratively.</SectionTitle>
         <p className="mt-6 max-w-2xl text-base md:text-lg leading-relaxed text-muted-foreground">
           A small, focused team. Each role mattered — branding, interface, data, and
@@ -566,43 +686,64 @@ function NeuroAICaseStudy({ study }: { study: CaseStudy }) {
 
       {/* PROCESS */}
       <section className="mx-auto max-w-6xl px-6">
-        <Eyebrow>04 · Process</Eyebrow>
-        <SectionTitle>From problem to product.</SectionTitle>
+        <Eyebrow>05 · Design & Development Process</Eyebrow>
+        <SectionTitle>From problem to product, in four phases.</SectionTitle>
+        <p className="mt-6 max-w-2xl text-base md:text-lg leading-relaxed text-muted-foreground">
+          We worked in tight, overlapping phases — research informing architecture,
+          architecture unblocking parallel development, and integration feeding back
+          into the next research loop.
+        </p>
 
         <div className="mt-10 grid gap-6 md:grid-cols-2">
           {[
             {
-              n: "Phase 01",
+              n: "Phase 01 · Research",
+              dur: "Weeks 1–2",
               t: "Understanding the problem",
-              d: "We mapped the researcher’s journey — from messy EEG files to a final report — and listed every step that wasted time.",
+              d: "Mapped the researcher’s journey from messy EEG files to a final report with the design and data leads. Documented every step that wasted time.",
+              who: "Backend · Design · Data",
             },
             {
-              n: "Phase 02",
+              n: "Phase 02 · Architecture",
+              dur: "Weeks 2–3",
               t: "System design",
-              d: "I sketched a modular architecture: data, ML, backend, and frontend as independent layers connected by clear contracts.",
+              d: "I sketched a modular architecture — data, ML, backend, and frontend as independent layers connected by typed contracts — and aligned the team on API schemas before any code shipped.",
+              who: "Backend (lead) · Frontend",
             },
             {
-              n: "Phase 03",
-              t: "Implementation",
-              d: "Backend, data pipeline, and frontend were built in parallel against shared API schemas to avoid blocking each other.",
+              n: "Phase 03 · Development",
+              dur: "Weeks 3–7",
+              t: "Parallel implementation",
+              d: "Backend, data pipeline, and frontend were built in parallel against shared schemas. Branding and UI iterated alongside the API surface so nothing waited on anything.",
+              who: "Full team",
             },
             {
-              n: "Phase 04",
-              t: "Integration & feedback",
-              d: "We connected modules, ran end-to-end tests with real EEG data, and iterated on UI based on researcher feedback.",
+              n: "Phase 04 · Integration",
+              dur: "Weeks 7–9",
+              t: "End-to-end & feedback",
+              d: "Connected modules, ran end-to-end tests with real EEG data, then iterated on the UI based on researcher feedback before locking the first stable release.",
+              who: "Backend · Frontend · Data",
             },
           ].map((p) => (
             <div
               key={p.t}
-              className="rounded-2xl border border-border bg-card/60 p-6"
+              className="rounded-2xl border border-border bg-card/60 p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40"
             >
-              <div className="text-[11px] font-mono uppercase tracking-wider text-primary">
-                {p.n}
+              <div className="flex items-center justify-between gap-3">
+                <div className="text-[11px] font-mono uppercase tracking-wider text-primary">
+                  {p.n}
+                </div>
+                <div className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground">
+                  {p.dur}
+                </div>
               </div>
               <div className="mt-2 font-display text-xl font-semibold tracking-tight">
                 {p.t}
               </div>
               <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{p.d}</p>
+              <div className="mt-4 inline-flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-wider text-muted-foreground">
+                <GitBranch className="h-3 w-3" /> {p.who}
+              </div>
             </div>
           ))}
         </div>
@@ -612,7 +753,7 @@ function NeuroAICaseStudy({ study }: { study: CaseStudy }) {
 
       {/* SOLUTION + ARCHITECTURE */}
       <section className="mx-auto max-w-6xl px-6">
-        <Eyebrow>05 · Solution</Eyebrow>
+        <Eyebrow>06 · Architecture</Eyebrow>
         <SectionTitle>One pipeline, four collaborating modules.</SectionTitle>
         <p className="mt-6 max-w-3xl text-base md:text-lg leading-relaxed text-muted-foreground">
           NeuroAI is composed of a data module, an ML pipeline, a backend control plane,
@@ -665,11 +806,69 @@ function NeuroAICaseStudy({ study }: { study: CaseStudy }) {
 
       <Divider />
 
+      {/* TECHNICAL IMPLEMENTATION */}
+      <section className="mx-auto max-w-6xl px-6">
+        <Eyebrow>07 · Technical Implementation</Eyebrow>
+        <SectionTitle>How the pieces actually work together.</SectionTitle>
+        <p className="mt-6 max-w-3xl text-base md:text-lg leading-relaxed text-muted-foreground">
+          A <strong className="text-foreground">FastAPI</strong> control plane sits at the
+          center, exposing typed endpoints for datasets, jobs, and runs. When a researcher
+          submits a job, the API hands work off to a pool of <strong className="text-foreground">Docker</strong>
+          {" "}workers running <strong className="text-foreground">PyTorch</strong> trainers
+          on top of an <strong className="text-foreground">MNE</strong>-based preprocessing
+          pipeline. Artifacts and metrics land in versioned storage on{" "}
+          <strong className="text-foreground">AWS</strong>, and the{" "}
+          <strong className="text-foreground">React</strong> dashboard subscribes to job
+          state through the same API contract — so the UI never reaches into the ML stack
+          directly.
+        </p>
+
+        <div className="mt-10 grid gap-4 md:grid-cols-2">
+          {[
+            {
+              icon: Layers,
+              t: "Scalability by design",
+              d: "Workers are stateless and containerized — adding capacity is a horizontal scale, not a rewrite. Long sweeps fan out across the pool in parallel.",
+            },
+            {
+              icon: Repeat,
+              t: "Reproducibility as a first-class concern",
+              d: "Every run captures dataset hash, config, code version, and metrics. Re-running a result is one click, not a forensic exercise.",
+            },
+            {
+              icon: GitBranch,
+              t: "Contract-based modules",
+              d: "Data, ML, backend, and frontend share typed schemas. Each team can ship independently as long as the contract holds.",
+            },
+            {
+              icon: Zap,
+              t: "Researcher-first surface",
+              d: "All infrastructure complexity (containers, queues, storage) lives behind a small, intentional API the dashboard consumes.",
+            },
+          ].map((c) => (
+            <div
+              key={c.t}
+              className="rounded-2xl border border-border bg-card/60 p-6 flex items-start gap-4"
+            >
+              <div className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary">
+                <c.icon className="h-5 w-5" />
+              </div>
+              <div>
+                <div className="text-sm font-semibold">{c.t}</div>
+                <p className="mt-1.5 text-sm text-muted-foreground leading-relaxed">{c.d}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <Divider />
+
       {/* MY CONTRIBUTIONS */}
       <section className="mx-auto max-w-6xl px-6">
         <div className="grid gap-12 md:grid-cols-[1fr_1.2fr] md:gap-16 items-start">
           <div>
-            <Eyebrow>06 · My Contribution</Eyebrow>
+            <Eyebrow>08 · My Contribution</Eyebrow>
             <SectionTitle>Backend & system integration.</SectionTitle>
             <p className="mt-6 text-base md:text-lg leading-relaxed text-muted-foreground">
               I owned the backend, the ML pipeline integration, and the overall
@@ -727,30 +926,58 @@ function NeuroAICaseStudy({ study }: { study: CaseStudy }) {
 
       {/* CHALLENGES */}
       <section className="mx-auto max-w-6xl px-6">
-        <Eyebrow>07 · Challenges</Eyebrow>
-        <SectionTitle>Where it got hard.</SectionTitle>
+        <Eyebrow>09 · Challenges & Solutions</Eyebrow>
+        <SectionTitle>Where it got hard — and what we did about it.</SectionTitle>
+        <p className="mt-6 max-w-2xl text-base md:text-lg leading-relaxed text-muted-foreground">
+          The hard parts weren’t the algorithms. They were the seams between people,
+          modules, and runtimes. Each challenge below shaped a concrete engineering
+          decision that still defines the platform today.
+        </p>
 
         <div className="mt-10 grid gap-4 md:grid-cols-3">
           {[
             {
-              t: "Noisy EEG signals",
-              d: "Artifacts (blinks, muscle, line noise) varied per recording. We standardized preprocessing so models saw comparable inputs.",
+              p: "Noisy, inconsistent EEG signals",
+              s: "Built a standardized MNE-based preprocessing pipeline (filter → ICA → epoch) so every model sees comparable inputs across recordings.",
             },
             {
-              t: "Module integration",
-              d: "Four modules built in parallel had to fit together. Shared schemas and contract tests kept everyone unblocked.",
+              p: "Four modules built in parallel",
+              s: "Locked typed, contract-based APIs early. Each module shipped against the contract, not the other team’s implementation.",
             },
             {
-              t: "Speed vs scale",
-              d: "Single-node speed was easy; horizontal scale was the real win. We chose containerized workers for parallel sweeps.",
+              p: "Single-node speed wasn’t enough",
+              s: "Replaced ad-hoc training scripts with a Docker worker pool, letting hyperparameter sweeps fan out horizontally on demand.",
+            },
+            {
+              p: "Manual hyperparameter tuning loops",
+              s: "Added a parameter-prediction layer that suggests sensible starting configs, removing most of the cold-start guesswork.",
+            },
+            {
+              p: "Results that didn’t reproduce",
+              s: "Made every run versioned end-to-end (data hash + config + code + metrics) so any result can be re-executed exactly.",
+            },
+            {
+              p: "High infra barrier for researchers",
+              s: "Hid containers, queues, and storage behind a small, intentional API the dashboard consumes — researchers never see the plumbing.",
             },
           ].map((c) => (
             <div
-              key={c.t}
+              key={c.p}
               className="rounded-2xl border border-border bg-card/60 p-6"
             >
-              <div className="text-sm font-semibold">{c.t}</div>
-              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{c.d}</p>
+              <div className="text-[10px] font-mono uppercase tracking-wider text-muted-foreground">
+                Problem
+              </div>
+              <div className="mt-1 text-sm font-semibold">{c.p}</div>
+              <div className="mt-4 flex items-start gap-2">
+                <CheckCircle2 className="h-4 w-4 mt-0.5 shrink-0 text-primary" />
+                <div>
+                  <div className="text-[10px] font-mono uppercase tracking-wider text-primary">
+                    Solution
+                  </div>
+                  <p className="mt-1 text-sm text-muted-foreground leading-relaxed">{c.s}</p>
+                </div>
+              </div>
             </div>
           ))}
         </div>
@@ -766,30 +993,37 @@ function NeuroAICaseStudy({ study }: { study: CaseStudy }) {
 
       {/* OUTCOME */}
       <section className="mx-auto max-w-6xl px-6">
-        <Eyebrow>08 · Outcome</Eyebrow>
+        <Eyebrow>10 · Outcome</Eyebrow>
         <SectionTitle>Days of work, compressed into minutes.</SectionTitle>
+        <p className="mt-6 max-w-2xl text-base md:text-lg leading-relaxed text-muted-foreground">
+          The win wasn’t a single benchmark number — it was the pipeline disappearing
+          as a problem. Researchers shifted their time from plumbing to questions worth
+          asking.
+        </p>
 
-        <div className="mt-10 grid gap-4 md:grid-cols-3">
+        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {[
-            { v: "2–3 days → minutes", k: "Benchmark cycle" },
-            { v: "5+", k: "Researchers using it" },
-            { v: "Eliminated", k: "Manual tuning steps" },
+            { v: "~95%", k: "Reduction in benchmark cycle time", s: "From 2–3 days of manual work down to minutes per run." },
+            { v: "End-to-end", k: "Pipeline automation", s: "Upload → preprocess → train → compare, in a single job." },
+            { v: "+UX", k: "Researcher usability", s: "Zero infra knowledge required to run modern EEG ML." },
+            { v: "5+", k: "Active researchers onboarded", s: "Adopted by the team’s research collaborators within weeks." },
           ].map((m) => (
             <div
               key={m.k}
-              className="rounded-2xl border border-border bg-gradient-to-br from-card to-background p-6"
+              className="rounded-2xl border border-border bg-gradient-to-br from-card to-background p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40"
             >
-              <div className="text-[11px] font-mono uppercase tracking-widest text-muted-foreground">
+              <div className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">
                 {m.k}
               </div>
-              <div className="mt-2 font-display text-3xl md:text-4xl font-semibold tracking-tight">
+              <div className="mt-2 font-display text-3xl md:text-4xl font-semibold tracking-tight text-gradient">
                 {m.v}
               </div>
+              <p className="mt-2 text-xs text-muted-foreground leading-relaxed">{m.s}</p>
             </div>
           ))}
         </div>
 
-        <PullQuote by="Outcome">
+        <PullQuote by="Takeaway">
           Researchers stopped fighting the pipeline and started running experiments.
           That was the real win.
         </PullQuote>
@@ -811,6 +1045,52 @@ function NeuroAICaseStudy({ study }: { study: CaseStudy }) {
             alt="TAM SAM SOM market sizing"
             caption="Slide 08 — Market sizing: TAM $60M / SAM $9.6M / SOM $1.2M per year across neurotech research and clinical use."
           />
+        </div>
+      </section>
+
+      <Divider />
+
+      {/* KEY LEARNINGS */}
+      <section className="mx-auto max-w-6xl px-6">
+        <Eyebrow>11 · Key Learnings & Takeaways</Eyebrow>
+        <SectionTitle>What this project taught us.</SectionTitle>
+        <p className="mt-6 max-w-2xl text-base md:text-lg leading-relaxed text-muted-foreground">
+          A few principles came out of NeuroAI that now shape how I approach any
+          ML-heavy product — not just EEG.
+        </p>
+
+        <div className="mt-10 grid gap-4 md:grid-cols-2">
+          {[
+            {
+              t: "Reproducibility beats raw performance",
+              d: "A 1% accuracy gain that nobody can re-run is worth less than a stable baseline anyone can extend. Versioning is a feature, not a chore.",
+            },
+            {
+              t: "Abstraction layers unlock team velocity",
+              d: "Typed contracts between modules let four people ship in parallel without stepping on each other. The contract is the product.",
+            },
+            {
+              t: "UX matters even in research tooling",
+              d: "‘For experts only’ is a constraint, not a virtue. Removing infra friction broadened who could actually use the system.",
+            },
+            {
+              t: "Architecture is a team decision, not a solo one",
+              d: "Clear interfaces let designers, frontend, data, and backend make local decisions without breaking the whole. Good seams = good teamwork.",
+            },
+          ].map((l) => (
+            <div
+              key={l.t}
+              className="rounded-2xl border border-border bg-card/60 p-6 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40"
+            >
+              <div className="flex items-start gap-3">
+                <Sparkles className="h-4 w-4 mt-1 shrink-0 text-primary" />
+                <div>
+                  <div className="text-sm font-semibold">{l.t}</div>
+                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{l.d}</p>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
