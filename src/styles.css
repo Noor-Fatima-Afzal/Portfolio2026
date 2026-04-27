@@ -74,36 +74,36 @@
 }
 
 .dark {
-  /* Dark mode — deep warm cream / beige-brown */
-  --background: oklch(0.22 0.018 55);          /* #2B2620-ish warm dark */
-  --foreground: oklch(0.94 0.022 85);          /* warm ivory */
-  --card: oklch(0.27 0.022 55);                /* muted dark cream */
-  --card-foreground: oklch(0.94 0.022 85);
-  --popover: oklch(0.26 0.02 55);
-  --popover-foreground: oklch(0.94 0.022 85);
-  --primary: oklch(0.78 0.1 70);               /* warm sand */
-  --primary-foreground: oklch(0.22 0.018 55);
-  --secondary: oklch(0.32 0.025 55);
-  --secondary-foreground: oklch(0.94 0.022 85);
-  --muted: oklch(0.3 0.022 55);
-  --muted-foreground: oklch(0.72 0.025 75);
-  --accent: oklch(0.72 0.12 60);               /* warm amber */
-  --accent-foreground: oklch(0.22 0.018 55);
-  --destructive: oklch(0.65 0.2 28);
-  --destructive-foreground: oklch(0.96 0.02 85);
-  --border: oklch(0.95 0.02 80 / 0.1);
-  --input: oklch(0.95 0.02 80 / 0.12);
-  --ring: oklch(0.78 0.1 70);
+  /* Dark mode — neutral graphite with soft cool blue accent */
+  --background: oklch(0.18 0.005 250);         /* deep neutral graphite */
+  --foreground: oklch(0.95 0.005 250);         /* near-white, slight cool tint */
+  --card: oklch(0.22 0.006 250);               /* elevated surface */
+  --card-foreground: oklch(0.95 0.005 250);
+  --popover: oklch(0.21 0.006 250);
+  --popover-foreground: oklch(0.95 0.005 250);
+  --primary: oklch(0.72 0.08 235);             /* soft sky blue */
+  --primary-foreground: oklch(0.18 0.005 250);
+  --secondary: oklch(0.27 0.006 250);
+  --secondary-foreground: oklch(0.95 0.005 250);
+  --muted: oklch(0.25 0.006 250);
+  --muted-foreground: oklch(0.68 0.01 250);
+  --accent: oklch(0.68 0.09 220);              /* cool steel blue accent */
+  --accent-foreground: oklch(0.18 0.005 250);
+  --destructive: oklch(0.6 0.16 25);
+  --destructive-foreground: oklch(0.96 0.005 250);
+  --border: oklch(0.95 0.005 250 / 0.08);
+  --input: oklch(0.95 0.005 250 / 0.1);
+  --ring: oklch(0.72 0.08 235);
 
-  --quantum: oklch(0.72 0.12 60);
-  --neural: oklch(0.78 0.1 70);
-  --glow: oklch(0.78 0.1 70 / 0.4);
+  --quantum: oklch(0.68 0.09 220);
+  --neural: oklch(0.72 0.08 235);
+  --glow: oklch(0.72 0.08 235 / 0.32);
 
-  --gradient-hero: linear-gradient(135deg, oklch(0.78 0.1 70) 0%, oklch(0.72 0.12 60) 100%);
-  --gradient-text: linear-gradient(135deg, oklch(0.85 0.09 75), oklch(0.78 0.13 60));
-  --gradient-card: linear-gradient(180deg, oklch(0.3 0.022 55 / 0.7), oklch(0.24 0.018 55 / 0.4));
-  --shadow-glow: 0 0 80px -10px oklch(0.78 0.1 70 / 0.35);
-  --shadow-card: 0 8px 40px -16px oklch(0.1 0.01 55 / 0.55);
+  --gradient-hero: linear-gradient(135deg, oklch(0.72 0.08 235) 0%, oklch(0.66 0.07 215) 100%);
+  --gradient-text: linear-gradient(135deg, oklch(0.85 0.04 240), oklch(0.74 0.08 225));
+  --gradient-card: linear-gradient(180deg, oklch(0.24 0.006 250 / 0.7), oklch(0.2 0.006 250 / 0.4));
+  --shadow-glow: 0 0 80px -10px oklch(0.72 0.08 235 / 0.28);
+  --shadow-card: 0 8px 40px -16px oklch(0.05 0.005 250 / 0.6);
 }
 
 @layer base {
@@ -164,5 +164,79 @@
   0%, 100% { opacity: 0.4; }
   50% { opacity: 1; }
 }
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
 .animate-float { animation: float 6s ease-in-out infinite; }
 .animate-pulse-glow { animation: pulse-glow 4s ease-in-out infinite; }
+.animate-fade-in-up { animation: fade-in-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.animate-fade-in { animation: fade-in 0.6s ease-out both; }
+
+/* Subtle, professional interaction utilities */
+@layer utilities {
+  .interactive {
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 0.3s ease,
+                background-color 0.3s ease;
+  }
+  .interactive:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px -18px color-mix(in oklab, var(--primary) 40%, transparent);
+  }
+  .lift-on-hover {
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
+  }
+  .lift-on-hover:hover { transform: translateY(-3px); }
+  .underline-grow {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    transition: background-size 0.35s ease;
+  }
+  .underline-grow:hover { background-size: 100% 1px; }
+  .reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Global cursor-follow ambient glow — subtle, dark mode only */
+.cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 520px;
+  height: 520px;
+  pointer-events: none;
+  z-index: 0;
+  border-radius: 50%;
+  transform: translate3d(var(--cursor-x, 50vw), var(--cursor-y, 50vh), 0) translate(-50%, -50%);
+  background: radial-gradient(
+    circle,
+    color-mix(in oklab, var(--primary) 14%, transparent) 0%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  mix-blend-mode: screen;
+  filter: blur(40px);
+}
+.dark .cursor-glow { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .cursor-glow { display: none; }
+  .animate-float, .animate-pulse-glow { animation: none; }
+  .reveal-on-scroll { opacity: 1; transform: none; }
+}
