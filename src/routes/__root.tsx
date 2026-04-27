@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import ChatWidget from "@/components/ChatWidget";
+import InteractionEffects from "@/components/InteractionEffects";
 import { Toaster } from "@/components/ui/sonner";
 
 function NotFoundComponent() {
