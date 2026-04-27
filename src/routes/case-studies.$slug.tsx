@@ -806,6 +806,64 @@ function NeuroAICaseStudy({ study }: { study: CaseStudy }) {
 
       <Divider />
 
+      {/* TECHNICAL IMPLEMENTATION */}
+      <section className="mx-auto max-w-6xl px-6">
+        <Eyebrow>07 · Technical Implementation</Eyebrow>
+        <SectionTitle>How the pieces actually work together.</SectionTitle>
+        <p className="mt-6 max-w-3xl text-base md:text-lg leading-relaxed text-muted-foreground">
+          A <strong className="text-foreground">FastAPI</strong> control plane sits at the
+          center, exposing typed endpoints for datasets, jobs, and runs. When a researcher
+          submits a job, the API hands work off to a pool of <strong className="text-foreground">Docker</strong>
+          {" "}workers running <strong className="text-foreground">PyTorch</strong> trainers
+          on top of an <strong className="text-foreground">MNE</strong>-based preprocessing
+          pipeline. Artifacts and metrics land in versioned storage on{" "}
+          <strong className="text-foreground">AWS</strong>, and the{" "}
+          <strong className="text-foreground">React</strong> dashboard subscribes to job
+          state through the same API contract — so the UI never reaches into the ML stack
+          directly.
+        </p>
+
+        <div className="mt-10 grid gap-4 md:grid-cols-2">
+          {[
+            {
+              icon: Layers,
+              t: "Scalability by design",
+              d: "Workers are stateless and containerized — adding capacity is a horizontal scale, not a rewrite. Long sweeps fan out across the pool in parallel.",
+            },
+            {
+              icon: Repeat,
+              t: "Reproducibility as a first-class concern",
+              d: "Every run captures dataset hash, config, code version, and metrics. Re-running a result is one click, not a forensic exercise.",
+            },
+            {
+              icon: GitBranch,
+              t: "Contract-based modules",
+              d: "Data, ML, backend, and frontend share typed schemas. Each team can ship independently as long as the contract holds.",
+            },
+            {
+              icon: Zap,
+              t: "Researcher-first surface",
+              d: "All infrastructure complexity (containers, queues, storage) lives behind a small, intentional API the dashboard consumes.",
+            },
+          ].map((c) => (
+            <div
+              key={c.t}
+              className="rounded-2xl border border-border bg-card/60 p-6 flex items-start gap-4"
+            >
+              <div className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-primary/10 text-primary">
+                <c.icon className="h-5 w-5" />
+              </div>
+              <div>
+                <div className="text-sm font-semibold">{c.t}</div>
+                <p className="mt-1.5 text-sm text-muted-foreground leading-relaxed">{c.d}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <Divider />
+
       {/* MY CONTRIBUTIONS */}
       <section className="mx-auto max-w-6xl px-6">
         <div className="grid gap-12 md:grid-cols-[1fr_1.2fr] md:gap-16 items-start">
