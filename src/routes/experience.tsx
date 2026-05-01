@@ -224,33 +224,6 @@ export default function ExperiencePage() {
         </ol>
       </div>
 
-      {/* Skills */}
-      <div className="mt-24">
-        <div className="text-xs font-mono uppercase tracking-widest text-primary">Skills</div>
-        <h2 className="mt-2 font-display text-3xl font-semibold tracking-tight">
-          Technical stack
-        </h2>
-        <div className="mt-8 grid md:grid-cols-2 gap-5">
-          {Object.entries(skills).map(([group, items]) => (
-            <div
-              key={group}
-              className="rounded-2xl border border-border bg-card p-6 lift-on-hover"
-            >
-              <div className="text-sm font-display font-semibold">{group}</div>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {items.map((s) => (
-                  <span
-                    key={s}
-                    className="text-xs font-mono px-2.5 py-1 rounded-md bg-secondary text-secondary-foreground border border-border/60"
-                  >
-                    {s}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
 
       {/* Honors */}
       <div className="mt-24">
