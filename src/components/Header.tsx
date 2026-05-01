@@ -9,6 +9,7 @@ const aboutItems = [
   { to: "/education", label: "Education" },
   { to: "/certificates", label: "Certificates" },
   { to: "/talks", label: "Invited Talks" },
+  { to: "/blog", label: "Blog" },
 ] as const;
 
 const primaryNav = [
@@ -16,7 +17,7 @@ const primaryNav = [
   { to: "/projects", label: "Projects" },
   { to: "/experience", label: "Experience" },
   { to: "/publications", label: "Publications" },
-  { to: "/blog", label: "Blog" },
+  { to: "/skills", label: "Skills" },
   { to: "/contact", label: "Contact" },
 ] as const;
 
