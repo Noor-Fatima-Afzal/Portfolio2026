@@ -9,6 +9,7 @@ const aboutItems = [
   { to: "/education", label: "Education" },
   { to: "/certificates", label: "Certificates" },
   { to: "/talks", label: "Invited Talks" },
+  { to: "/volunteer", label: "Volunteer" },
   { to: "/blog", label: "Blog" },
 ] as const;
 
