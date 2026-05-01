@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VolunteerRouteImport } from './routes/volunteer'
 import { Route as TalksRouteImport } from './routes/talks'
 import { Route as SkillsRouteImport } from './routes/skills'
 import { Route as PublicationsRouteImport } from './routes/publications'
@@ -25,6 +26,11 @@ import { Route as ProjectsSlugRouteImport } from './routes/projects.$slug'
 import { Route as CaseStudiesSlugRouteImport } from './routes/case-studies.$slug'
 import { Route as ApiChatRouteImport } from './routes/api.chat'
 
+const VolunteerRoute = VolunteerRouteImport.update({
+  id: '/volunteer',
+  path: '/volunteer',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TalksRoute = TalksRouteImport.update({
   id: '/talks',
   path: '/talks',
@@ -113,6 +119,7 @@ export interface FileRoutesByFullPath {
   '/publications': typeof PublicationsRoute
   '/skills': typeof SkillsRoute
   '/talks': typeof TalksRoute
+  '/volunteer': typeof VolunteerRoute
   '/api/chat': typeof ApiChatRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
   '/projects/$slug': typeof ProjectsSlugRoute
@@ -129,6 +136,7 @@ export interface FileRoutesByTo {
   '/publications': typeof PublicationsRoute
   '/skills': typeof SkillsRoute
   '/talks': typeof TalksRoute
+  '/volunteer': typeof VolunteerRoute
   '/api/chat': typeof ApiChatRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
   '/projects/$slug': typeof ProjectsSlugRoute
@@ -147,6 +155,7 @@ export interface FileRoutesById {
   '/publications': typeof PublicationsRoute
   '/skills': typeof SkillsRoute
   '/talks': typeof TalksRoute
+  '/volunteer': typeof VolunteerRoute
   '/api/chat': typeof ApiChatRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
   '/projects/$slug': typeof ProjectsSlugRoute
@@ -166,6 +175,7 @@ export interface FileRouteTypes {
     | '/publications'
     | '/skills'
     | '/talks'
+    | '/volunteer'
     | '/api/chat'
     | '/case-studies/$slug'
     | '/projects/$slug'
@@ -182,6 +192,7 @@ export interface FileRouteTypes {
     | '/publications'
     | '/skills'
     | '/talks'
+    | '/volunteer'
     | '/api/chat'
     | '/case-studies/$slug'
     | '/projects/$slug'
@@ -199,6 +210,7 @@ export interface FileRouteTypes {
     | '/publications'
     | '/skills'
     | '/talks'
+    | '/volunteer'
     | '/api/chat'
     | '/case-studies/$slug'
     | '/projects/$slug'
@@ -217,11 +229,19 @@ export interface RootRouteChildren {
   PublicationsRoute: typeof PublicationsRoute
   SkillsRoute: typeof SkillsRoute
   TalksRoute: typeof TalksRoute
+  VolunteerRoute: typeof VolunteerRoute
   ApiChatRoute: typeof ApiChatRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/volunteer': {
+      id: '/volunteer'
+      path: '/volunteer'
+      fullPath: '/volunteer'
+      preLoaderRoute: typeof VolunteerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/talks': {
       id: '/talks'
       path: '/talks'
@@ -368,6 +388,7 @@ const rootRouteChildren: RootRouteChildren = {
   PublicationsRoute: PublicationsRoute,
   SkillsRoute: SkillsRoute,
   TalksRoute: TalksRoute,
+  VolunteerRoute: VolunteerRoute,
   ApiChatRoute: ApiChatRoute,
 }
 export const routeTree = rootRouteImport
