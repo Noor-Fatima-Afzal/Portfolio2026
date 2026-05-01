@@ -132,20 +132,6 @@ const honors = [
   },
 ];
 
-const skills = {
-  "AI / ML": [
-    "PyTorch",
-    "TensorFlow",
-    "Scikit-learn",
-    "GNNs",
-    "Transformers",
-    "Spiking NNs",
-    "LoRA / QLoRA",
-  ],
-  "LLM & RAG": ["LangChain", "FAISS", "CLIP", "Groq", "OpenAI", "Meditron", "PEFT"],
-  "Tools & Frameworks": ["NumPy", "Pandas", "MNE", "OpenCV", "Librosa", "pydicom"],
-  "Systems & Deployment": ["Docker", "AWS", "Flask", "FastAPI", "Streamlit", "React", "MySQL"],
-};
 
 export default function ExperiencePage() {
   return (

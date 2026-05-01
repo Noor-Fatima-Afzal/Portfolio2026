@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TalksRouteImport } from './routes/talks'
+import { Route as SkillsRouteImport } from './routes/skills'
 import { Route as PublicationsRouteImport } from './routes/publications'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as ExperienceRouteImport } from './routes/experience'
@@ -27,6 +28,11 @@ import { Route as ApiChatRouteImport } from './routes/api.chat'
 const TalksRoute = TalksRouteImport.update({
   id: '/talks',
   path: '/talks',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SkillsRoute = SkillsRouteImport.update({
+  id: '/skills',
+  path: '/skills',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PublicationsRoute = PublicationsRouteImport.update({
@@ -105,6 +111,7 @@ export interface FileRoutesByFullPath {
   '/experience': typeof ExperienceRoute
   '/projects': typeof ProjectsRouteWithChildren
   '/publications': typeof PublicationsRoute
+  '/skills': typeof SkillsRoute
   '/talks': typeof TalksRoute
   '/api/chat': typeof ApiChatRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
@@ -120,6 +127,7 @@ export interface FileRoutesByTo {
   '/experience': typeof ExperienceRoute
   '/projects': typeof ProjectsRouteWithChildren
   '/publications': typeof PublicationsRoute
+  '/skills': typeof SkillsRoute
   '/talks': typeof TalksRoute
   '/api/chat': typeof ApiChatRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
@@ -137,6 +145,7 @@ export interface FileRoutesById {
   '/experience': typeof ExperienceRoute
   '/projects': typeof ProjectsRouteWithChildren
   '/publications': typeof PublicationsRoute
+  '/skills': typeof SkillsRoute
   '/talks': typeof TalksRoute
   '/api/chat': typeof ApiChatRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
@@ -155,6 +164,7 @@ export interface FileRouteTypes {
     | '/experience'
     | '/projects'
     | '/publications'
+    | '/skills'
     | '/talks'
     | '/api/chat'
     | '/case-studies/$slug'
@@ -170,6 +180,7 @@ export interface FileRouteTypes {
     | '/experience'
     | '/projects'
     | '/publications'
+    | '/skills'
     | '/talks'
     | '/api/chat'
     | '/case-studies/$slug'
@@ -186,6 +197,7 @@ export interface FileRouteTypes {
     | '/experience'
     | '/projects'
     | '/publications'
+    | '/skills'
     | '/talks'
     | '/api/chat'
     | '/case-studies/$slug'
@@ -203,6 +215,7 @@ export interface RootRouteChildren {
   ExperienceRoute: typeof ExperienceRoute
   ProjectsRoute: typeof ProjectsRouteWithChildren
   PublicationsRoute: typeof PublicationsRoute
+  SkillsRoute: typeof SkillsRoute
   TalksRoute: typeof TalksRoute
   ApiChatRoute: typeof ApiChatRoute
 }
@@ -214,6 +227,13 @@ declare module '@tanstack/react-router' {
       path: '/talks'
       fullPath: '/talks'
       preLoaderRoute: typeof TalksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/skills': {
+      id: '/skills'
+      path: '/skills'
+      fullPath: '/skills'
+      preLoaderRoute: typeof SkillsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/publications': {
@@ -346,6 +366,7 @@ const rootRouteChildren: RootRouteChildren = {
   ExperienceRoute: ExperienceRoute,
   ProjectsRoute: ProjectsRouteWithChildren,
   PublicationsRoute: PublicationsRoute,
+  SkillsRoute: SkillsRoute,
   TalksRoute: TalksRoute,
   ApiChatRoute: ApiChatRoute,
 }
